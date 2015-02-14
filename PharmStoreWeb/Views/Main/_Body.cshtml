@@ -1,0 +1,70 @@
+﻿<div class="main-body">
+	<div class="for-table">
+		<div class="empty-table" ng-if="!shownPriceList || shownPriceList.length === 0">
+			<span>
+				Для того чтобы отобразился прайс необходимо что-нибудь написать в строке поиска, либо не загружено ни одного прайса <br /> ToDo: сделать точное определние отсутствия прайса <br />ИЛИ ничего не найдено
+			</span>
+		</div>
+		<table class="table table-striped table-hover" ng-if="shownPriceList.length > 0">
+			<thead>
+				<tr>
+					<td class="t-col col1"></td>
+					<td class="t-col col2">
+						<span tooltip="Код поставщика" tooltip-placement="top" tooltip-animation="false">Код</span>
+					</td>
+					<td class="t-col col3">
+						<span tooltip="Количество для заказа" tooltip-placement="top" tooltip-animation="false">Заказ</span>
+					</td>
+					<td class="t-col col4">
+						<span tooltip="Наименование товара" tooltip-placement="top" tooltip-animation="false">Наименование</span>
+</td>
+					<td class="t-col col5">
+						<span tooltip="Форма упаковки" tooltip-placement="top" tooltip-animation="false">Форма</span>
+					</td>
+					<td class="t-col col6">
+						<span tooltip="Производитель" tooltip-placement="top" tooltip-animation="false">Производитель</span>
+					</td>
+					<td class="t-col col7">
+						<span tooltip="Цена" tooltip-placement="top" tooltip-animation="false">Цена</span>
+					</td>
+					<td class="t-col col8">
+						<span tooltip="Поставщик" tooltip-placement="top" tooltip-animation="false">Поставщик</span>
+					</td>
+					<td class="t-col col9">
+						<span tooltip="Цена больше в %" tooltip-placement="top" tooltip-animation="false">Больше %</span>
+					</td>
+					<td class="t-col col10">
+						<span tooltip="Кратность заказа" tooltip-placement="top" tooltip-animation="false">Кратность</span>
+					</td>
+					<td class="t-col col11">
+						<span tooltip="Остаток на складе" tooltip-placement="top" tooltip-animation="false">Остаток</span>
+					</td>
+					<td class="t-col col12">
+						<span tooltip="Срок годности" tooltip-placement="top" tooltip-animation="false">Годность</span>
+					</td>
+					<td class="t-col col13">
+						<span tooltip="Итоговая сумма" tooltip-placement="top" tooltip-animation="false">Сумма</span>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in shownPriceList">
+					<td class="t-col col1 drug-info" ng-click="showDrugFullInfo(item)"><i class="mdi-action-info-outline" tooltip="Подробная информация" tooltip-placement="right" tooltip-animation="false"></i></td>
+					<td class="t-col col2">{{ item.DrugIdCustomer }}</td>
+					<td class="t-col col3"><input type="number" min="1" max="5000" digits-only ng-model="item.count"></td>
+					<td class="t-col col4">{{ item.Title }}</td>
+					<td class="t-col col5">{{ item.Form }}</td>
+					<td class="t-col col6">{{ item.Manufacturer }}</td>
+					<td class="t-col col7">{{ item.Price }}</td>
+					<td class="t-col col8" ng-click="showCustomerInfo(item.Customer)"><span class="cur-pointer">{{ item.Customer.Name }}</span></td>
+					<td class="t-col col9">TODO!</td>
+					<td class="t-col col10">{{ item.Multiplicity }}</td>
+					<td class="t-col col11">{{ item.Balance }}</td>
+					<td class="t-col col12">{{ item.DueDate | date:'MM/dd/yyyy' }}</td>
+					<td class="t-col col13"><span ng-show="item.count">{{ item.count * item.Price | number:2 }}</span></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</div>

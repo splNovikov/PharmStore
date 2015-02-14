@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html ng-app="pharmPrice" ng-controller="LayoutCtrl as layoutCtrl" lang="ru">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Pharm Store</title>
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/siteLess")
+</head>
+<body ng-cloak>
+
+	<div class="container-fluid">
+		<div ui-view></div>
+	</div>
+
+	@Scripts.Render("~/bundles/libs")
+	@Scripts.Render("~/bundles/app")
+
+</body>
+</html>

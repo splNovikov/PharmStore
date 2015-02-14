@@ -1,0 +1,272 @@
+﻿@import "colors.less";
+@import "variables.less";
+@import "../../libs/materialDesign/_variables.less";
+
+.main-page {
+	.main-header, .main-footer, .main-body {
+		position: absolute;
+		left: 0;
+		right: 0;
+	}
+
+	.main-header {
+		height: @main-header-height;
+		background-color: #fff;
+		top: 0;
+		box-shadow: 0 6px 24px -10px #000;
+		z-index: 10;
+
+		.user-info {
+			/*border: 1px solid red;*/
+			height: @user-info-height;
+
+			.btn-group {
+				float: right;
+				margin: 0 10px;
+				box-shadow: none;
+
+				.btn.dropdown-toggle {
+					max-width: 300px;
+					-ms-text-overflow: ellipsis;
+					-o-text-overflow: ellipsis;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					font-size: 12px;
+					padding: 4px 20px 4px 8px;
+					margin: 5px 10px;
+
+					.caret {
+						position: absolute;
+						right: 5px;
+						top: 10px;
+					}
+				}
+
+				.dropdown-menu {
+					right: 90px;
+					left: auto;
+					box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.26);
+
+					& > li > a {
+						cursor: pointer;
+					}
+				}
+
+				.btn.btn-logout {
+					padding: 4px 8px;
+					margin: 5px 10px;
+					border-radius: 2px;
+				}
+			}
+		}
+
+		.search-block {
+			/*border: 1px solid green;*/
+			height: @search-block-height;
+
+			.for-input {
+				/*border: 1px solid black;*/
+				height: 100%;
+				width: 60%;
+				margin: 0 auto;
+				margin-top: @for-input-margin-top;
+
+				.input-group {
+					width: 100%;
+
+					.form-control-wrapper {
+						margin: 0;
+						/* input */
+						.form-control {
+							border: 1px solid @primary;
+							border-right: none;
+							padding: 5px;
+							height: @search-controls-height;
+						}
+
+						.form-control:focus {
+							height: @search-controls-height - 1px;
+						}
+					}
+
+					.btn {
+						border-bottom-left-radius: 0;
+						border-top-left-radius: 0;
+						height: @search-controls-height;
+					}
+				}
+
+				.drugs-lookup {
+					background-color: #fff;
+					border: 1px solid @primary;
+					max-height: 100px;
+					overflow-y: auto;
+					padding: 3px;
+					margin-top: 1px;
+
+					ul {
+						margin-bottom: 0;
+						list-style-type: none;
+						padding: 0 2px;
+
+						li {
+							cursor: pointer;
+							padding: 2px 5px;
+							height: 24px;
+							white-space: nowrap;
+
+							&:hover {
+								background-color: lighten(@lighten-primary, 20%);
+							}
+
+							div {
+								display: inline-block;
+								width: 33%;
+								overflow: hidden;
+								-ms-text-overflow: ellipsis;
+								-o-text-overflow: ellipsis;
+								text-overflow: ellipsis;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		.search-preferences {
+			/*border: 1px solid blue;*/
+			height: @search-preferences-height;
+		}
+	}
+
+	.main-footer {
+		height: @main-footer-height;
+		background-color: #fff;
+		bottom: 0;
+		box-shadow: 0 6px 24px 3px #000;
+		z-index: 9;
+	}
+
+	.main-body {
+		top: @main-header-height;
+		bottom: @main-footer-height;
+		background-color: #fff;
+
+		.for-table {
+			overflow: auto;
+			height: 100%;
+
+			.tooltip-inner{
+				border-radius: 5px;
+			}
+
+			.empty-table {
+				background-color: @background-disabled;
+				height: 100%;
+				text-align: center;
+				padding: 50px;
+
+				span {
+					font-size: 24px;
+					color: @text-disabled;
+				}
+			}
+
+			table {
+				width: 100%;
+				min-width: @main-table-width;
+
+				.t-col {
+					overflow: hidden;
+					-ms-text-overflow: ellipsis;
+					-o-text-overflow: ellipsis;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					vertical-align: middle;
+					cursor: default;
+
+					&.col1 {
+						min-width: @col1-width;
+						max-width: @col1-width;
+
+						&.drug-info {
+							cursor: pointer;
+							color: @primary;
+
+							&:hover i {
+								font-weight: bold;
+							}
+						}
+					}
+
+					&.col2 {
+						min-width: @col2-width;
+						max-width: @col2-width;
+					}
+
+					&.col3 {
+						width: @col3-width;
+					}
+
+					&.col4 {
+						min-width: @col4-width;
+						max-width: @col4-width;
+					}
+
+					&.col5 {
+						min-width: @col5-width;
+						max-width: @col5-width;
+					}
+
+					&.col6 {
+						min-width: @col6-width;
+						max-width: @col6-width;
+					}
+
+					&.col7 {
+						min-width: @col7-width;
+						max-width: @col7-width;
+					}
+
+					&.col8 {
+						min-width: @col8-width;
+						max-width: @col8-width;
+					}
+
+					&.col9 {
+						min-width: @col9-width;
+						max-width: @col9-width;
+					}
+
+					&.col10 {
+						min-width: @col10-width;
+						max-width: @col10-width;
+					}
+
+					&.col11 {
+						min-width: @col11-width;
+						max-width: @col11-width;
+					}
+
+					&.col12 {
+						min-width: @col12-width;
+						max-width: @col12-width;
+					}
+
+					&.col13 {
+						min-width: @col13-width;
+						max-width: @col13-width;
+					}
+				}
+
+				thead {
+					background-color: @lighten-primary;
+					font-weight: bold;
+				}
+
+				tbody {
+				}
+			}
+		}
+	}
+}

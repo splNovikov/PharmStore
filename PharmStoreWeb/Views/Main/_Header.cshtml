@@ -1,0 +1,50 @@
+﻿<div class="main-header">
+	<div class="user-info">
+		<div class="btn-group">
+			<a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				{{ activeUser.Name ? activeUser.Name : 'филиал не определен' }} ({{ activeUser.Address }})
+				<span class="caret" ng-if="userBranches.length > 1"></span>
+			</a>
+			<ul class="dropdown-menu" ng-if="userBranches.length > 1">
+				<li ng-repeat="branch in userBranches" ng-hide="branch.Id === activeUser.Id"><a ng-click="setBranchActive(branch)">{{ branch.Name }}, {{ branch.Address }}</a></li>
+			</ul>
+			<div ng-click="logOut()" class="btn btn-primary btn-xs btn-logout">Выйти</div>
+		</div>
+	</div>
+	<div class="search-block">
+		<div class="for-input">
+			<div class="input-group">
+				<div class=form-control-wrapper>
+					<input type="text"
+						   class="form-control"
+						   placeholder="Поиск..."
+						   ng-model="searchQuery"
+						   ng-model-options="{ debounce: 200 }"
+						   ng-enter="showAllResults()"
+						   off-click="clearLookup()">
+				</div>
+				<span class="input-group-btn">
+					<button type="button"
+							class="btn btn-primary"
+							ng-click="showAllResults()"
+							ng-disabled="!searchQuery">
+						В таблицу
+					</button>
+				</span>
+			</div>
+			<div class="drugs-lookup" ng-show="searchQuery && lookupDrugs.length > 0">
+				<ul role="listbox">
+					<li ng-repeat="drug in lookupDrugs" ng-click="showResultsByItem(drug)">
+						<div>{{ drug.Title }}</div>
+						<div>{{ drug.Form }}</div>
+						<div>{{ drug.Manufacturer }}</div>
+					</li>
+				</ul>
+			</div>
+			<div class="drugs-lookup" ng-show="searchQuery && !lookupDrugs">
+				В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}</b>"
+			</div>
+		</div>
+	</div>
+	<div class="search-preferences"></div>
+</div>
