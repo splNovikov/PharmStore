@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Optimization;
 
-namespace PharmPriceWeb.Utils
+namespace pharmStoreWeb.Utils
 {
 	public class JsBundle : Bundle
 	{
