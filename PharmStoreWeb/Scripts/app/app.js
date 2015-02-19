@@ -54,8 +54,14 @@
 				appStart) {
 
 			$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-				if (toState.name !== 'login' && !authService.isAuthenticated()) {
-					$state.go('login');
+
+				if (toState.name === 'login') {
+					return; 
+				}
+
+				if (!authService.isAuthenticated()) {
+					event.preventDefault();
+					$state.go('login', {}, { reload: true });
 				}
 			});
 
