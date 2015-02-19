@@ -1,0 +1,259 @@
+<%@ Register TagPrefix="iglbar" Namespace="Infragistics.WebUI.UltraWebListbar" Assembly="Infragistics2.WebUI.UltraWebListbar.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igtbl" Namespace="Infragistics.WebUI.UltraWebGrid" Assembly="Infragistics2.WebUI.UltraWebGrid.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="ignavbar" Namespace="Infragistics.WebUI.WebNavBar" Assembly="Infragistics2.WebUI.WebNavBar.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igtxt" Namespace="Infragistics.WebUI.WebDataInput" Assembly="Infragistics2.WebUI.WebDataInput.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igsch" Namespace="Infragistics.WebUI.WebSchedule" Assembly="Infragistics2.WebUI.WebDateChooser.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igcmbo" Namespace="Infragistics.WebUI.WebCombo" Assembly="Infragistics2.WebUI.WebCombo.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="ignav" Namespace="Infragistics.WebUI.UltraWebNavigator" Assembly="Infragistics2.WebUI.UltraWebNavigator.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igtab" Namespace="Infragistics.WebUI.UltraWebTab" Assembly="Infragistics2.WebUI.UltraWebTab.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<%@ Register TagPrefix="igtbar" Namespace="Infragistics.WebUI.UltraWebToolbar" Assembly="Infragistics2.WebUI.UltraWebToolbar.v6.2, Version=6.2.20062.10, Culture=neutral, PublicKeyToken=7dd5c3163f2cd0cb" %>
+<igtbl:UltraWebGrid Runat="server" Height="449px" Width="849px">
+  <DisplayLayout ColWidthDefault="" AllowSortingDefault="OnClient" RowHeightDefault="20px" Version="3.00" GridLinesDefault="Horizontal" SelectTypeRowDefault="Extended" NullTextDefault="" HeaderClickActionDefault="SortSingle" BorderCollapseDefault="Separate" AllowColSizingDefault="Free" CellPaddingDefault="4" RowSelectorsDefault="No" Name="UltraWebGrid1" TableLayout="Fixed" CellClickActionDefault="RowSelect">
+    <AddNewBox>
+      <Style BorderWidth="1px" BorderStyle="Solid" BackColor="LightGray">
+        <BorderDetails ColorTop="White" WidthLeft="1px" WidthTop="1px" ColorLeft="White" />
+      </Style>
+      <ButtonStyle />
+    </AddNewBox>
+    <Pager PageSize="20" AllowPaging="True">
+      <Style BorderWidth="1px" BorderStyle="Solid" BackColor="LightGray">
+        <BorderDetails ColorTop="White" WidthLeft="1px" WidthTop="1px" ColorLeft="White" />
+      </Style>
+    </Pager>
+    <HeaderStyleDefault BorderStyle="Solid" BackColor="#E9E7D7">
+      <BorderDetails ColorTop="LightGray" WidthLeft="1px" StyleBottom="Solid" ColorBottom="DarkGray" WidthTop="1px" StyleTop="Outset" WidthBottom="2px" ColorLeft="White" />
+    </HeaderStyleDefault>
+    <FrameStyle Width="849px" BorderWidth="1px" Font-Size="8pt" Font-Names="Verdana" BorderStyle="Solid" Height="449px" />
+    <FooterStyleDefault BorderWidth="1px" BorderStyle="Solid" BackColor="LightGray">
+      <BorderDetails ColorTop="White" WidthLeft="1px" WidthTop="1px" ColorLeft="White" />
+    </FooterStyleDefault>
+    <ActivationObject BorderStyle="Dotted">
+    </ActivationObject>
+    <EditCellStyleDefault BorderWidth="0px" BorderStyle="None" />
+    <SelectedRowStyleDefault BackColor="#CAD3E4">
+      <BorderDetails WidthLeft="0px" StyleBottom="Solid" ColorBottom="Black" WidthTop="0px" WidthRight="0px" StyleTop="None" StyleRight="None" WidthBottom="1px" StyleLeft="None" />
+    </SelectedRowStyleDefault>
+    <RowStyleDefault BorderWidth="1px" BorderColor="Gray" BorderStyle="Solid">
+      <Padding Left="3px" />
+      <BorderDetails WidthLeft="0px" WidthTop="0px" />
+    </RowStyleDefault>
+    <ImageUrls ExpandImage="Images/ig_tblcrm_rowarrow_right.gif" CollapseImage="Images/ig_tblcrm_rowarrow_down.gif" />
+  </DisplayLayout>
+</igtbl:UltraWebGrid>
+<iglbar:UltraWebListbar Runat="server" ImageDirectory="Images" BarWidth="100%" BorderStyle="None" BackColor="#E9E7D7" SkinID="ExplorerBar" ViewType="ExplorerBar" GroupSpacing="5px" HeaderClickAction="None">
+  <DefaultGroupStyle Cursor="Hand" Height="100%" BorderColor="DarkGray" BorderStyle="None" BackColor="#E9E7D7">
+    <BorderDetails StyleBottom="None" />
+  </DefaultGroupStyle>
+  <DefaultItemStyle Cursor="Hand" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" ForeColor="#666666" />
+  <DefaultItemHoverStyle Cursor="Hand" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" ForeColor="Black" BackColor="#EFEFEB" />
+  <DefaultGroupHeaderAppearance>
+    <CollapsedAppearance>
+      <Style />
+    </CollapsedAppearance>
+    <HoverAppearance>
+      <Style Font-Size="9pt" Font-Names="Microsoft Sans Serif" Font-Bold="True" />
+    </HoverAppearance>
+    <ExpandedAppearance>
+      <Style Font-Size="9pt" Font-Names="Microsoft Sans Serif" Font-Bold="True">
+        <BorderDetails StyleBottom="Solid" ColorBottom="102, 102, 102" WidthBottom="1px" />
+      </Style>
+    </ExpandedAppearance>
+  </DefaultGroupHeaderAppearance>
+  <DefaultItemSelectedStyle Cursor="Default" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" />
+</iglbar:UltraWebListbar>
+<iglbar:UltraWebListbar Runat="server" ImageDirectory="Images" BarWidth="100%" BorderStyle="None">
+  <DefaultGroupStyle Height="100%" BorderColor="DarkGray" BorderStyle="None" BackColor="#DFDDCF" />
+  <DefaultItemStyle Cursor="Hand" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" BackColor="#DDDBCD">
+    <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="131, 133, 116" WidthBottom="1px" StyleLeft="Solid" ColorLeft="131, 133, 116" />
+  </DefaultItemStyle>
+  <DefaultItemHoverStyle Cursor="Hand" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" ForeColor="Black" BackColor="#BAB9AE">
+    <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="131, 133, 116" WidthBottom="1px" StyleLeft="Solid" ColorLeft="131, 133, 116" />
+  </DefaultItemHoverStyle>
+  <DefaultGroupButtonSelectedStyle Cursor="Default" BorderStyle="None" />
+  <DefaultItemSelectedStyle Cursor="Hand" Font-Size="9pt" Font-Names="Microsoft Sans Serif" BorderStyle="None" BackColor="#EFEFEB">
+    <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="159, 160, 144" WidthBottom="1px" StyleLeft="Solid" ColorLeft="159, 160, 144" />
+  </DefaultItemSelectedStyle>
+  <DefaultGroupButtonStyle Cursor="Default" Height="0px" Font-Size="XX-Small" BorderStyle="None" BackColor="Transparent" />
+  <DefaultGroupButtonHoverStyle BorderColor="Control" BorderStyle="None" BackColor="Menu" />
+</iglbar:UltraWebListbar>
+<ignav:UltraWebMenu Runat="server" ImageDirectory="Images" SeparatorClass="" ScrollImageBottom="Images/ig_menu_scrolldown.gif" FileUrl="" TopSelectedClass="" DisabledClass="" ScrollImageTopDisabled="Images/ig_menu_scrollup_disabled.gif" DefaultIslandClass="" ItemPaddingSubMenus="5" TargetUrl="" ScrollImageBottomDisabled="Images/ig_menu_scrolldown_disabled.gif" Cursor="Default" XPSpacerImage="Images/ig_menuCRMspacer1.gif" ForeColor="White" HoverClass="" WebMenuStyle="XPClient" DefaultItemClass="" BackColor="#7288AC" TargetFrame="" ScrollImageTop="Images/ig_menu_scrollup.gif">
+  <ItemStyle Font-Size="8pt" Font-Names="Arial" />
+  <Styles>
+    <ignav:Style Font-Size="8pt" Font-Names="Arial" BorderColor="Blue" BorderStyle="Solid" BackColor="#64799C" CssClass="TopLevelHover">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+    </ignav:Style>
+    <ignav:Style Font-Size="8pt" Font-Names="Arial" BorderColor="#7288AC" BorderStyle="Solid" CssClass="TopLevelStyle">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+    </ignav:Style>
+  </Styles>
+  <DisabledStyle BorderStyle="Solid" ForeColor="LightGray">
+    <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+  </DisabledStyle>
+  <HoverItemStyle Cursor="Default" ForeColor="Black" BackColor="#ABC0E7" />
+  <IslandStyle Cursor="Default" BorderWidth="1px" Font-Size="8pt" Font-Names="MS Sans Serif" BorderStyle="Outset" ForeColor="Black" BackColor="White" />
+  <ExpandEffects ShadowColor="LightGray" />
+  <TopSelectedStyle BorderColor="Blue" BackColor="#889DC2">
+    <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+  </TopSelectedStyle>
+  <SeparatorStyle BackgroundImage="Images/ig_menuSep.gif" CssClass="SeparatorClass" CustomRules="background-repeat:repeat-x; " />
+ </ignav:UltraWebMenu>
+ <igtab:UltraWebTab Runat="server" ImageDirectory="Images" TabOrientation="LeftTop" BorderStyle="None" BackColor="#D0CDC0">
+  <HoverTabStyle ForeColor="Black" BackColor="#BAB9AE" />
+  <DisabledTabStyle />
+  <DefaultTabStyle Font-Size="9pt" Font-Names="Microsoft Sans Serif" ForeColor="#666666" BackColor="#D0CDC0">
+    <Padding Bottom="3px" Top="5px" Right="15px" />
+    <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="131, 133, 116" WidthBottom="1px" StyleLeft="Solid" ColorLeft="131, 133, 116" />
+  </DefaultTabStyle>
+  <DefaultTabSeparatorStyle Height="3px" ForeColor="#D0CDC0" BackColor="#D0CDC0" CustomRules="background-color:#D0CDC0">
+    <BorderDetails StyleBottom="None" StyleTop="None" StyleRight="None" StyleLeft="Solid" ColorLeft="208, 205, 192" />
+  </DefaultTabSeparatorStyle>
+  <SelectedTabStyle ForeColor="Black" BackColor="#EFEFEB">
+    <BorderDetails StyleBottom="Solid" ColorBottom="159, 160, 144" StyleLeft="Solid" ColorLeft="159, 160, 144" />
+  </SelectedTabStyle>
+</igtab:UltraWebTab>
+<igtbar:UltraWebToolbar Runat="server" ImageDirectory="Images" BackColor="#7288AC" Font-Size="8pt" Font-Names="Microsoft Sans Serif" ItemWidthDefault="" ForeColor="White" MovableImage="Images/ig_tb_move00.gif" Height="22px">
+  <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+    <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+  </HoverStyle>
+  <SelectedStyle />
+  <DefaultStyle BackColor="#7288AC" BorderStyle="Solid" ForeColor="White">
+    <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+  </DefaultStyle>
+</igtbar:UltraWebToolbar>
+<igsch:WebCalendar Runat="server" ImageDirectory="Images" >
+  <Layout DayNameFormat="FirstLetter" ShowYearDropDown="False" GridLineColor="114, 136, 172" ShowMonthDropDown="False" ShowGridLines="Both">
+    <FooterStyle Cursor="Default" Font-Size="9pt" Font-Names="Verdana" BackColor="#D8D9DB" CustomRules="text-align:center">
+      <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="Black" ColorRight="Black" WidthRight="1px" StyleRight="Solid" WidthBottom="1px" StyleLeft="Solid" ColorLeft="Black" />
+    </FooterStyle>
+    <SelectedDayStyle ForeColor="Black" />
+    <OtherMonthDayStyle ForeColor="#CCCCCC" />
+    <TodayDayStyle BorderWidth="2px" BorderColor="#E89F2E" BorderStyle="Solid" />
+    <DayHeaderStyle Font-Size="9pt" Font-Names="Verdana" BackColor="#EEEEEE" />
+    <TitleStyle Font-Size="9pt" Font-Names="Verdana" BackColor="#D8D9DB" />
+  </Layout>
+</igsch:WebCalendar>
+<igcmbo:WebCombo Runat="server" ImageDirectory="Images" BorderStyle="Solid" DropImage1="Images/igcmbo_mscrmup.gif" DropImage2="Images/igcmbo_mscrmdown.gif" BorderWidth="1px" DropImageXP1="Images/igcmbo_mscrmup.gif" DropImageXP2="Images/igcmbo_mscrmdown.gif" SelBackColor="171, 192, 231" BackColor="White" ForeColor="Black" Font-Size="9pt" Font-Names="Tahoma" BorderColor="#7B9EBD" SelForeColor="Black" Version="3.00">
+  <DropDownLayout DropdownWidth="325px" BorderCollapse="Separate" RowSelectors="No" RowHeightDefault="20px" HeaderClickAction="Select" DropdownHeight="130px" GridLines="None">
+    <RowStyle BorderWidth="1px" BorderColor="Gray" BorderStyle="Solid" BackColor="White">
+      <BorderDetails WidthLeft="0px" WidthTop="0px" />
+    </RowStyle>
+    <RowSelectorStyle />
+    <SelectedRowStyle ForeColor="Black" BackColor="#ABC0E7" />
+    <HeaderStyle BorderStyle="Solid" BackColor="#E9E7D7">
+      <BorderDetails ColorTop="LightGray" WidthLeft="1px" StyleBottom="Solid" ColorBottom="DarkGray" WidthTop="1px" StyleTop="Outset" WidthBottom="2px" ColorLeft="White" />
+    </HeaderStyle>
+    <RowAlternateStyle />
+    <FooterStyle />
+    <FrameStyle Width="100%" Cursor="Default" Font-Size="9pt" Font-Names="Verdana" BorderStyle="None" BackColor="White" Height="100%" />
+    <ImageUrls />
+  </DropDownLayout>
+  <ExpandEffects ShadowColor="LightGray" />
+</igcmbo:WebCombo>
+<igtxt:WebCurrencyEdit Runat="server" ImageDirectory="Images" BorderStyle="Solid" Font-Size="8pt" Font-Names="Tahoma" BorderColor="#7B9EBD" BorderWidth="1px" />
+<igsch:WebDateChooser BorderStyle="Solid" BorderColor="#7B9EBD" Runat="server" ImageDirectory="Images">
+  <CalendarLayout DayNameFormat="FirstLetter" ShowYearDropDown="False" GridLineColor="114, 136, 172" ShowMonthDropDown="False" ShowGridLines="Both">
+    <FooterStyle Cursor="Default" Font-Size="9pt" Font-Names="Verdana" BackColor="#D8D9DB" CustomRules="text-align:center">
+      <BorderDetails WidthLeft="1px" StyleBottom="Solid" ColorBottom="Black" ColorRight="Black" WidthRight="1px" StyleRight="Solid" WidthBottom="1px" StyleLeft="Solid" ColorLeft="Black" />
+    </FooterStyle>
+    <SelectedDayStyle ForeColor="Black" />
+    <OtherMonthDayStyle ForeColor="#CCCCCC" />
+    <TodayDayStyle BorderWidth="2px" BorderColor="#E89F2E" BorderStyle="Solid" />
+    <DayHeaderStyle Font-Size="9pt" Font-Names="Verdana" BackColor="#EEEEEE" />
+    <TitleStyle Font-Size="9pt" Font-Names="Verdana" BackColor="#D8D9DB" />
+  </CalendarLayout>
+  <DropDownStyle BorderStyle="Solid" />
+  <DropButton ImageUrl2="Images/igsch_mscrmdown.gif" ImageUrl1="Images/igsch_mscrmup.gif">
+  </DropButton>
+  <ExpandEffects ShadowColor="LightGray" />
+</igsch:WebDateChooser>
+<igtxt:WebDateTimeEdit Runat="server" ImageDirectory="Images" BorderStyle="Solid" Font-Size="8pt" Font-Names="Tahoma" BorderColor="#7B9EBD" BorderWidth="1px" />
+<igtxt:WebMaskEdit Runat="server" ImageDirectory="Images" BorderStyle="Solid" Font-Size="8pt" Font-Names="Tahoma" BorderColor="#7B9EBD" BorderWidth="1px" />
+<ignavbar:WebNavBar Runat="server" Movable="False" BorderStyle="Solid" BorderWidth="1px" BackColor="#7288AC" BackgroundImage="" Font-Size="8pt" Font-Names="Microsoft Sans Serif" ForeColor="White" Theme="CorporateSilver">
+  <Navigation>
+    <End Tag="" Text="" DisabledImage="Images/end_disabled.gif" Key="end" StepUnit="Last" TabIndex="0" HoverImage="Images/end_hover.gif" Image="Images/end_up.gif" DepthFirst="True" SelectedImage="Images/end_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="2147483647" ToolTip="End">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </End>
+    <Start Tag="" Text="" DisabledImage="Images/start_disabled.gif" Key="start" StepUnit="First" TabIndex="0" HoverImage="Images/start_hover.gif" Image="Images/start_up.gif" DepthFirst="True" SelectedImage="Images/start_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="-2147483648" ToolTip="Start">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Start>
+    <Next Tag="" Text="" DisabledImage="Images/next_disabled.gif" Key="next" StepUnit="Row" TabIndex="0" HoverImage="Images/next_hover.gif" Image="Images/next_up.gif" DepthFirst="False" SelectedImage="Images/next_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="1" ToolTip="Next">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Next>
+    <Rewind Tag="" Text="" DisabledImage="Images/rew_disabled.gif" Key="rew" StepUnit="Page" TabIndex="0" HoverImage="Images/rew_hover.gif" Image="Images/rew_up.gif" DepthFirst="False" SelectedImage="Images/rew_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="-1" ToolTip="Reverse">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Rewind>
+    <FastForward Tag="" Text="" DisabledImage="Images/ff_disabled.gif" Key="ff" StepUnit="Page" TabIndex="0" HoverImage="Images/ff_hover.gif" Image="Images/ff_up.gif" DepthFirst="False" SelectedImage="Images/ff_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="1" ToolTip="Forward">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </FastForward>
+    <Prev Tag="" Text="" DisabledImage="Images/prev_disabled.gif" Key="prev" StepUnit="Row" TabIndex="0" HoverImage="Images/prev_hover.gif" Image="Images/prev_up.gif" DepthFirst="False" SelectedImage="Images/prev_down.gif" TargetURL="" TargetFrame="" AutoPostBack="False" Step="-1" ToolTip="Previous">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Prev>
+  </Navigation>
+  <Extension>
+    <Submit Tag="" Text="" Key="submit" TabIndex="0" HoverImage="Images/submit_hover.gif" ToolTip="Submit" SelectedImage="Images/submit_down.gif" TargetURL="" DisabledImage="Images/submit_disabled.gif" TargetFrame="" Image="Images/submit_up.gif">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Submit>
+    <Delete Tag="" Text="" Key="del" TabIndex="0" HoverImage="Images/del_hover.gif" ToolTip="Delete" SelectedImage="Images/del_down.gif" TargetURL="" DisabledImage="Images/del_disabled.gif" TargetFrame="" Image="Images/del_up.gif">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Delete>
+    <Insert Tag="" Text="" Key="add" TabIndex="0" HoverImage="Images/add_hover.gif" ToolTip="Insert" SelectedImage="Images/add_down.gif" TargetURL="" DisabledImage="Images/add_disabled.gif" TargetFrame="" Image="Images/add_up.gif">
+     <HoverStyle BorderColor="Blue" BorderStyle="Solid" ForeColor="White" BackColor="#64799C">
+      <BorderDetails WidthLeft="1px" WidthTop="1px" WidthRight="1px" WidthBottom="1px" />
+     </HoverStyle>
+     <SelectedStyle />
+     <DefaultStyle BorderStyle="Solid" ForeColor="White">
+      <BorderDetails ColorTop="114, 136, 172" WidthLeft="1px" ColorBottom="114, 136, 172" WidthTop="1px" ColorRight="114, 136, 172" WidthRight="1px" WidthBottom="1px" ColorLeft="114, 136, 172" />
+     </DefaultStyle>
+    </Insert>
+  </Extension>
+</ignavbar:WebNavBar>
+<igtxt:WebNumericEdit Runat="server" BorderStyle="Solid" Font-Size="8pt" Font-Names="Tahoma" BorderColor="#7B9EBD" BorderWidth="1px" />
+<igtxt:WebTextEdit Runat="server" BorderStyle="Solid" Font-Size="8pt" Font-Names="Tahoma" BorderColor="#7B9EBD" BorderWidth="1px" />

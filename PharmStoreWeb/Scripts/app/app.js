@@ -4,7 +4,7 @@
 	'use strict';
 
 	angular
-		.module('pharmPrice', [
+		.module('pharmStore', [
 			'ui.router',
 			'ui.bootstrap',
 			'LocalStorageModule',
@@ -46,26 +46,20 @@
 			'$rootScope',
 			'$location',
 			'authService',
-			'modalsService',
-			'modalViewsEnum',
+			'appStart',
 			function (
 				$rootScope,
 				$location,
 				authService,
-				modalsService,
-				modalViewsEnum) {
+				appStart) {
+
 			$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 				if (toState.name !== 'login' && !authService.isAuthenticated()) {
 					$location.path('/login');
 				}
 			});
 
-			// cache modal templates //TODO - add to templates main templates
-			modalsService.getTemplate(modalViewsEnum.alerts.drugView);
-			modalsService.getTemplate(modalViewsEnum.alerts.customerView);
-
-			modalsService.getTemplate(modalViewsEnum.confirms.exitView);
-
+			appStart.start();
 		}])
 
 })();

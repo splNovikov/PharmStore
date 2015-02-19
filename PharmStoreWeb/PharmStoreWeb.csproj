@@ -261,9 +261,10 @@
     <Content Include="Content\fonts\materialDesign\Material-Design-Icons.eot" />
     <Content Include="Content\fonts\materialDesign\Material-Design-Icons.ttf" />
     <Content Include="Content\fonts\materialDesign\Material-Design-Icons.woff" />
-    <Content Include="Scripts\app\app.constants.js" />
+    <Content Include="Scripts\app\app.config.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\app.layout.controller.js" />
+    <Content Include="Scripts\app\app.start.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.digitsOnly.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.module.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.ngEnter.directive.js" />
@@ -1181,15 +1182,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>61310</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55470/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:8288/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

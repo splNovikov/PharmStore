@@ -1,4 +1,4 @@
-﻿using PharmPriceWeb.Utils;
+﻿using pharmStoreWeb.Utils;
 using System.Web;
 using System.Web.Optimization;
 
@@ -10,7 +10,7 @@ namespace PharmStoreWeb
 
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			BundleTable.EnableOptimizations = true;
+			//BundleTable.EnableOptimizations = true;
 
 			RegisterThirdPartyLibs(bundles);
 
@@ -78,7 +78,8 @@ namespace PharmStoreWeb
 				"~/Scripts/app/interceptors/interceptor.authentication.js",
 
 				"~/Scripts/app/app.js",
-				"~/Scripts/app/app.constants.js",
+				"~/Scripts/app/app.config.js",
+				"~/Scripts/app/app.start.js",
 				"~/Scripts/app/app.layout.controller.js"));
 
 			bundles.Add(new LessBundle("~/Content/siteLess").Include(
