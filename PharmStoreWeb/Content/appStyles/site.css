@@ -6194,7 +6194,6 @@ icon-material-lightgrey {
   box-shadow: none;
 }
 .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
-  max-width: 300px;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
@@ -6207,6 +6206,21 @@ icon-material-lightgrey {
   position: absolute;
   right: 5px;
   top: 10px;
+}
+@media (max-width: 420px) {
+  .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 150px;
+  }
+}
+@media (min-width: 421px) and (max-width: 500px) {
+  .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 300px;
+  }
+}
+@media (min-width: 501px) {
+  .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 400px;
+  }
 }
 .main-page .main-header .user-info .btn-group .dropdown-menu {
   right: 90px;

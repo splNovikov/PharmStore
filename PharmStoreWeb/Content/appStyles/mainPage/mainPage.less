@@ -26,7 +26,6 @@
 				box-shadow: none;
 
 				.btn.dropdown-toggle {
-					max-width: 300px;
 					-ms-text-overflow: ellipsis;
 					-o-text-overflow: ellipsis;
 					text-overflow: ellipsis;
@@ -39,6 +38,24 @@
 						position: absolute;
 						right: 5px;
 						top: 10px;
+					}
+				}
+
+				@media (max-width: 420px) {
+					.btn.dropdown-toggle {
+						max-width: 150px;
+					}
+				}
+
+				@media (min-width: 421px) and (max-width: 500px) {
+					.btn.dropdown-toggle {
+						max-width: 300px;
+					}
+				}
+
+				@media (min-width: 501px) {
+					.btn.dropdown-toggle {
+						max-width: 400px;
 					}
 				}
 
@@ -156,7 +173,7 @@
 			overflow: auto;
 			height: 100%;
 
-			.tooltip-inner{
+			.tooltip-inner {
 				border-radius: 5px;
 			}
 
