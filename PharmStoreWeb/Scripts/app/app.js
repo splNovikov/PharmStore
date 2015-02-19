@@ -44,18 +44,18 @@
 
 		.run([
 			'$rootScope',
-			'$location',
+			'$state',
 			'authService',
 			'appStart',
 			function (
 				$rootScope,
-				$location,
+				$state,
 				authService,
 				appStart) {
 
 			$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 				if (toState.name !== 'login' && !authService.isAuthenticated()) {
-					$location.path('/login');
+					$state.go('login');
 				}
 			});
 
