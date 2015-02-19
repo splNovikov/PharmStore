@@ -47,13 +47,18 @@
 			});
 		}
 
-		$scope.userBranches = localStorageService.get('userBranches');
-		$scope.currentUser = localStorageService.get('authorizationData').user;
+		var authorizationData = localStorageService.get('authorizationData');
 
-		// set isActive user
-		$scope.activeUser = _.find($scope.userBranches, function (branch) {
-			return branch.Id === $scope.currentUser.Id;
-		});
+		if (authorizationData) {
+
+			$scope.userBranches = localStorageService.get('userBranches');
+			$scope.currentUser = authorizationData.user;
+
+			// set isActive user
+			$scope.activeUser = _.find($scope.userBranches, function (branch) {
+				return branch.Id === $scope.currentUser.Id;
+			});
+		}
 
 		$scope.setBranchActive = function (branch) {
 			$scope.activeUser = branch;
@@ -68,7 +73,7 @@
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
 
-			if (!newVal){
+			if (!newVal) {
 				$scope.clearLookup();
 				return;
 			}
@@ -81,7 +86,7 @@
 		}
 
 		$scope.showAllResults = function () {
-			if ($scope.searchQuery){
+			if ($scope.searchQuery) {
 				showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
 			} else {
 				showPrice();
