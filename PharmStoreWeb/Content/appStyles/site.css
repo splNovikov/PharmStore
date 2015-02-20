@@ -6202,11 +6202,6 @@ icon-material-lightgrey {
   padding: 4px 20px 4px 8px;
   margin: 5px 10px;
 }
-.main-page .main-header .user-info .btn-group .btn.dropdown-toggle .caret {
-  position: absolute;
-  right: 5px;
-  top: 10px;
-}
 @media (max-width: 420px) {
   .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
     max-width: 150px;
@@ -6221,6 +6216,11 @@ icon-material-lightgrey {
   .main-page .main-header .user-info .btn-group .btn.dropdown-toggle {
     max-width: 400px;
   }
+}
+.main-page .main-header .user-info .btn-group .btn.dropdown-toggle .caret {
+  position: absolute;
+  right: 5px;
+  top: 10px;
 }
 .main-page .main-header .user-info .btn-group .dropdown-menu {
   right: 90px;
