@@ -27,58 +27,91 @@
 
 		_openConfirm = function (size, title, confirmViewType, entity, yesCallback, cancelCallback) {
 
-			$modal.open({
-				templateUrl: 'components/modalConfirm',
-				controller: 'ModalsConfirmController',
-				size: size,
-				resolve: {
-					title: function () {
-						return title;
-					},
-					confirmViewType: function () {
-						return confirmViewType;
-					},
-					entity: function () {
-						return entity;
-					},
-					yesCallback: function () {
-						return yesCallback;
-					},
-					cancelCallback: function () {
-						return cancelCallback;
-					}
-				}
-			});
-		}
+			_getTemplate(modalViewsEnum.confirms.mainView)
+				.then(function (tmpl) {
+
+					$modal.open({
+						template: tmpl,
+						controller: 'ModalsConfirmController',
+						size: size,
+						resolve: {
+							title: function () {
+								return title;
+							},
+							confirmViewType: function () {
+								return confirmViewType;
+							},
+							entity: function () {
+								return entity;
+							},
+							yesCallback: function () {
+								return yesCallback;
+							},
+							cancelCallback: function () {
+								return cancelCallback;
+							}
+						}
+					});
+				});
+		};
 
 		_openAlert = function (size, alertViewType, entity, title, yesCallback) {
 
-			$modal.open({
-				templateUrl: 'components/modalAlert',
-				controller: 'ModalsAlertController',
-				size: size,
-				resolve: {
-					alertViewType: function () {
-						return alertViewType;
-					},
-					entity: function () {
-						return entity;
-					},
-					title: function () {
-						return title;
-					},
-					yesCallback: function () {
-						return yesCallback;
-					}
-				}
-			});
-		}
+			_getTemplate(modalViewsEnum.alerts.mainView)
+				.then(function (tmpl) {
+
+					$modal.open({
+						template: tmpl,
+						controller: 'ModalsAlertController',
+						size: size,
+						resolve: {
+							alertViewType: function () {
+								return alertViewType;
+							},
+							entity: function () {
+								return entity;
+							},
+							title: function () {
+								return title;
+							},
+							yesCallback: function () {
+								return yesCallback;
+							}
+						}
+					});
+				});
+		};
 
 		_getTemplate = function (contentType) {
 			var def = $q.defer();
 
 			var template = '';
 			switch (contentType) {
+				case modalViewsEnum.alerts.mainView:
+					template = $templateCache.get(modalViewPaths.alerts.mainView);
+					if (typeof template === "undefined") {
+						$http.get(modalViewPaths.alerts.mainView)
+							.success(function (data) {
+								$templateCache.put(modalViewPaths.alerts.mainView, data);
+								def.resolve(data);
+							});
+					} else {
+						def.resolve(template);
+					}
+					break;
+				case modalViewsEnum.confirms.mainView:
+					template = $templateCache.get(modalViewPaths.confirms.mainView);
+					if (typeof template === "undefined") {
+						$http.get(modalViewPaths.confirms.mainView)
+							.success(function (data) {
+								$templateCache.put(modalViewPaths.confirms.mainView, data);
+								def.resolve(data);
+							});
+					} else {
+						def.resolve(template);
+					}
+					break;
+
 				case modalViewsEnum.alerts.drugView:
 					template = $templateCache.get(modalViewPaths.alerts.drugView);
 					if (typeof template === "undefined") {
@@ -118,7 +151,7 @@
 
 			}
 			return def.promise;
-		}
+		};
 
 		return {
 			openConfirm: _openConfirm,
