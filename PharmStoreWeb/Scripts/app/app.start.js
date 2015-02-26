@@ -36,22 +36,13 @@
 
 		putTemplatesToCache = function () {
 			// cache modal templates
-			
 			_.each(modalViewsEnum.alerts, function (n, key) {
 				modalsService.getTemplate(modalViewsEnum.alerts[key]);
 			});
 
 			_.each(modalViewsEnum.confirms, function (n, key) {
-				modalsService.getTemplate(modalViewsEnum.alerts[key]);
+				modalsService.getTemplate(modalViewsEnum.confirms[key]);
 			});
-
-			//modalsService.getTemplate(modalViewsEnum.alerts.mainView);
-			//modalsService.getTemplate(modalViewsEnum.confirms.mainView);
-
-			//modalsService.getTemplate(modalViewsEnum.alerts.drugView);
-			//modalsService.getTemplate(modalViewsEnum.alerts.customerView);
-
-			//modalsService.getTemplate(modalViewsEnum.confirms.exitView);
 		};
 
 		_start = function () {
