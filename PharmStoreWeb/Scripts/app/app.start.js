@@ -35,11 +35,14 @@
 		};
 
 		putTemplatesToCache = function () {
-			// cache modal templates //TODO - add to templates main templates
-			modalsService.getTemplate(modalViewsEnum.alerts.drugView);
-			modalsService.getTemplate(modalViewsEnum.alerts.customerView);
+			// cache modal templates
+			_.each(modalViewsEnum.alerts, function (n, key) {
+				modalsService.getTemplate(modalViewsEnum.alerts[key]);
+			});
 
-			modalsService.getTemplate(modalViewsEnum.confirms.exitView);
+			_.each(modalViewsEnum.confirms, function (n, key) {
+				modalsService.getTemplate(modalViewsEnum.confirms[key]);
+			});
 		};
 
 		_start = function () {
