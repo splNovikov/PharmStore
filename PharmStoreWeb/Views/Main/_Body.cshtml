@@ -49,7 +49,7 @@
 			</thead>
 			<tbody>
 				<tr ng-repeat="item in shownPriceList">
-					<td class="t-col col1 drug-info" ng-click="showDrugFullInfo(item)"><i class="mdi-action-info-outline" tooltip="Подробная информация" tooltip-placement="right" tooltip-animation="false"></i></td>
+					<td class="t-col col1 drug-info" ng-click="showDrugFullInfo(item)"><i class="fa fa-info-circle" tooltip="Подробная информация" tooltip-placement="right" tooltip-animation="false"></i></td>
 					<td class="t-col col2">{{ item.DrugIdCustomer }}</td>
 					<td class="t-col col3"><input type="number" min="1" max="5000" digits-only ng-model="item.count"></td>
 					<td class="t-col col4">{{ item.Title }}</td>
