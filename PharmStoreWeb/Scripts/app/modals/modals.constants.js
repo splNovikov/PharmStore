@@ -3,27 +3,15 @@
 
 	angular
 		.module('modals')
-		.constant('modalViewPaths', {
+		.constant('modalViews', {
 			alerts: {
-				mainView: 'components/modalAlert',
-				drugView: 'components/alertDrugView',
-				customerView: 'components/alertCustomerView'
+				mainView: { path: 'components/modalAlert', num: 1 },
+				drugView: { path: 'components/alertDrugView', num: 2 },
+				customerView: { path: 'components/alertCustomerView', num: 3 }
 			},
 			confirms: {
-				mainView: 'components/modalConfirm',
-				exitView: 'components/confirmExitView'
-			}
-		})
-		.constant('modalViewsEnum', {
-			alerts: {
-				mainView: 1,
-				drugView: 2,
-				customerView: 3
-			}
-			,
-			confirms: {
-				mainView: 4,
-				exitView: 5
+				mainView: { path: 'components/modalConfirm', num: 4 },
+				exitView: { path: 'components/confirmExitView', num: 5 }
 			}
 		})
 

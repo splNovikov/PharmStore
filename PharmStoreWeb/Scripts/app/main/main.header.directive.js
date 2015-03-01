@@ -19,7 +19,7 @@
 				'loginService',
 				'localStorageService',
 				'priceStorageDataService',
-				'modalViewsEnum',
+				'modalViews',
 				mainHeaderController]
 		};
 	}
@@ -31,7 +31,7 @@
 		loginService,
 		localStorageService,
 		priceStorageDataService,
-		modalViewsEnum) {
+		modalViews) {
 
 		angular.element(document).ready(function () {
 			$.material.ripples();
@@ -41,7 +41,7 @@
 		//#region user identity block
 
 		$scope.logOut = function () {
-			modalsService.openConfirm('sm', 'Вы уверены что хотите выйти?', modalViewsEnum.confirms.exitView, null, function () {
+			modalsService.openConfirm('sm', 'Вы уверены что хотите выйти?', modalViews.confirms.exitView, null, function () {
 				loginService.logOut();
 				$state.go('login');
 			});

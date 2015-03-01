@@ -19,7 +19,7 @@
 				'$filter',
 				'priceStorageDataService',
 				'modalsService',
-				'modalViewsEnum',
+				'modalViews',
 				mainBodyController]
 		};
 	}
@@ -29,16 +29,16 @@
 		$filter,
 		priceStorageDataService,
 		modalsService,
-		modalViewsEnum) {
+		modalViews) {
 
 		$scope.showDrugFullInfo = function (item) {
 			item.DueDate = $filter('date')(item.DueDate, "dd.MM.yyyy");
-			modalsService.openAlert(null, modalViewsEnum.alerts.drugView, item, 'инфо: ' + item.Title);
+			modalsService.openAlert(null, modalViews.alerts.drugView, item, 'инфо: ' + item.Title);
 		}
 
 		$scope.showCustomerInfo = function (customer) {
 			var customerFull = priceStorageDataService.getCustomerById(customer.Id);
-			modalsService.openAlert(null, modalViewsEnum.alerts.customerView, customerFull, customer.Name);
+			modalsService.openAlert(null, modalViews.alerts.customerView, customerFull, customer.Name);
 		}
 	}
 

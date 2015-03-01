@@ -8,8 +8,7 @@
 			'$http',
 			'$templateCache',
 			'$modal',
-			'modalViewsEnum',
-			'modalViewPaths',
+			'modalViews',
 			modalsService]);
 
 	function modalsService(
@@ -17,8 +16,7 @@
 		$http,
 		$templateCache,
 		$modal,
-		modalViewsEnum,
-		modalViewPaths) {
+		modalViews) {
 
 		var _openConfirm,
 			_openAlert,
@@ -27,7 +25,7 @@
 
 		_openConfirm = function (size, title, confirmViewType, entity, yesCallback, cancelCallback) {
 
-			_getTemplate(modalViewsEnum.confirms.mainView)
+			_getTemplate(modalViews.confirms.mainView)
 				.then(function (tmpl) {
 
 					$modal.open({
@@ -57,7 +55,7 @@
 
 		_openAlert = function (size, alertViewType, entity, title, yesCallback) {
 
-			_getTemplate(modalViewsEnum.alerts.mainView)
+			_getTemplate(modalViews.alerts.mainView)
 				.then(function (tmpl) {
 
 					$modal.open({
@@ -83,73 +81,19 @@
 		};
 
 		_getTemplate = function (contentType) {
-			var def = $q.defer();
+			var def = $q.defer(),
+				template = $templateCache.get(contentType.path);
 
-			var template = '';
-			switch (contentType) {
-				case modalViewsEnum.alerts.mainView:
-					template = $templateCache.get(modalViewPaths.alerts.mainView);
-					if (typeof template === "undefined") {
-						$http.get(modalViewPaths.alerts.mainView)
-							.success(function (data) {
-								$templateCache.put(modalViewPaths.alerts.mainView, data);
-								def.resolve(data);
-							});
-					} else {
-						def.resolve(template);
-					}
-					break;
-				case modalViewsEnum.confirms.mainView:
-					template = $templateCache.get(modalViewPaths.confirms.mainView);
-					if (typeof template === "undefined") {
-						$http.get(modalViewPaths.confirms.mainView)
-							.success(function (data) {
-								$templateCache.put(modalViewPaths.confirms.mainView, data);
-								def.resolve(data);
-							});
-					} else {
-						def.resolve(template);
-					}
-					break;
-
-				case modalViewsEnum.alerts.drugView:
-					template = $templateCache.get(modalViewPaths.alerts.drugView);
-					if (typeof template === "undefined") {
-						$http.get(modalViewPaths.alerts.drugView)
-							.success(function (data) {
-								$templateCache.put(modalViewPaths.alerts.drugView, data);
-								def.resolve(data);
-							});
-					} else {
-						def.resolve(template);
-					}
-					break;
-				case modalViewsEnum.alerts.customerView:
-					template = $templateCache.get(modalViewPaths.alerts.customerView);
-					if (typeof template === "undefined") {
-						$http.get(modalViewPaths.alerts.customerView)
-							.success(function (data) {
-								$templateCache.put(modalViewPaths.alerts.customerView, data);
-								def.resolve(data);
-							});
-					} else {
-						def.resolve(template);
-					}
-					break;
-				case modalViewsEnum.confirms.exitView:
-					template = $templateCache.get(modalViewPaths.confirms.exitView);
-					if (typeof template === "undefined") {
-						$http.get(modalViewPaths.confirms.exitView)
-							.success(function (data) {
-								$templateCache.put(modalViewPaths.confirms.exitView, data);
-								def.resolve(data);
-							});
-					} else {
-						def.resolve(template);
-					}
-					break;
-
+			if (typeof template === "undefined") {
+				$http.get(contentType.path)
+					.success(function (data) {
+						$templateCache.put(contentType.path, data);
+						def.resolve(data);
+					});
+			} else {
+				def.resolve(template);
 			}
+
 			return def.promise;
 		};
 

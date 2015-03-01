@@ -8,13 +8,13 @@
 		.factory('appStart', [
 			'APP_DEBUG_MODE',
 			'modalsService',
-			'modalViewsEnum',
+			'modalViews',
 			AppStartFactory]);
 
 	function AppStartFactory(
 		APP_DEBUG_MODE,
 		modalsService,
-		modalViewsEnum) {
+		modalViews) {
 
 		var onCloseTab,
 			putTemplatesToCache,
@@ -35,13 +35,13 @@
 		};
 
 		putTemplatesToCache = function () {
-			// cache modal templates
-			_.each(modalViewsEnum.alerts, function (n, key) {
-				modalsService.getTemplate(modalViewsEnum.alerts[key]);
+			// push modal templates to cache
+			_.each(modalViews.alerts, function (n, key) {
+				modalsService.getTemplate(modalViews.alerts[key]);
 			});
 
-			_.each(modalViewsEnum.confirms, function (n, key) {
-				modalsService.getTemplate(modalViewsEnum.confirms[key]);
+			_.each(modalViews.confirms, function (n, key) {
+				modalsService.getTemplate(modalViews.confirms[key]);
 			});
 		};
 
