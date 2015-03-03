@@ -22,7 +22,9 @@
 		</div>
 		<div class="drugs-lookup" ng-show="searchQuery && lookupDrugs.length > 0">
 			<ul role="listbox">
-				<li ng-repeat="drug in lookupDrugs" ng-click="showResultsByItem(drug)">
+				<li ng-repeat="drug in lookupDrugs"
+					ng-click="showResultsByItem(drug)"
+					ng-class="{ 'is-selectd' : drug.isSelected }">
 					<div>{{ drug.Title }}</div>
 					<div>{{ drug.Form }}</div>
 					<div>{{ drug.Manufacturer }}</div>

@@ -62,11 +62,15 @@
 		}
 
 		$scope.navigateOnPopup = function (event) {
-			if (!$scope.searchQuery)
+			if (!$scope.searchQuery || !$scope.lookupDrugs)
 				return;
 
-			if (event.keyCode === 40) { // down
-				$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, true);
+			if (event.keyCode === 40 || event.keyCode === 38) { // down || up
+				if ($scope.lookupDrugs.length === 0) {
+					$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, true);
+				} else {
+					debugger;
+				}
 			}
 		}
 
