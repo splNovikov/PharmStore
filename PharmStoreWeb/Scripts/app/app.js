@@ -15,6 +15,7 @@
 			'ngResource',
 			'ngSanitize',
 			'login',
+			'lookup',
 			'main',
 			'interceptors'
 		])

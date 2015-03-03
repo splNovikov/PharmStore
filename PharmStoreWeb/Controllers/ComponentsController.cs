@@ -8,6 +8,10 @@ namespace PharmStoreWeb.Controllers
 {
 	public class ComponentsController : Controller
 	{
+		public ActionResult LookupView()
+		{
+			return PartialView("~/Views/Components/_Lookup.cshtml");
+		}
 
 		public ActionResult ModalConfirm()
 		{

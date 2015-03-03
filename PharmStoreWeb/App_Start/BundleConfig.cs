@@ -66,12 +66,18 @@ namespace PharmStoreWeb
 				"~/Scripts/app/login/login.service.js",
 				"~/Scripts/app/login/login.auth.service.js",
 
+				// Lookup
+				"~/Scripts/app/lookup/lookup.module.js",
+				"~/Scripts/app/lookup/lookup.directive.js",
+
 				// Main
 				"~/Scripts/app/main/main.module.js",
-				"~/Scripts/app/main/main.priceStorageData.service.js",
 				"~/Scripts/app/main/main.controller.js",
-				"~/Scripts/app/main/main.header.directive.js",
-				"~/Scripts/app/main/main.body.directive.js",
+				// directices
+				"~/Scripts/app/main/directives/main.header.directive.js",
+				"~/Scripts/app/main/directives/main.body.directive.js",
+				// services
+				"~/Scripts/app/main/services/main.priceStorageData.service.js",
 
 				// Interceptors
 				"~/Scripts/app/interceptors/interceptors.module.js",

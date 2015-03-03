@@ -275,11 +275,13 @@
     <Content Include="Scripts\app\login\login.controller.js" />
     <Content Include="Scripts\app\login\login.module.js" />
     <Content Include="Scripts\app\login\login.service.js" />
-    <Content Include="Scripts\app\main\main.body.directive.js" />
+    <Content Include="Scripts\app\lookup\lookup.module.js" />
+    <Content Include="Scripts\app\lookup\lookup.directive.js" />
+    <Content Include="Scripts\app\main\directives\main.body.directive.js" />
     <Content Include="Scripts\app\main\main.controller.js" />
-    <Content Include="Scripts\app\main\main.header.directive.js" />
+    <Content Include="Scripts\app\main\directives\main.header.directive.js" />
     <Content Include="Scripts\app\main\main.module.js" />
-    <Content Include="Scripts\app\main\main.priceStorageData.service.js" />
+    <Content Include="Scripts\app\main\services\main.priceStorageData.service.js" />
     <Content Include="Scripts\app\modals\modals.alert.controller.js" />
     <Content Include="Scripts\app\modals\modals.confirm.controller.js" />
     <Content Include="Scripts\app\modals\modals.constants.js" />
@@ -1167,6 +1169,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\appStyles\modals\modals.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Components\_Lookup.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

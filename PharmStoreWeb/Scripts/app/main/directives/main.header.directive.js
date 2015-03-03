@@ -18,7 +18,6 @@
 				'$state',
 				'loginService',
 				'localStorageService',
-				'priceStorageDataService',
 				'modalViews',
 				mainHeaderController]
 		};
@@ -30,13 +29,7 @@
 		$state,
 		loginService,
 		localStorageService,
-		priceStorageDataService,
 		modalViews) {
-
-		angular.element(document).ready(function () {
-			$.material.ripples();
-			$.material.input();
-		});
 
 		//#region user identity block
 
@@ -47,6 +40,7 @@
 			});
 		}
 
+		// TODO - переместить в сервис
 		var authorizationData = localStorageService.get('authorizationData');
 
 		if (authorizationData) {
@@ -66,44 +60,6 @@
 
 		//#endregion
 
-		//#region primary search field
-
-		//temporary!!! TODO!!!
-		priceStorageDataService.setData();
-
-		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
-
-			if (!newVal) {
-				$scope.clearLookup();
-				return;
-			}
-
-			$scope.lookupDrugs = priceStorageDataService.getFilteredData(newVal, true);
-		});
-
-		$scope.showResultsByItem = function (item) {
-			showPrice(priceStorageDataService.getFilteredDataByItem(item));
-		}
-
-		$scope.showAllResults = function () {
-			if ($scope.searchQuery) {
-				showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
-			} else {
-				showPrice();
-			}
-		}
-
-		var showPrice = function (price) {
-			$scope.$parent.shownPriceList = price;
-			$scope.clearLookup();
-		}
-
-		$scope.clearLookup = function () {
-			$scope.lookupDrugs = [];
-			//$scope.searchQuery = '';
-		}
-
-		//#endregion
 	}
 
 })();
