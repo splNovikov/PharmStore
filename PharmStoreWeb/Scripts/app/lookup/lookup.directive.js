@@ -33,43 +33,99 @@
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
 
 			if (!newVal) {
-				$scope.clearLookup();
+				$scope.lookup.clearLookup();
 				return;
 			}
 
 			$scope.lookupDrugs = priceStorageDataService.getFilteredData(newVal, true);
 		});
 
-		$scope.showResultsByItem = function (item) {
-			showPrice(priceStorageDataService.getFilteredDataByItem(item));
-		}
-
-		$scope.showAllResults = function () {
-			if ($scope.searchQuery) {
-				showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
-			} else {
-				showPrice();
-			}
-		}
-
 		var showPrice = function (price) {
 			$scope.$parent.shownPriceList = price;
-			$scope.clearLookup();
-		}
+			$scope.lookup.clearLookup();
+		};
 
-		$scope.clearLookup = function () {
-			$scope.lookupDrugs = [];
-		}
+		var selectByArrows = function (event, selectedIdx) {
+			//1. find selected is exist
+			var lookupLength = $scope.lookupDrugs.length;
 
-		$scope.navigateOnPopup = function (event) {
-			if (!$scope.searchQuery || !$scope.lookupDrugs)
-				return;
+			//2. if selected is not exists
+			if (!_.isNumber(selectedIdx)) {
+				if (event.keyCode === 40) {
+					$scope.lookupDrugs[0].isSelected = true;
+				} else if (event.keyCode === 38) {
+					$scope.lookupDrugs[lookupLength - 1].isSelected = true;
+				}
+			} else {
+				if (lookupLength === 1) return;
 
-			if (event.keyCode === 40 || event.keyCode === 38) { // down || up
-				if ($scope.lookupDrugs.length === 0) {
-					$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, true);
+				$scope.lookupDrugs[selectedIdx].isSelected = false;
+
+				// 3. if selected is exists
+				if (event.keyCode === 40) {
+					if (selectedIdx + 1 !== lookupLength) {
+						$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
+					} else {
+						$scope.lookupDrugs[0].isSelected = true;
+					}
+				} else if (event.keyCode === 38) {
+					if (selectedIdx !== 0) {
+						$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
+					} else {
+						$scope.lookupDrugs[lookupLength - 1].isSelected = true;
+					}
+				}
+			}
+		};
+
+		$scope.lookup = {
+			showResultsByItem: function (item) {
+				showPrice(priceStorageDataService.getFilteredDataByItem(item));
+			},
+
+			showResults: function () {
+				// check if there is no selected data by arrows
+				var selectedDrug = _.find($scope.lookupDrugs, function (drugItem) {
+					return drugItem.isSelected;
+				});
+
+				if (selectedDrug) {
+					showPrice(priceStorageDataService.getFilteredDataByItem(selectedDrug));
+					return;
+				}
+
+				if ($scope.searchQuery) {
+					showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
 				} else {
-					debugger;
+					showPrice();
+				}
+			},
+
+			clearLookup: function () {
+				$scope.lookupDrugs = [];
+			},
+
+			navigateOnPopup: function (event) {
+				if (!$scope.searchQuery || !$scope.lookupDrugs)
+					return;
+
+				var selectedIdx,
+					selectedDrug = _.find($scope.lookupDrugs, function (drugItem, drugIdx) {
+						if (drugItem.isSelected) { selectedIdx = drugIdx; };
+						return drugItem.isSelected;
+					});
+
+				if (event.keyCode === 27) { // Esc
+					if (selectedDrug) { selectedDrug.isSelected = false; }
+				}
+
+				if (event.keyCode === 40 || event.keyCode === 38) { // down || up
+					if ($scope.lookupDrugs.length === 0) {
+						$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, true);
+						selectByArrows(event, selectedIdx);
+					} else {
+						selectByArrows(event, selectedIdx);
+					}
 				}
 			}
 		}

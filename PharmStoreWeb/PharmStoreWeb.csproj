@@ -192,6 +192,12 @@
     <Content Include="Content\appStyles\mainPage\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
+    <Content Include="Content\appStyles\mainPage\lookup.css">
+      <DependentUpon>lookup.less</DependentUpon>
+    </Content>
+    <Content Include="Content\appStyles\mainPage\lookup.min.css">
+      <DependentUpon>lookup.less</DependentUpon>
+    </Content>
     <Content Include="Content\appStyles\mainPage\mainPage.css">
       <DependentUpon>mainPage.less</DependentUpon>
     </Content>
@@ -1172,6 +1178,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Components\_Lookup.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\mainPage\lookup.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

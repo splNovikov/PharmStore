@@ -7,14 +7,14 @@
 					   placeholder="Поиск..."
 					   ng-model="searchQuery"
 					   ng-model-options="{ debounce: 200 }"
-					   ng-enter="showAllResults()"
-					   off-click="clearLookup()"
-					   ng-keydown="navigateOnPopup($event)">
+					   ng-enter="lookup.showResults()"
+					   off-click="lookup.clearLookup()"
+					   ng-keydown="lookup.navigateOnPopup($event)">
 			</div>
 			<span class="input-group-btn">
 				<button type="button"
 						class="btn btn-primary"
-						ng-click="showAllResults()"
+						ng-click="lookup.showResults()"
 						ng-disabled="!searchQuery">
 					<span class="fa fa-search"></span>
 				</button>
@@ -23,8 +23,8 @@
 		<div class="drugs-lookup" ng-show="searchQuery && lookupDrugs.length > 0">
 			<ul role="listbox">
 				<li ng-repeat="drug in lookupDrugs"
-					ng-click="showResultsByItem(drug)"
-					ng-class="{ 'is-selectd' : drug.isSelected }">
+					ng-click="lookup.showResultsByItem(drug)"
+					ng-class="{ 'is-selected' : drug.isSelected }">
 					<div>{{ drug.Title }}</div>
 					<div>{{ drug.Form }}</div>
 					<div>{{ drug.Manufacturer }}</div>
