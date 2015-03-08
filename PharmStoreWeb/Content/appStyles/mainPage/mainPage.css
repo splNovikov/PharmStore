@@ -1,4 +1,4 @@
-/* table column sizes*/
+﻿/* table column sizes*/
 /*#*/
 /*Код*/
 /*Заказ*/
@@ -146,8 +146,11 @@
   height: 24px;
   white-space: nowrap;
 }
-.main-page .main-header .search-block .for-input .drugs-lookup ul li:hover {
+.main-page .main-header .search-block .for-input .drugs-lookup ul li.is-selected {
   background-color: #c7e7e4;
+}
+.main-page .main-header .search-block .for-input .drugs-lookup ul li:hover {
+  background-color: #a3d8d3;
 }
 .main-page .main-header .search-block .for-input .drugs-lookup ul li div {
   display: inline-block;
@@ -265,3 +268,4 @@
   background-color: #7fc9c2;
   font-weight: bold;
 }
+/*# sourceMappingURL=mainPage.css.map */

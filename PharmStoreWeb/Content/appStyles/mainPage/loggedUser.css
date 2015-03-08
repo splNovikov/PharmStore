@@ -1,0 +1,84 @@
+﻿/* table column sizes*/
+/*#*/
+/*Код*/
+/*Заказ*/
+/*Наименование*/
+/*Форма*/
+/*Производитель*/
+/*Цена*/
+/*Поставщик*/
+/*Больше %*/
+/*Кратность*/
+/*Остаток*/
+/*Годность*/
+/*Сумма*/
+/* header-heights*/
+/* search query */
+/* table column sizes*/
+/*#*/
+/*Код*/
+/*Заказ*/
+/*Наименование*/
+/*Форма*/
+/*Производитель*/
+/*Цена*/
+/*Поставщик*/
+/*Больше %*/
+/*Кратность*/
+/*Остаток*/
+/*Годность*/
+/*Сумма*/
+/* header-heights*/
+/* search query */
+.user-info {
+  /*border: 1px solid red;*/
+  height: 25px;
+}
+.user-info .btn-group {
+  float: right;
+  margin: 0 10px;
+  box-shadow: none;
+}
+.user-info .btn-group .btn.dropdown-toggle {
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
+  padding: 4px 20px 4px 8px;
+  margin: 5px 10px;
+}
+@media (max-width: 420px) {
+  .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 150px;
+  }
+}
+@media (min-width: 421px) and (max-width: 500px) {
+  .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 300px;
+  }
+}
+@media (min-width: 501px) {
+  .user-info .btn-group .btn.dropdown-toggle {
+    max-width: 400px;
+  }
+}
+.user-info .btn-group .btn.dropdown-toggle .caret {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+.user-info .btn-group .dropdown-menu {
+  right: 90px;
+  left: auto;
+  box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.26);
+}
+.user-info .btn-group .dropdown-menu > li > a {
+  cursor: pointer;
+}
+.user-info .btn-group .btn.btn-logout {
+  padding: 4px 8px;
+  margin: 5px 10px;
+  border-radius: 2px;
+}
+/*# sourceMappingURL=loggedUser.css.map */

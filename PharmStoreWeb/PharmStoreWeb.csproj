@@ -192,6 +192,12 @@
     <Content Include="Content\appStyles\mainPage\colors.min.css">
       <DependentUpon>colors.css</DependentUpon>
     </Content>
+    <Content Include="Content\appStyles\mainPage\loggedUser.css">
+      <DependentUpon>loggedUser.less</DependentUpon>
+    </Content>
+    <Content Include="Content\appStyles\mainPage\loggedUser.min.css">
+      <DependentUpon>loggedUser.css</DependentUpon>
+    </Content>
     <Content Include="Content\appStyles\mainPage\lookup.css">
       <DependentUpon>lookup.less</DependentUpon>
     </Content>
@@ -278,9 +284,10 @@
     <Content Include="Scripts\app\interceptors\interceptor.authentication.js" />
     <Content Include="Scripts\app\interceptors\interceptors.module.js" />
     <Content Include="Scripts\app\login\login.auth.service.js" />
-    <Content Include="Scripts\app\login\login.controller.js" />
+    <Content Include="Scripts\app\login\login.page.controller.js" />
     <Content Include="Scripts\app\login\login.module.js" />
     <Content Include="Scripts\app\login\login.service.js" />
+    <Content Include="Scripts\app\login\login.loggedUser.directive.js" />
     <Content Include="Scripts\app\lookup\lookup.module.js" />
     <Content Include="Scripts\app\lookup\lookup.directive.js" />
     <Content Include="Scripts\app\main\directives\main.body.directive.js" />
@@ -1181,6 +1188,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\appStyles\mainPage\lookup.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Login\_LoggedUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\mainPage\loggedUser.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\mainPage\loggedUser.css.map">
+      <DependentUpon>loggedUser.css</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

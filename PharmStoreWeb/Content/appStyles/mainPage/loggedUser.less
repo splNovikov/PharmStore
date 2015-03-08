@@ -1,0 +1,57 @@
+﻿@import "variables.less";
+
+.user-info {
+	/*border: 1px solid red;*/
+	height: @user-info-height;
+
+	.btn-group {
+		float: right;
+		margin: 0 10px;
+		box-shadow: none;
+
+		.btn.dropdown-toggle {
+			-ms-text-overflow: ellipsis;
+			-o-text-overflow: ellipsis;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			font-size: 12px;
+			padding: 4px 20px 4px 8px;
+			margin: 5px 10px;
+
+			@media (max-width: 420px) {
+				max-width: 150px;
+			}
+
+			@media (min-width: 421px) and (max-width: 500px) {
+				max-width: 300px;
+			}
+
+			@media (min-width: 501px) {
+				max-width: 400px;
+			}
+
+
+			.caret {
+				position: absolute;
+				right: 5px;
+				top: 10px;
+			}
+		}
+
+		.dropdown-menu {
+			right: 90px;
+			left: auto;
+			box-shadow: 0 0 15px -1px rgba(0, 0, 0, 0.26);
+
+			& > li > a {
+				cursor: pointer;
+			}
+		}
+
+		.btn.btn-logout {
+			padding: 4px 8px;
+			margin: 5px 10px;
+			border-radius: 2px;
+		}
+	}
+}

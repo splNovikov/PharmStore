@@ -10,7 +10,7 @@ namespace PharmStoreWeb
 
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			BundleTable.EnableOptimizations = false;
+			BundleTable.EnableOptimizations = true;
 
 			RegisterThirdPartyLibs(bundles);
 
@@ -62,7 +62,8 @@ namespace PharmStoreWeb
 
 				// Login
 				"~/Scripts/app/login/login.module.js",
-				"~/Scripts/app/login/login.controller.js",
+				"~/Scripts/app/login/login.page.controller.js",
+				"~/Scripts/app/login/login.loggedUser.directive.js",
 				"~/Scripts/app/login/login.service.js",
 				"~/Scripts/app/login/login.auth.service.js",
 

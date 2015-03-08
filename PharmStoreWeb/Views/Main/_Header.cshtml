@@ -1,16 +1,5 @@
 ﻿<div class="main-header">
-	<div class="user-info">
-		<div class="btn-group">
-			<a class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-				{{ activeUser.Name ? activeUser.Name : 'филиал не определен' }} ({{ activeUser.Address }})
-				<span class="caret" ng-if="userBranches.length > 1"></span>
-			</a>
-			<ul class="dropdown-menu" ng-if="userBranches.length > 1">
-				<li ng-repeat="branch in userBranches" ng-hide="branch.Id === activeUser.Id"><a ng-click="setBranchActive(branch)">{{ branch.Name }}, {{ branch.Address }}</a></li>
-			</ul>
-			<div ng-click="logOut()" class="btn btn-primary btn-xs btn-logout">Выйти</div>
-		</div>
-	</div>
+	<logged-user></logged-user>
 	<lookup></lookup>
 	<div class="search-preferences"></div>
 </div>

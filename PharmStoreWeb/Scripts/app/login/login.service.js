@@ -7,7 +7,12 @@
 
 	function loginService($http, $q, loginApiPath, localStorageService) {
 
-		var _authenticate = function (email, password) {
+		var _authenticate,
+			_logOut,
+			_getUserData,
+			_getUserBranches;
+
+		_authenticate = function (email, password) {
 			var deferred = $q.defer();
 
 			$http.post(loginApiPath + '/Authenticate/', { Email: email, Password: password })
@@ -29,13 +34,23 @@
 			return deferred.promise;
 		};
 
-		var _logOut = function () {
+		_logOut = function () {
 			localStorageService.remove('authorizationData');
+		};
+
+		_getUserData = function () {
+			return localStorageService.get('authorizationData');
+		};
+
+		_getUserBranches = function () {
+			return localStorageService.get('userBranches');
 		};
 
 		return {
 			authenticate: _authenticate,
-			logOut: _logOut
+			logOut: _logOut,
+			getUserData: _getUserData,
+			getUserBranches: _getUserBranches
 		};
 
 	}

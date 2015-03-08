@@ -13,5 +13,9 @@ namespace PharmStoreWeb.Controllers
 			return PartialView("~/Views/Login/_Index.cshtml");
 		}
 
+		public ActionResult LoggedUserView()
+		{
+			return PartialView("~/Views/Login/_LoggedUser.cshtml");
+		}
 	}
 }
