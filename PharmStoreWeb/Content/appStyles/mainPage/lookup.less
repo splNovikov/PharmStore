@@ -26,9 +26,9 @@
 					height: @search-controls-height;
 				}
 
-					.form-control:focus {
-						height: @search-controls-height - 1px;
-					}
+				.form-control:focus {
+					height: @search-controls-height - 1px;
+				}
 			}
 
 			.btn {
@@ -57,11 +57,11 @@
 					height: 24px;
 					white-space: nowrap;
 
-					&.is-selected{
+					&.is-selected {
 						background-color: lighten(@lighten-primary, 20%);
 					}
 
-					&:hover{
+					&:hover {
 						background-color: lighten(@lighten-primary, 10%);
 					}
 
@@ -72,6 +72,11 @@
 						-ms-text-overflow: ellipsis;
 						-o-text-overflow: ellipsis;
 						text-overflow: ellipsis;
+
+						.colorized {
+							color: @primary;
+							font-weight: bold;
+						}
 					}
 				}
 			}

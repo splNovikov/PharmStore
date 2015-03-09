@@ -111,10 +111,36 @@
 		};
 
 		_getFilteredData = function (query, isUniq) {
-			var filtered, sorted;
+			//isUniq - only for lookup dropdown
 
-			filtered = _.filter(localStorageService.get('mainPrice'), function (drug) {
-				return drug.Title.toLowerCase().indexOf(query.toLowerCase()) === 0;
+			var queryArrOrig,
+				queryArr,
+				mainPrice,
+				filtered,
+				sorted
+
+
+			// 1. split query by space
+			queryArrOrig = query.split(' ');
+			
+			// 2. delete spaces
+			queryArr = _.compact(queryArrOrig);
+
+			mainPrice = localStorageService.get('mainPrice');
+
+			filtered = mainPrice;
+			_.each(queryArr, function (q) {
+				filtered = _.filter(filtered, function (drug) {
+					return drug.Title.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+				});
+
+				_.each(filtered, function (drug) {
+					drug.colorizedTitle = drug.colorizedTitle || drug.Title;
+
+					drug.colorizedTitle = drug.colorizedTitle.replace(new RegExp(q, 'ig'),
+						'<span class="colorized">' + q + '</span>');
+
+				});
 			});
 
 			if (filtered.length === 0) {
@@ -126,10 +152,11 @@
 			if (isUniq) {
 				return _.uniq(sorted, function (item) {
 					return item.Id;
-				})
+				});
 			} else {
 				return sorted;
 			}
+
 		};
 
 		_getFilteredDataByItem = function (item) {

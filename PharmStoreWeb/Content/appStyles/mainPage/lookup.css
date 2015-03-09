@@ -1,4 +1,4 @@
-/* table column sizes*/
+﻿/* table column sizes*/
 /*#*/
 /*Код*/
 /*Заказ*/
@@ -95,3 +95,8 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
 }
+.search-block .for-input .drugs-lookup ul li div .colorized {
+  color: #009587;
+  font-weight: bold;
+}
+/*# sourceMappingURL=lookup.css.map */
