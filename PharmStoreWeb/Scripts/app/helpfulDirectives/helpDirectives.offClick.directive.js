@@ -18,6 +18,7 @@
 
 			function targetCustomClassFilter(target, filter) {
 				if (!target || !filter || (target && !target.parentElement.hasAttribute('is-off-click-exception'))) return false;
+				
 				var filterLen = filter.length;
 				for (var i = 0; i < filterLen; ++i)
 					if (target.classList.contains(filter[i])) return true;
@@ -60,7 +61,6 @@
 						// This filters out artificial click events. Example: If you hit enter on a form to submit it, an
 						// artificial click event gets triggered on the form's submit button.
 						if (event.pageX == 0 && event.pageY == 0) return;
-
 
 						var target = event.target || event.srcElement;
 						if (!(elm[0].contains(target) || targetInFilter(target, attr.offClickFilter) || targetCustomClassFilter(target, scope.offClickCustomClass))) {

@@ -18,6 +18,8 @@
 
 			.form-control-wrapper {
 				margin: 0;
+				width: 50%;
+				display:inline-block;
 				/* input */
 				.form-control {
 					border: 1px solid @primary;
@@ -26,8 +28,10 @@
 					height: @search-controls-height;
 				}
 
-				.form-control:focus {
-					height: @search-controls-height - 1px;
+				.material-input{
+					&:before{
+						bottom: 0;
+					}
 				}
 			}
 
@@ -43,8 +47,8 @@
 			border: 1px solid @primary;
 			max-height: 100px;
 			overflow-y: auto;
-			padding: 3px;
-			margin-top: 1px;
+			padding: 5px 3px;
+			margin-top: -1px;
 
 			ul {
 				margin-bottom: 0;

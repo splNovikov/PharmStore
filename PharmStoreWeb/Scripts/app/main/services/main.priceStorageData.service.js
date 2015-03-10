@@ -11,6 +11,8 @@
 			_setData,
 			_getFullData,
 			_getFilteredData,
+			filteredData,
+			_getFilteredDataByShape,
 			_getFilteredDataByItem,
 			_getCustomerById;
 
@@ -150,13 +152,27 @@
 			sorted = sortDrugs(filtered);
 
 			if (isUniq) {
-				return _.uniq(sorted, function (item) {
+				filteredData = _.uniq(sorted, function (item) {
 					return item.Id;
 				});
+				return filteredData;
 			} else {
 				return sorted;
 			}
 
+		};
+
+		_getFilteredDataByShape = function (query) {
+
+			if (!filteredData) return null;
+
+			if (!query) {
+				return filteredData;
+			}
+
+			return _.filter(filteredData, function (drug) {
+				return drug.Form.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+			});
 		};
 
 		_getFilteredDataByItem = function (item) {
@@ -186,6 +202,7 @@
 			setData: _setData,
 			getFullData: _getFullData,
 			getFilteredData: _getFilteredData,
+			getFilteredDataByShape: _getFilteredDataByShape,
 			getFilteredDataByItem: _getFilteredDataByItem,
 			getCustomerById: _getCustomerById
 		};

@@ -1,14 +1,26 @@
 ﻿<div class="search-block">
 	<div class="for-input">
 		<div class="input-group">
-			<div class=form-control-wrapper>
+			<div class=form-control-wrapper is-off-click-exception>
 				<input type="text"
 					   class="form-control"
-					   placeholder="Поиск..."
+					   placeholder="Поиск по именованию..."
 					   ng-model="searchQuery"
 					   ng-model-options="{ debounce: 200 }"
 					   ng-enter="lookup.showResults()"
 					   off-click="lookup.clearLookup()"
+					   off-click-custom-class="['form-control']"
+					   ng-keydown="lookup.navigateOnPopup($event)">
+			</div>
+			<div class=form-control-wrapper is-off-click-exception>
+				<input type="text"
+					   class="form-control"
+					   placeholder="Фильтр по форме упаковки..."
+					   ng-model="searchQueryShape"
+					   ng-model-options="{ debounce: 200 }"
+					   ng-enter="lookup.showResults()"
+					   off-click="lookup.clearLookup()"
+					   off-click-custom-class="['form-control']"
 					   ng-keydown="lookup.navigateOnPopup($event)">
 			</div>
 			<span class="input-group-btn">

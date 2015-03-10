@@ -31,13 +31,15 @@
 		priceStorageDataService.setData();
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
-
 			if (!newVal) {
 				$scope.lookup.clearLookup();
 				return;
 			}
-
 			$scope.lookupDrugs = priceStorageDataService.getFilteredData(newVal, true);
+		});
+
+		$scope.$watch('searchQueryShape', function (newVal, prevVal, scope) {
+			$scope.lookupDrugs = priceStorageDataService.getFilteredDataByShape(newVal);
 		});
 
 		var showPrice = function (price) {
