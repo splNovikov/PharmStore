@@ -38,13 +38,13 @@
 					ng-click="lookup.showResultsByItem(drug)"
 					ng-class="{ 'is-selected' : drug.isSelected }">
 					<div ng-bind-html="drug.colorizedTitle"></div>
-					<div>{{ drug.Form }}</div>
+					<div ng-bind-html="drug.colorizedForm ? drug.colorizedForm : drug.Form"></div>
 					<div>{{ drug.Manufacturer }}</div>
 				</li>
 			</ul>
 		</div>
 		<div class="drugs-lookup" ng-show="searchQuery && !lookupDrugs">
-			В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}</b>"
+			В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}</b><b ng-show="searchQueryShape"> {{ searchQueryShape }}</b>"
 		</div>
 	</div>
 </div>

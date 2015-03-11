@@ -12,6 +12,7 @@
 			_getFullData,
 			_getFilteredData,
 			filteredData,
+			shapeQuery,
 			_getFilteredDataByShape,
 			_getFilteredDataByItem,
 			_getCustomerById;
@@ -32,7 +33,7 @@
 				{
 					Id: 1,
 					DrugIdCustomer: 32,
-					Title: 'Аспирин',
+					Title: 'Аспирин*',
 					Form: 'таб. №20',
 					Manufacturer: 'Лек. фарма',
 					Price: 39.92,
@@ -47,7 +48,7 @@
 				{
 					Id: 1,
 					DrugIdCustomer: 162,
-					Title: 'Аспирин',
+					Title: 'Аспирин*',
 					Form: 'таб. №20',
 					Manufacturer: 'Лек. фарма',
 					Price: 27.92,
@@ -124,7 +125,7 @@
 
 			// 1. split query by space
 			queryArrOrig = query.split(' ');
-			
+
 			// 2. delete spaces
 			queryArr = _.compact(queryArrOrig);
 
@@ -155,7 +156,12 @@
 				filteredData = _.uniq(sorted, function (item) {
 					return item.Id;
 				});
-				return filteredData;
+
+				if (shapeQuery) {
+					return _getFilteredDataByShape(shapeQuery);
+				} else {
+					return filteredData;
+				}
 			} else {
 				return sorted;
 			}
@@ -163,16 +169,54 @@
 		};
 
 		_getFilteredDataByShape = function (query) {
-
+			shapeQuery = query;
 			if (!filteredData) return null;
+
+			_.each(filteredData, function (drug) {
+				if (drug.colorizedForm) {
+					drug.colorizedForm = null;
+				}
+			});
 
 			if (!query) {
 				return filteredData;
 			}
 
-			return _.filter(filteredData, function (drug) {
-				return drug.Form.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+			var queryArrOrig,
+				queryArr,
+				filtered,
+				sorted
+
+			// 1. split query by space
+			queryArrOrig = query.split(' ');
+
+			// 2. delete spaces
+			queryArr = _.compact(queryArrOrig);
+
+			filtered = filteredData;
+
+			_.each(queryArr, function (q) {
+				filtered = _.filter(filtered, function (drug) {
+					return drug.Form.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+				});
+
+				// TODO[Novikov]. we have to escape all regex symbols
+				// может быть избавиться от регекса к чертям?!!?
+				_.each(filtered, function (drug) {
+					drug.colorizedForm = drug.colorizedForm || drug.Form;
+
+					drug.colorizedForm = drug.colorizedForm.replace(new RegExp(q, 'ig'),
+						'<span class="colorized">' + q + '</span>');
+				});
+
+
 			});
+
+			if (filtered.length === 0) {
+				return null;
+			}
+
+			return filtered;
 		};
 
 		_getFilteredDataByItem = function (item) {
