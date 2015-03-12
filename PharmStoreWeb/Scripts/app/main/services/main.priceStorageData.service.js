@@ -10,13 +10,15 @@
 		var sortDrugs,
 			_setData,
 			_getFullData,
-			_getFilteredData,
 			filteredData,
 			shapeQuery,
+			getFilterAndColorize,
+			getSubstringIndexes,
+			replaceStringWithColorized,
+			_getFilteredData,
 			_getFilteredDataByShape,
 			_getFilteredDataByItem,
 			_getCustomerById;
-
 
 		/*my own sorting - may be I have to improve it*/
 		sortDrugs = function (drugs) {
@@ -113,15 +115,11 @@
 			return localStorageService.get('mainPrice');
 		};
 
-		_getFilteredData = function (query, isUniq) {
-			//isUniq - only for lookup dropdown
-
+		getFilterAndColorize = function (query, price, fieldForColorize, colorizedFieldName) {
 			var queryArrOrig,
 				queryArr,
 				mainPrice,
-				filtered,
-				sorted
-
+				filtered;
 
 			// 1. split query by space
 			queryArrOrig = query.split(' ');
@@ -129,22 +127,58 @@
 			// 2. delete spaces
 			queryArr = _.compact(queryArrOrig);
 
-			mainPrice = localStorageService.get('mainPrice');
-
-			filtered = mainPrice;
+			filtered = price;
 			_.each(queryArr, function (q) {
 				filtered = _.filter(filtered, function (drug) {
-					return drug.Title.toLowerCase().indexOf(q.toLowerCase()) !== -1;
+					return drug[fieldForColorize].toLowerCase().indexOf(q.toLowerCase()) !== -1;
 				});
 
 				_.each(filtered, function (drug) {
-					drug.colorizedTitle = drug.colorizedTitle || drug.Title;
-
-					drug.colorizedTitle = drug.colorizedTitle.replace(new RegExp(q, 'ig'),
-						'<span class="colorized">' + q + '</span>');
-
+					drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
+					drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], q);
 				});
 			});
+
+			return filtered;
+		};
+
+		getSubstringIndexes = function (originalString, substring) {
+			var a = [], i = -1;
+			while ((i = originalString.toLowerCase().indexOf(substring.toLowerCase(), i + 1)) >= 0) a.push(i);
+			return a;
+		};
+
+		replaceStringWithColorized = function (originalString, substring) {
+			if (!substring || substring.length === 0) {
+				return originalString;
+			}
+
+			var substringIndexes = getSubstringIndexes(originalString, substring),
+			substringLength = substring.length;
+
+
+			_.forEachRight(substringIndexes, function (ind) {
+				originalString = [originalString.slice(0, ind + substringLength),
+				'</span>', originalString.slice(ind + substringLength)].join('');
+
+
+				originalString = [originalString.slice(0, ind),
+				'<span class="colorized">', originalString.slice(ind)].join('');
+			})
+
+
+			return originalString;
+		};
+
+		_getFilteredData = function (query, isUniq) {
+			//isUniq - only for lookup dropdown
+
+			var filtered = getFilterAndColorize(
+								query,
+								localStorageService.get('mainPrice'),
+								'Title',
+								'colorizedTitle'),
+				sorted;
 
 			if (filtered.length === 0) {
 				return null;
@@ -172,9 +206,12 @@
 			shapeQuery = query;
 			if (!filteredData) return null;
 
+			var colorizedFieldName = 'colorizedForm',
+				filtered;
+
 			_.each(filteredData, function (drug) {
-				if (drug.colorizedForm) {
-					drug.colorizedForm = null;
+				if (drug[colorizedFieldName]) {
+					drug[colorizedFieldName] = null;
 				}
 			});
 
@@ -182,35 +219,7 @@
 				return filteredData;
 			}
 
-			var queryArrOrig,
-				queryArr,
-				filtered,
-				sorted
-
-			// 1. split query by space
-			queryArrOrig = query.split(' ');
-
-			// 2. delete spaces
-			queryArr = _.compact(queryArrOrig);
-
-			filtered = filteredData;
-
-			_.each(queryArr, function (q) {
-				filtered = _.filter(filtered, function (drug) {
-					return drug.Form.toLowerCase().indexOf(q.toLowerCase()) !== -1;
-				});
-
-				// TODO[Novikov]. we have to escape all regex symbols
-				// может быть избавиться от регекса к чертям?!!?
-				_.each(filtered, function (drug) {
-					drug.colorizedForm = drug.colorizedForm || drug.Form;
-
-					drug.colorizedForm = drug.colorizedForm.replace(new RegExp(q, 'ig'),
-						'<span class="colorized">' + q + '</span>');
-				});
-
-
-			});
+			filtered = getFilterAndColorize(query, filteredData, 'Form', colorizedFieldName);
 
 			if (filtered.length === 0) {
 				return null;
