@@ -10,7 +10,7 @@ namespace PharmStoreWeb
 
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			BundleTable.EnableOptimizations = true;
+			BundleTable.EnableOptimizations = false;
 
 			RegisterThirdPartyLibs(bundles);
 

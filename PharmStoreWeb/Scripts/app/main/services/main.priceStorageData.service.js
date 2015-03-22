@@ -7,7 +7,10 @@
 
 	function priceStorageDataService(localStorageService) {
 
-		var sortDrugs,
+		var _initDatabase,
+			db,
+
+			sortDrugs,
 			_setData,
 			_getFullData,
 			filteredData,
@@ -19,6 +22,12 @@
 			_getFilteredDataByShape,
 			_getFilteredDataByItem,
 			_getCustomerById;
+
+		_initDatabase = function () {
+			//Database name //Version number //Text description //Size of database //Creation callback
+			db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
+			debugger;
+		};
 
 		/*my own sorting - may be I have to improve it*/
 		sortDrugs = function (drugs) {
@@ -252,6 +261,7 @@
 		};
 
 		return {
+			initDatabase: _initDatabase,
 			setData: _setData,
 			getFullData: _getFullData,
 			getFilteredData: _getFilteredData,

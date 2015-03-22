@@ -9,12 +9,14 @@
 			'APP_DEBUG_MODE',
 			'modalsService',
 			'modalViews',
+			'priceStorageDataService',
 			AppStartFactory]);
 
 	function AppStartFactory(
 		APP_DEBUG_MODE,
 		modalsService,
-		modalViews) {
+		modalViews,
+		priceStorageDataService) {
 
 		var onCloseTab,
 			putTemplatesToCache,
@@ -50,6 +52,7 @@
 				onCloseTab();
 			}
 			putTemplatesToCache();
+			priceStorageDataService.initDatabase();
 		};
 
 		return {
