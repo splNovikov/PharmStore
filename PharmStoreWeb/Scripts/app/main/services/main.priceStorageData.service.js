@@ -40,11 +40,31 @@
 
 			// of course, temporary:
 			//#region Data
-			mainPrice = [
-				{
-					Id: 1,
-					DrugIdCustomer: 32,
-					Title: 'Аспирин*',
+			// format of the objects in price:
+			//{
+			//	Id: 1,
+			//	DrugIdCustomer: 32,
+			//	Title: 'Аспирин*',
+			//	Form: 'таб. №20',
+			//	Manufacturer: 'Лек. фарма',
+			//	Price: 39.92,
+			//	Customer: {
+			//		Id: 1,
+			//		Name: 'Катрен'
+			//	},
+			//	Multiplicity: 5,
+			//	Balance: 1000,
+			//	DueDate: new Date('2015.11.24')
+			//}
+
+			mainPrice = [];
+			
+			for (var i = 1; i < 1000; i++) {
+				var id = i % 3 ? i : i - 1;
+				mainPrice.push({
+					Id: id,
+					DrugIdCustomer: i*id,
+					Title: 'Аспирин_' + id,
 					Form: 'таб. №20',
 					Manufacturer: 'Лек. фарма',
 					Price: 39.92,
@@ -55,51 +75,8 @@
 					Multiplicity: 5,
 					Balance: 1000,
 					DueDate: new Date('2015.11.24')
-				},
-				{
-					Id: 1,
-					DrugIdCustomer: 162,
-					Title: 'Аспирин*',
-					Form: 'таб. №20',
-					Manufacturer: 'Лек. фарма',
-					Price: 27.92,
-					Customer: {
-						Id: 2,
-						Name: 'Протек'
-					},
-					Multiplicity: 5,
-					Balance: 1000,
-					DueDate: new Date('2015.11.24')
-				},
-				{
-					Id: 2,
-					DrugIdCustomer: 3882,
-					Title: 'Аспирин',
-					Form: 'таб. №10',
-					Manufacturer: 'Лек. фарма',
-					Price: 20.12,
-					Customer: {
-						Id: 1,
-						Name: 'Катрен'
-					},
-					Multiplicity: 10,
-					Balance: 2000,
-					DueDate: new Date('2015.11.22')
-				},
-				{
-					Id: 3,
-					DrugIdCustomer: 32321,
-					Title: 'Аспирин',
-					Form: 'таб. №50',
-					Manufacturer: 'Лек. фарма',
-					Price: 101.81,
-					Customer: {
-						Id: 1,
-						Name: 'Катрен'
-					},
-					DueDate: new Date('2015.11.24')
-				}
-			]
+				})
+			}
 
 			customers = [
 				{
@@ -127,7 +104,6 @@
 		getFilterAndColorize = function (query, price, fieldForColorize, colorizedFieldName) {
 			var queryArrOrig,
 				queryArr,
-				mainPrice,
 				filtered;
 
 			// 1. split query by space
@@ -138,7 +114,8 @@
 
 			filtered = price;
 			_.each(queryArr, function (q) {
-				filtered = _.filter(filtered, function (drug) {
+				filtered = _.filter(filtered, function (drug, key, arr) {
+					debugger
 					return drug[fieldForColorize].toLowerCase().indexOf(q.toLowerCase()) !== -1;
 				});
 
@@ -181,6 +158,15 @@
 
 		_getFilteredData = function (query, isUniq) {
 			//isUniq - only for lookup dropdown
+
+			// перехолим на web sql!
+			// первое - временно отрубаем подкрашивание (разбить метод на 2а)
+			// фильтрация может происходить и по форме - помнить об этом
+			// зная сколько нужно результатов фильтруем данные. когда количество равно максимму в странице - тормозим фильтрацию. (важно сделать это оптимально чтоб не шерстить по всем данным)
+			// когда идет фильтрация - удаляем прошерстенные данные
+			// отфильтрованное сохраняем для следующих страниц
+			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
+			// склейка данных происходит не здесь - а на том слое где идет вызов.
 
 			var filtered = getFilterAndColorize(
 								query,
