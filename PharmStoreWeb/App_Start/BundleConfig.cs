@@ -23,7 +23,7 @@ namespace PharmStoreWeb
 				"~/Scripts/libs/angular/angular.js",
 				"~/Scripts/libs/angular/angular-route.js",
 				"~/Scripts/libs/angular/angular-local-storage.js",
-				"~/Scripts/libs/angular/angular-resource.js",
+				"~/Scripts/libs/angular/angular-websql.js",
 				"~/Scripts/libs/angular/angular-ui-router.js",
 				"~/Scripts/libs/angular/angular-sanitize.js",
 				"~/Scripts/libs/angular/angular-ui/ui-bootstrap-tpls.js",

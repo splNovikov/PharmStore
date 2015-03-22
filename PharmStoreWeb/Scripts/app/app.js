@@ -8,11 +8,11 @@
 			'ui.router',
 			'ui.bootstrap',
 			'LocalStorageModule',
+			'angular-websql',
 
 			// app own modules:
 			'helpDirectives',
 			'modals',
-			'ngResource',
 			'ngSanitize',
 			'login',
 			'lookup',

@@ -329,6 +329,8 @@
     <Content Include="Scripts\libs\angular\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\libs\angular\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\libs\angular\angular-ui\ui-bootstrap.min.js" />
+    <Content Include="Scripts\libs\angular\angular-websql.js" />
+    <Content Include="Scripts\libs\angular\angular-websql.min.js" />
     <Content Include="Scripts\libs\angular\angular.js" />
     <Content Include="Scripts\libs\angular\angular.min.js" />
     <Content Include="Scripts\libs\angular\i18n\angular-locale_aa-dj.js" />

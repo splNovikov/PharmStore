@@ -3,9 +3,14 @@
 
 	angular
 		.module('login')
-		.factory('priceStorageDataService', ['localStorageService', priceStorageDataService]);
+		.factory('priceStorageDataService', [
+			'localStorageService',
+			'$webSql',
+			priceStorageDataService]);
 
-	function priceStorageDataService(localStorageService) {
+	function priceStorageDataService(
+		localStorageService,
+		$webSql) {
 
 		var _initDatabase,
 			db,
@@ -25,8 +30,49 @@
 
 		_initDatabase = function () {
 			//Database name //Version number //Text description //Size of database //Creation callback
-			db = openDatabase('mydb', '1.0', 'Test DB', 2 * 1024 * 1024);
-			debugger;
+			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 2 * 1024 * 1024);
+
+			db.dropTable('Drugs');
+
+			db.createTable('Drugs', {
+				'Id': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'DrugIdCustomer': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'Title': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Form': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Manufacturer': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Price': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'CustomerId': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'Multiplicity': {
+					'type': 'INTEGER'
+				},
+				'Balance': {
+					'type': 'INTEGER'
+				},
+				'DueDate': {
+					'type': 'TIMESTAMP'
+				}
+			})
 		};
 
 		/*my own sorting - may be I have to improve it*/
@@ -40,38 +86,19 @@
 
 			// of course, temporary:
 			//#region Data
-			// format of the objects in price:
-			//{
-			//	Id: 1,
-			//	DrugIdCustomer: 32,
-			//	Title: 'Аспирин*',
-			//	Form: 'таб. №20',
-			//	Manufacturer: 'Лек. фарма',
-			//	Price: 39.92,
-			//	Customer: {
-			//		Id: 1,
-			//		Name: 'Катрен'
-			//	},
-			//	Multiplicity: 5,
-			//	Balance: 1000,
-			//	DueDate: new Date('2015.11.24')
-			//}
 
 			mainPrice = [];
-			
+
 			for (var i = 1; i < 1000; i++) {
 				var id = i % 3 ? i : i - 1;
 				mainPrice.push({
 					Id: id,
-					DrugIdCustomer: i*id,
+					DrugIdCustomer: i * id,
 					Title: 'Аспирин_' + id,
 					Form: 'таб. №20',
 					Manufacturer: 'Лек. фарма',
 					Price: 39.92,
-					Customer: {
-						Id: 1,
-						Name: 'Катрен'
-					},
+					CustomerId: 1,
 					Multiplicity: 5,
 					Balance: 1000,
 					DueDate: new Date('2015.11.24')
@@ -91,10 +118,26 @@
 				}
 			]
 
+			_.each(mainPrice, function (drug) {
+				
+				db.insert('Drugs', {
+					'Id': drug.Id,
+					"DrugIdCustomer": drug.DrugIdCustomer,
+					'Title': drug.Title,
+					'Form': drug.Form,
+					'Manufacturer': drug.Manufacturer,
+					'Price': drug.Price,
+					'CustomerId': drug.CustomerId,
+					'Multiplicity': drug.Multiplicity,
+					'Balance': drug.Balance,
+					'DueDate': drug.DueDate
+				}).then(function (results) {
+
+				})
+			})
+
 			//#endregion
 
-			localStorageService.set('mainPrice', mainPrice);
-			localStorageService.set('customers', customers);
 		};
 
 		_getFullData = function () {
