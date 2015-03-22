@@ -1,4 +1,4 @@
-﻿/* table column sizes*/
+/* table column sizes*/
 /*#*/
 /*Код*/
 /*Заказ*/
@@ -67,10 +67,14 @@
 .search-block .for-input .drugs-lookup {
   background-color: #fff;
   border: 1px solid #009587;
-  max-height: 100px;
+  max-height: 250px;
   overflow-y: auto;
   padding: 5px 3px;
   margin-top: -1px;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 .search-block .for-input .drugs-lookup ul {
   margin-bottom: 0;
@@ -101,4 +105,3 @@
   color: #009587;
   font-weight: bold;
 }
-/*# sourceMappingURL=lookup.css.map */

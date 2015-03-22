@@ -24,6 +24,7 @@
 							}
 						});
 					});
+					//todo: bind on destroy element
 					elem.bind('blur', function () {
 						stopWatch();
 					})
