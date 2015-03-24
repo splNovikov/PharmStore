@@ -27,7 +27,7 @@
 			$.material.input();
 		});
 
-		//temporary!!! TODO!!!
+		//temporary!!! TODO!!! - сделать в дебаг режиме
 		priceStorageDataService.setData();
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
@@ -35,7 +35,13 @@
 				$scope.lookup.clearLookup();
 				return;
 			}
-			$scope.lookupDrugs = priceStorageDataService.getFilteredData(newVal, true);
+
+			priceStorageDataService.getFilteredData(newVal, true).promise
+				.then(function (result) {
+					$scope.lookupDrugs = result;
+				})
+
+			
 		});
 
 		$scope.$watch('searchQueryShape', function (newVal, prevVal, scope) {

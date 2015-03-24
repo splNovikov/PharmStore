@@ -30,49 +30,49 @@
 
 		_initDatabase = function () {
 			//Database name //Version number //Text description //Size of database //Creation callback
-			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 2 * 1024 * 1024);
+			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 5 * 1024 * 1024); // 5Mb
 
-			db.dropTable('Drugs');
+			//db.dropTable('Drugs');
 
-			db.createTable('Drugs', {
-				'Id': {
-					'type': 'INTEGER',
-					//'null': 'NOT NULL'
-				},
-				'DrugIdCustomer': {
-					'type': 'INTEGER',
-					//'null': 'NOT NULL'
-				},
-				'Title': {
-					'type': 'TEXT',
-					//'null': 'NOT NULL'
-				},
-				'Form': {
-					'type': 'TEXT',
-					//'null': 'NOT NULL'
-				},
-				'Manufacturer': {
-					'type': 'TEXT',
-					//'null': 'NOT NULL'
-				},
-				'Price': {
-					'type': 'INTEGER',
-					//'null': 'NOT NULL'
-				},
-				'CustomerId': {
-					'type': 'INTEGER',
-					//'null': 'NOT NULL'
-				},
-				'Multiplicity': {
-					'type': 'INTEGER'
-				},
-				'Balance': {
-					'type': 'INTEGER'
-				},
-				'DueDate': {
-					'type': 'TIMESTAMP'
-				}
-			})
+			//db.createTable('Drugs', {
+			//	'Id': {
+			//		'type': 'INTEGER',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'DrugIdCustomer': {
+			//		'type': 'INTEGER',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'Title': {
+			//		'type': 'TEXT',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'Form': {
+			//		'type': 'TEXT',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'Manufacturer': {
+			//		'type': 'TEXT',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'Price': {
+			//		'type': 'INTEGER',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'CustomerId': {
+			//		'type': 'INTEGER',
+			//		//'null': 'NOT NULL'
+			//	},
+			//	'Multiplicity': {
+			//		'type': 'INTEGER'
+			//	},
+			//	'Balance': {
+			//		'type': 'INTEGER'
+			//	},
+			//	'DueDate': {
+			//		'type': 'TIMESTAMP'
+			//	}
+			//})
 		};
 
 		/*my own sorting - may be I have to improve it*/
@@ -89,21 +89,21 @@
 
 			mainPrice = [];
 
-			for (var i = 1; i < 1000; i++) {
-				var id = i % 3 ? i : i - 1;
-				mainPrice.push({
-					Id: id,
-					DrugIdCustomer: i * id,
-					Title: 'Аспирин_' + id,
-					Form: 'таб. №20',
-					Manufacturer: 'Лек. фарма',
-					Price: 39.92,
-					CustomerId: 1,
-					Multiplicity: 5,
-					Balance: 1000,
-					DueDate: new Date('2015.11.24')
-				})
-			}
+			//for (var i = 1; i < 1000; i++) {
+			//	var id = i % 3 ? i : i - 1;
+			//	mainPrice.push({
+			//		Id: id,
+			//		DrugIdCustomer: i * id,
+			//		Title: 'Аспирин_' + id,
+			//		Form: 'таб. №20',
+			//		Manufacturer: 'Лек. фарма',
+			//		Price: 39.92,
+			//		CustomerId: 1,
+			//		Multiplicity: 5,
+			//		Balance: 1000,
+			//		DueDate: new Date('2015.11.24')
+			//	})
+			//}
 
 			customers = [
 				{
@@ -118,23 +118,23 @@
 				}
 			]
 
-			_.each(mainPrice, function (drug) {
-				
-				db.insert('Drugs', {
-					'Id': drug.Id,
-					"DrugIdCustomer": drug.DrugIdCustomer,
-					'Title': drug.Title,
-					'Form': drug.Form,
-					'Manufacturer': drug.Manufacturer,
-					'Price': drug.Price,
-					'CustomerId': drug.CustomerId,
-					'Multiplicity': drug.Multiplicity,
-					'Balance': drug.Balance,
-					'DueDate': drug.DueDate
-				}).then(function (results) {
+			//_.each(mainPrice, function (drug) {
 
-				})
-			})
+			//	db.insert('Drugs', {
+			//		'Id': drug.Id,
+			//		"DrugIdCustomer": drug.DrugIdCustomer,
+			//		'Title': drug.Title,
+			//		'Form': drug.Form,
+			//		'Manufacturer': drug.Manufacturer,
+			//		'Price': drug.Price,
+			//		'CustomerId': drug.CustomerId,
+			//		'Multiplicity': drug.Multiplicity,
+			//		'Balance': drug.Balance,
+			//		'DueDate': drug.DueDate
+			//	}).then(function (results) {
+			//		console.log('added');
+			//	})
+			//})
 
 			//#endregion
 
@@ -211,31 +211,52 @@
 			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
 			// склейка данных происходит не здесь - а на том слое где идет вызов.
 
-			var filtered = getFilterAndColorize(
-								query,
-								localStorageService.get('mainPrice'),
-								'Title',
-								'colorizedTitle'),
-				sorted;
+			//var filtered = getFilterAndColorize(
+			//					query,
+			//					localStorageService.get('mainPrice'),
+			//					'Title',
+			//					'colorizedTitle'),
+			//	sorted;
 
-			if (filtered.length === 0) {
-				return null;
-			}
-
-			sorted = sortDrugs(filtered);
-
-			if (isUniq) {
-				filteredData = _.uniq(sorted, function (item) {
-					return item.Id;
-				});
-
-				if (shapeQuery) {
-					return _getFilteredDataByShape(shapeQuery);
-				} else {
-					return filteredData;
+			var promise = db.select("Drugs", {
+				"Title": {
+					"operator": 'LIKE',
+					"value": '%' + query + '%'
 				}
-			} else {
-				return sorted;
+			}).then(function (results) {
+
+				if (results.rows.length === 0) {
+					return null;
+				}
+
+				var i = 0,
+					resultArray = [],
+					sorted;
+
+				for (i; i < results.rows.length; i++) {
+					resultArray.push(results.rows.item(i));
+				}
+
+				sorted = sortDrugs(resultArray);
+
+				if (isUniq) {
+					filteredData = _.uniq(sorted, function (item) {
+						return item.Id;
+					});
+
+					//if (shapeQuery) {
+					//	return _getFilteredDataByShape(shapeQuery);
+					//} else {
+					return filteredData;
+					//}
+				} else {
+					return sorted;
+				}
+
+			});
+
+			return {
+				promise: promise
 			}
 
 		};
