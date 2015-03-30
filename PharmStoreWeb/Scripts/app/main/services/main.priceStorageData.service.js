@@ -6,16 +6,19 @@
 		.factory('priceStorageDataService', [
 			'localStorageService',
 			'$webSql',
+			'DebugSettings',
 			priceStorageDataService]);
 
 	function priceStorageDataService(
 		localStorageService,
-		$webSql) {
+		$webSql,
+		DebugSettings) {
 
-		var _initDatabase,
+		var sortDrugs,
 			db,
-
-			sortDrugs,
+			createDrugsTable,
+			_initDatabase,
+			_refillTestData,
 			_setData,
 			_getFullData,
 			filteredData,
@@ -28,82 +31,86 @@
 			_getFilteredDataByItem,
 			_getCustomerById;
 
-		_initDatabase = function () {
-			//Database name //Version number //Text description //Size of database //Creation callback
-			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 5 * 1024 * 1024); // 5Mb
-
-			//db.dropTable('Drugs');
-
-			//db.createTable('Drugs', {
-			//	'Id': {
-			//		'type': 'INTEGER',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'DrugIdCustomer': {
-			//		'type': 'INTEGER',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'Title': {
-			//		'type': 'TEXT',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'Form': {
-			//		'type': 'TEXT',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'Manufacturer': {
-			//		'type': 'TEXT',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'Price': {
-			//		'type': 'INTEGER',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'CustomerId': {
-			//		'type': 'INTEGER',
-			//		//'null': 'NOT NULL'
-			//	},
-			//	'Multiplicity': {
-			//		'type': 'INTEGER'
-			//	},
-			//	'Balance': {
-			//		'type': 'INTEGER'
-			//	},
-			//	'DueDate': {
-			//		'type': 'TIMESTAMP'
-			//	}
-			//})
-		};
-
 		/*my own sorting - may be I have to improve it*/
 		sortDrugs = function (drugs) {
 			return _.sortBy(drugs, ['Id', 'Price']);
 		};
 
-		_setData = function () {
+		createDrugsTable = function () {
+			db.createTable('Drugs', {
+				'Id': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'DrugIdCustomer': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'Title': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Form': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Manufacturer': {
+					'type': 'TEXT',
+					//'null': 'NOT NULL'
+				},
+				'Price': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'CustomerId': {
+					'type': 'INTEGER',
+					//'null': 'NOT NULL'
+				},
+				'Multiplicity': {
+					'type': 'INTEGER'
+				},
+				'Balance': {
+					'type': 'INTEGER'
+				},
+				'DueDate': {
+					'type': 'TIMESTAMP'
+				}
+			})
+		};
 
-			var mainPrice, customers;
+		_initDatabase = function () {
+			//Database name //Version number //Text description //Size of database //Creation callback
+			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 5 * 1024 * 1024); // 5Mb
 
-			// of course, temporary:
-			//#region Data
+			createDrugsTable();
+		};
+
+		_refillTestData = function () {
+
+			db.dropTable('Drugs');
+
+			createDrugsTable();
+
+			var mainPrice,
+				customers;
 
 			mainPrice = [];
 
-			//for (var i = 1; i < 1000; i++) {
-			//	var id = i % 3 ? i : i - 1;
-			//	mainPrice.push({
-			//		Id: id,
-			//		DrugIdCustomer: i * id,
-			//		Title: 'Аспирин_' + id,
-			//		Form: 'таб. №20',
-			//		Manufacturer: 'Лек. фарма',
-			//		Price: 39.92,
-			//		CustomerId: 1,
-			//		Multiplicity: 5,
-			//		Balance: 1000,
-			//		DueDate: new Date('2015.11.24')
-			//	})
-			//}
+			for (var i = 1; i < 1000; i++) {
+				var id = i % 3 ? i : i - 1;
+				mainPrice.push({
+					Id: id,
+					DrugIdCustomer: i * id,
+					Title: 'Аспирин_' + id,
+					Form: 'таб. №20' + id,
+					Manufacturer: 'Лек. фарма',
+					Price: 39.92,
+					CustomerId: 1,
+					Multiplicity: 5,
+					Balance: 1000,
+					DueDate: new Date('2015.11.24')
+				})
+			}
 
 			customers = [
 				{
@@ -118,26 +125,30 @@
 				}
 			]
 
-			//_.each(mainPrice, function (drug) {
+			_.each(mainPrice, function (drug) {
 
-			//	db.insert('Drugs', {
-			//		'Id': drug.Id,
-			//		"DrugIdCustomer": drug.DrugIdCustomer,
-			//		'Title': drug.Title,
-			//		'Form': drug.Form,
-			//		'Manufacturer': drug.Manufacturer,
-			//		'Price': drug.Price,
-			//		'CustomerId': drug.CustomerId,
-			//		'Multiplicity': drug.Multiplicity,
-			//		'Balance': drug.Balance,
-			//		'DueDate': drug.DueDate
-			//	}).then(function (results) {
-			//		console.log('added');
-			//	})
-			//})
+				db.insert('Drugs', {
+					'Id': drug.Id,
+					"DrugIdCustomer": drug.DrugIdCustomer,
+					'Title': drug.Title,
+					'Form': drug.Form,
+					'Manufacturer': drug.Manufacturer,
+					'Price': drug.Price,
+					'CustomerId': drug.CustomerId,
+					'Multiplicity': drug.Multiplicity,
+					'Balance': drug.Balance,
+					'DueDate': drug.DueDate
+				}).then(function (results) {
+					if (DebugSettings.couldLog) {
+						console.log('added new test line to Drugs');
+					}
+				})
+			})
 
-			//#endregion
+		};
 
+		_setData = function () {
+			console.info('Data has been setted');
 		};
 
 		_getFullData = function () {
@@ -145,27 +156,16 @@
 		};
 
 		getFilterAndColorize = function (query, price, fieldForColorize, colorizedFieldName) {
-			var queryArrOrig,
-				queryArr,
-				filtered;
+			// 1. split query by space and delete spaces
+			//queryArr = _.compact(query.split(' '));
 
-			// 1. split query by space
-			queryArrOrig = query.split(' ');
+			var filtered = _.filter(price, function (drug, key, arr) {
+				return drug[fieldForColorize].toLowerCase().indexOf(query.toLowerCase()) !== -1;
+			});
 
-			// 2. delete spaces
-			queryArr = _.compact(queryArrOrig);
-
-			filtered = price;
-			_.each(queryArr, function (q) {
-				filtered = _.filter(filtered, function (drug, key, arr) {
-					debugger
-					return drug[fieldForColorize].toLowerCase().indexOf(q.toLowerCase()) !== -1;
-				});
-
-				_.each(filtered, function (drug) {
-					drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
-					drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], q);
-				});
+			_.each(filtered, function (drug) {
+				drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
+				drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], query);
 			});
 
 			return filtered;
@@ -202,7 +202,7 @@
 		_getFilteredData = function (query, isUniq) {
 			//isUniq - only for lookup dropdown
 
-			// перехолим на web sql!
+			// переходим на web sql!
 			// первое - временно отрубаем подкрашивание (разбить метод на 2а)
 			// фильтрация может происходить и по форме - помнить об этом
 			// зная сколько нужно результатов фильтруем данные. когда количество равно максимму в странице - тормозим фильтрацию. (важно сделать это оптимально чтоб не шерстить по всем данным)
@@ -210,13 +210,6 @@
 			// отфильтрованное сохраняем для следующих страниц
 			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
 			// склейка данных происходит не здесь - а на том слое где идет вызов.
-
-			//var filtered = getFilterAndColorize(
-			//					query,
-			//					localStorageService.get('mainPrice'),
-			//					'Title',
-			//					'colorizedTitle'),
-			//	sorted;
 
 			var promise = db.select("Drugs", {
 				"Title": {
@@ -230,25 +223,33 @@
 				}
 
 				var i = 0,
+					rowsLength = results.rows.length,
 					resultArray = [],
+					filtered,
 					sorted;
 
-				for (i; i < results.rows.length; i++) {
+				for (i; i < rowsLength; i++) {
 					resultArray.push(results.rows.item(i));
 				}
 
-				sorted = sortDrugs(resultArray);
+				filtered = getFilterAndColorize(
+									query,
+									resultArray,
+									'Title',
+									'colorizedTitle');
+
+				sorted = sortDrugs(filtered);
 
 				if (isUniq) {
 					filteredData = _.uniq(sorted, function (item) {
 						return item.Id;
 					});
 
-					//if (shapeQuery) {
-					//	return _getFilteredDataByShape(shapeQuery);
-					//} else {
+					if (shapeQuery) {
+						return _getFilteredDataByShape(shapeQuery);
+					} else {
 					return filteredData;
-					//}
+					}
 				} else {
 					return sorted;
 				}
@@ -312,6 +313,7 @@
 
 		return {
 			initDatabase: _initDatabase,
+			refillTestData: _refillTestData,
 			setData: _setData,
 			getFullData: _getFullData,
 			getFilteredData: _getFilteredData,

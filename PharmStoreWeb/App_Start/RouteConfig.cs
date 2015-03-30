@@ -16,14 +16,14 @@ namespace PharmStoreWeb
 			routes.MapRoute(
 				name: "Partials",
 				url: "partials/{controller}/{action}",
-				namespaces: new[] { "EpamStore.Web.Controllers" }
+				namespaces: new[] { "PharmStore.Web.Controllers" }
 			);
 
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-				namespaces: new[] { "EpamStore.Web.Controllers" }
+				namespaces: new[] { "PharmStore.Web.Controllers" }
 			);
 		}
 	}

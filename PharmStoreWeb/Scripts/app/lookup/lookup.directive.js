@@ -27,9 +27,6 @@
 			$.material.input();
 		});
 
-		//temporary!!! TODO!!! - сделать в дебаг режиме
-		priceStorageDataService.setData();
-
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
 			if (!newVal) {
 				$scope.lookup.clearLookup();

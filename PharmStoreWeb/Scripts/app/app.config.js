@@ -10,7 +10,11 @@
 			appTitle: 'Pharm Store' // don't forget to rename this on Index.cshtml - in title.
 		})
 
-		.constant('APP_DEBUG_MODE', true)
+		.constant('DebugSettings', {
+			couldLog: true,
+			isDeveloper: true,
+			refillTestData: false
+		})
 
 
 })();

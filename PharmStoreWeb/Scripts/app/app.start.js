@@ -6,14 +6,14 @@
 	angular
 		.module('pharmStore')
 		.factory('appStart', [
-			'APP_DEBUG_MODE',
+			'DebugSettings',
 			'modalsService',
 			'modalViews',
 			'priceStorageDataService',
 			AppStartFactory]);
 
 	function AppStartFactory(
-		APP_DEBUG_MODE,
+		DebugSettings,
 		modalsService,
 		modalViews,
 		priceStorageDataService) {
@@ -48,11 +48,15 @@
 		};
 
 		_start = function () {
-			if (!APP_DEBUG_MODE) {
+			if (!DebugSettings.isDeveloper) {
 				onCloseTab();
 			}
 			putTemplatesToCache();
 			priceStorageDataService.initDatabase();
+
+			if (DebugSettings.isDeveloper && DebugSettings.refillTestData){
+				priceStorageDataService.refillTestData();
+			}
 		};
 
 		return {
