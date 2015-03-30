@@ -155,17 +155,20 @@
 			return localStorageService.get('mainPrice');
 		};
 
-		getFilterAndColorize = function (query, price, fieldForColorize, colorizedFieldName) {
-			// 1. split query by space and delete spaces
-			//queryArr = _.compact(query.split(' '));
+		getFilterAndColorize = function (queryArr, price, fieldForColorize, colorizedFieldName) {
+			var filtered = price;
+			_.each(queryArr, function (q, ind) {
 
-			var filtered = _.filter(price, function (drug, key, arr) {
-				return drug[fieldForColorize].toLowerCase().indexOf(query.toLowerCase()) !== -1;
-			});
+				if (ind !== 0) {
+					filtered = _.filter(filtered, function (drug, key, arr) {
+						return drug[fieldForColorize].toLowerCase().indexOf(q.toLowerCase()) !== -1;
+					});
+				}
 
-			_.each(filtered, function (drug) {
-				drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
-				drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], query);
+				_.each(filtered, function (drug) {
+					drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
+					drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], q);
+				});
 			});
 
 			return filtered;
@@ -211,50 +214,53 @@
 			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
 			// склейка данных происходит не здесь - а на том слое где идет вызов.
 
-			var promise = db.select("Drugs", {
-				"Title": {
-					"operator": 'LIKE',
-					"value": '%' + query + '%'
-				}
-			}).then(function (results) {
+			// 1. split query by space and delete spaces
+			var queryArr = _.compact(query.split(' ')),
 
-				if (results.rows.length === 0) {
-					return null;
-				}
-
-				var i = 0,
-					rowsLength = results.rows.length,
-					resultArray = [],
-					filtered,
-					sorted;
-
-				for (i; i < rowsLength; i++) {
-					resultArray.push(results.rows.item(i));
-				}
-
-				filtered = getFilterAndColorize(
-									query,
-									resultArray,
-									'Title',
-									'colorizedTitle');
-
-				sorted = sortDrugs(filtered);
-
-				if (isUniq) {
-					filteredData = _.uniq(sorted, function (item) {
-						return item.Id;
-					});
-
-					if (shapeQuery) {
-						return _getFilteredDataByShape(shapeQuery);
-					} else {
-					return filteredData;
+				promise = db.select("Drugs", {
+					"Title": {
+						"operator": 'LIKE',
+						"value": '%' + queryArr[0] + '%'
 					}
-				} else {
-					return sorted;
-				}
+				}).then(function (results) {
 
-			});
+					if (results.rows.length === 0) {
+						return null;
+					}
+
+					var i = 0,
+						rowsLength = results.rows.length,
+						resultArray = [],
+						filtered,
+						sorted;
+
+					for (i; i < rowsLength; i++) {
+						resultArray.push(results.rows.item(i));
+					}
+
+					filtered = getFilterAndColorize(
+										queryArr,
+										resultArray,
+										'Title',
+										'colorizedTitle');
+
+					sorted = sortDrugs(filtered);
+
+					if (isUniq) {
+						filteredData = _.uniq(sorted, function (item) {
+							return item.Id;
+						});
+
+						if (shapeQuery) {
+							return _getFilteredDataByShape(shapeQuery);
+						} else {
+							return filteredData;
+						}
+					} else {
+						return sorted;
+					}
+
+				});
 
 			return {
 				promise: promise
