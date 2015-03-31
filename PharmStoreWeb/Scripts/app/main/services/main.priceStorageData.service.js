@@ -21,7 +21,6 @@
 			_refillTestData,
 			_setData,
 			_getFullData,
-			filteredData,
 			shapeQuery,
 			getFilterAndColorize,
 			getSubstringIndexes,
@@ -186,7 +185,7 @@
 			}
 
 			var substringIndexes = getSubstringIndexes(originalString, substring),
-			substringLength = substring.length;
+				substringLength = substring.length;
 
 
 			_.forEachRight(substringIndexes, function (ind) {
@@ -209,7 +208,7 @@
 			// первое - временно отрубаем подкрашивание (разбить метод на 2а)
 			// фильтрация может происходить и по форме - помнить об этом
 			// зная сколько нужно результатов фильтруем данные. когда количество равно максимму в странице - тормозим фильтрацию. (важно сделать это оптимально чтоб не шерстить по всем данным)
-			// когда идет фильтрация - удаляем прошерстенные данные
+
 			// отфильтрованное сохраняем для следующих страниц
 			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
 			// склейка данных происходит не здесь - а на том слое где идет вызов.
@@ -217,50 +216,47 @@
 			// 1. split query by space and delete spaces
 			var queryArr = _.compact(query.split(' ')),
 
-				promise = db.select("Drugs", {
+				promise = db.selectCustom("Drugs", {
 					"Title": {
 						"operator": 'LIKE',
 						"value": '%' + queryArr[0] + '%'
 					}
-				}).then(function (results) {
+				},
+				"10", // limit
+				"0", // offset
+				isUniq)
+					.then(function (results) {
 
-					if (results.rows.length === 0) {
-						return null;
-					}
+						if (results.rows.length === 0) {
+							return null;
+						}
 
-					var i = 0,
-						rowsLength = results.rows.length,
-						resultArray = [],
-						filtered,
-						sorted;
+						var i = 0,
+							rowsLength = results.rows.length,
+							resultArray = [],
+							filtered;
 
-					for (i; i < rowsLength; i++) {
-						resultArray.push(results.rows.item(i));
-					}
+						for (i; i < rowsLength; i++) {
+							resultArray.push(results.rows.item(i));
+						}
 
-					filtered = getFilterAndColorize(
-										queryArr,
-										resultArray,
-										'Title',
-										'colorizedTitle');
+						filtered = getFilterAndColorize(
+											queryArr,
+											resultArray,
+											'Title',
+											'colorizedTitle');
 
-					sorted = sortDrugs(filtered);
-
-					if (isUniq) {
-						filteredData = _.uniq(sorted, function (item) {
-							return item.Id;
-						});
+						if (!isUniq){
+							filtered = sortDrugs(filtered);
+						}
 
 						if (shapeQuery) {
-							return _getFilteredDataByShape(shapeQuery);
+							return _getFilteredDataByShape(filtered, shapeQuery);
 						} else {
-							return filteredData;
+							return filtered;
 						}
-					} else {
-						return sorted;
-					}
 
-				});
+					});
 
 			return {
 				promise: promise
@@ -268,24 +264,25 @@
 
 		};
 
-		_getFilteredDataByShape = function (query) {
+		_getFilteredDataByShape = function (data, query) {
+			debugger;
 			shapeQuery = query;
-			if (!filteredData) return null;
+			if (!data) return null;
 
 			var colorizedFieldName = 'colorizedForm',
 				filtered;
 
-			_.each(filteredData, function (drug) {
+			_.each(data, function (drug) {
 				if (drug[colorizedFieldName]) {
 					drug[colorizedFieldName] = null;
 				}
 			});
 
 			if (!query) {
-				return filteredData;
+				return data;
 			}
 
-			filtered = getFilterAndColorize(query, filteredData, 'Form', colorizedFieldName);
+			filtered = getFilterAndColorize(query, data, 'Form', colorizedFieldName);
 
 			if (filtered.length === 0) {
 				return null;

@@ -42,7 +42,7 @@
 		});
 
 		$scope.$watch('searchQueryShape', function (newVal, prevVal, scope) {
-			$scope.lookupDrugs = priceStorageDataService.getFilteredDataByShape(newVal);
+			$scope.lookupDrugs = priceStorageDataService.getFilteredDataByShape($scope.lookupDrugs, newVal);
 		});
 
 		var showPrice = function (price) {

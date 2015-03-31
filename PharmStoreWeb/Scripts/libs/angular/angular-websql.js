@@ -71,12 +71,29 @@ angular.module("angular-websql", []).factory("$webSql", ["$q",
 								"{where}": a.w
 							}), a.p);
 						},
-						select: function(b, c) {
-							var d = "SELECT * FROM `{tableName}` WHERE {where}; ";
-							var a = this.whereClause(c);
+						select: function (b, c) {
+							var d = "SELECT * FROM `{tableName}` WHERE {where};",
+								a = this.whereClause(c);
 							return this.executeQuery(this.replace(d, {
 								"{tableName}": b,
-								"{where}": a.w
+								"{where}": a.w,
+							}), a.p);
+						},
+						selectCustom: function (b, c, lim, offset, uniq) {
+							var d = "SELECT " + (uniq ? "DISTINCT " : "") +
+										"Id, "+
+										"Title, " +
+										"Form, " +
+										"Manufacturer " +
+									"FROM `{tableName}` WHERE {where} " +
+									"LIMIT {limit} " +
+									"OFFSET {offset};",
+								a = this.whereClause(c);
+							return this.executeQuery(this.replace(d, {
+								"{tableName}": b,
+								"{where}": a.w,
+								"{limit}": lim,
+								"{offset}": offset
 							}), a.p);
 						},
 						selectAll: function(a) {
@@ -107,7 +124,7 @@ angular.module("angular-websql", []).factory("$webSql", ["$q",
 							}
 							return {w:a,p:v};
 						},
-						replace: function(a, c) {
+						replace: function (a, c) {
 							for (var b in c) {
 								a = a.replace(new RegExp(b, "ig"), c[b])
 							}
