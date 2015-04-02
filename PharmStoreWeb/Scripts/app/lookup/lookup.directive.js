@@ -29,7 +29,8 @@
 
 		var ctrlVariables = {
 			queryLimit: 15,
-			lookupPageNum: 0
+			lookupPageNum: 0,
+			stringsBeforeLoadingNext: 5
 		}
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
@@ -76,8 +77,6 @@
 				if (!_.isNumber(selectedIdx)) {
 					if (event.keyCode === 40) {
 						$scope.lookupDrugs[0].isSelected = true;
-					} else if (event.keyCode === 38) {
-						$scope.lookupDrugs[lookupLength - 1].isSelected = true;
 					}
 				} else {
 					if (lookupLength === 1) return;
@@ -86,6 +85,9 @@
 
 					// 3. if selected is exists
 					if (event.keyCode === 40) {
+						if (selectedIdx === lookupLength - ctrlVariables.stringsBeforeLoadingNext) {
+							$scope.lookup.continueLoading();
+						}
 						if (selectedIdx + 1 !== lookupLength) {
 							$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
 						} else {
@@ -95,7 +97,7 @@
 						if (selectedIdx !== 0) {
 							$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
 						} else {
-							$scope.lookupDrugs[lookupLength - 1].isSelected = true;
+							$scope.lookupDrugs[0].isSelected = true;
 						}
 					}
 				}
