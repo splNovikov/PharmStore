@@ -234,12 +234,8 @@
 			return newQueryArr;
 		};
 
-		_getFilteredData = function (query, shapeQuery, isUniq) {
+		_getFilteredData = function (query, shapeQuery, isUniq, limit, pageNum) {
 			//isUniq - only for lookup dropdown
-
-			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
-			// склейка данных происходит не здесь - а на том слое где идет вызов.
-			// остался limit и offset
 
 			var queryArr = _.compact(query.split(' ')),
 				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
@@ -255,7 +251,9 @@
 									(shapeQueryString ? shapeQueryString : "") +
 									"LIMIT ? " +
 									"OFFSET ?;",
-				queryParams = _.union(getQueryParams(queryArr), getQueryParams(shapeQueryArr), ["10", "0"]);
+				queryParams = getQueryParams(queryArr)
+					.concat(getQueryParams(shapeQueryArr))
+					.concat([limit, pageNum * limit]);
 
 			var promise = db.selectCustom(queryString, queryParams)
 				.then(function (results) {

@@ -27,26 +27,31 @@
 			$.material.input();
 		});
 
+		var ctrlVariables = {
+			queryLimit: 15,
+			lookupPageNum: 0
+		}
+
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
 			if (!newVal) {
 				$scope.lookup.clearLookup();
 				return;
 			}
+			ctrlVariables.lookupPageNum = 0;
 
-			priceStorageDataService.getFilteredData(newVal, $scope.searchQueryShape, true).promise
+			priceStorageDataService.getFilteredData(newVal, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 				})
-
-			
 		});
 
 		$scope.$watch('searchQueryShape', function (newVal, prevVal, scope) {
 			if (!$scope.searchQuery) {
 				return;
 			}
+			ctrlVariables.lookupPageNum = 0;
 
-			priceStorageDataService.getFilteredData($scope.searchQuery, newVal, true).promise
+			priceStorageDataService.getFilteredData($scope.searchQuery, newVal, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 				})
@@ -58,33 +63,40 @@
 		};
 
 		var selectByArrows = function (event, selectedIdx) {
-			//1. find selected is exist
 			var lookupLength = $scope.lookupDrugs.length;
 
-			//2. if selected is not exists
-			if (!_.isNumber(selectedIdx)) {
-				if (event.keyCode === 40) {
+			if (!$scope.lookupDrugs || lookupLength === 0) {
+				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+				.then(function (result) {
+					$scope.lookupDrugs = result;
 					$scope.lookupDrugs[0].isSelected = true;
-				} else if (event.keyCode === 38) {
-					$scope.lookupDrugs[lookupLength - 1].isSelected = true;
-				}
+				})
 			} else {
-				if (lookupLength === 1) return;
-
-				$scope.lookupDrugs[selectedIdx].isSelected = false;
-
-				// 3. if selected is exists
-				if (event.keyCode === 40) {
-					if (selectedIdx + 1 !== lookupLength) {
-						$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
-					} else {
+				// if selected is not exists
+				if (!_.isNumber(selectedIdx)) {
+					if (event.keyCode === 40) {
 						$scope.lookupDrugs[0].isSelected = true;
-					}
-				} else if (event.keyCode === 38) {
-					if (selectedIdx !== 0) {
-						$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
-					} else {
+					} else if (event.keyCode === 38) {
 						$scope.lookupDrugs[lookupLength - 1].isSelected = true;
+					}
+				} else {
+					if (lookupLength === 1) return;
+
+					$scope.lookupDrugs[selectedIdx].isSelected = false;
+
+					// 3. if selected is exists
+					if (event.keyCode === 40) {
+						if (selectedIdx + 1 !== lookupLength) {
+							$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
+						} else {
+							$scope.lookupDrugs[0].isSelected = true;
+						}
+					} else if (event.keyCode === 38) {
+						if (selectedIdx !== 0) {
+							$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
+						} else {
+							$scope.lookupDrugs[lookupLength - 1].isSelected = true;
+						}
 					}
 				}
 			}
@@ -115,6 +127,16 @@
 
 			clearLookup: function () {
 				$scope.lookupDrugs = [];
+				ctrlVariables.lookupPageNum = 0;
+			},
+
+			continueLoading: function () {
+				ctrlVariables.lookupPageNum += 1;
+
+				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+					.then(function (result) {
+						$scope.lookupDrugs = _.union($scope.lookupDrugs, result);
+					})
 			},
 
 			navigateOnPopup: function (event) {
@@ -132,12 +154,7 @@
 				}
 
 				if (event.keyCode === 40 || event.keyCode === 38) { // down || up
-					if ($scope.lookupDrugs.length === 0) { // здесь тоже добавить форму если она есть
-						$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, null, true);
-						selectByArrows(event, selectedIdx);
-					} else {
-						selectByArrows(event, selectedIdx);
-					}
+					selectByArrows(event, selectedIdx);
 				}
 			}
 		}

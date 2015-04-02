@@ -32,7 +32,9 @@
 				</button>
 			</span>
 		</div>
-		<div class="drugs-lookup" ng-show="searchQuery && lookupDrugs.length > 0">
+		<div class="drugs-lookup"
+			 ng-show="searchQuery && lookupDrugs.length > 0"
+			 lookup-scrolled="lookup.continueLoading()">
 			<ul role="listbox">
 				<li ng-repeat="drug in lookupDrugs"
 					ng-click="lookup.showResultsByItem(drug)"

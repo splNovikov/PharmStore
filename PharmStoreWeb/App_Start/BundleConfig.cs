@@ -70,6 +70,7 @@ namespace PharmStoreWeb
 				// Lookup
 				"~/Scripts/app/lookup/lookup.module.js",
 				"~/Scripts/app/lookup/lookup.directive.js",
+				"~/Scripts/app/lookup/lookup.scrolled.js",
 
 				// Main
 				"~/Scripts/app/main/main.module.js",
