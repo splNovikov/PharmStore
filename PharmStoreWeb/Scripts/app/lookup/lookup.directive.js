@@ -33,7 +33,7 @@
 				return;
 			}
 
-			priceStorageDataService.getFilteredData(newVal, true).promise
+			priceStorageDataService.getFilteredData(newVal, $scope.searchQueryShape, true).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 				})
@@ -42,7 +42,14 @@
 		});
 
 		$scope.$watch('searchQueryShape', function (newVal, prevVal, scope) {
-			$scope.lookupDrugs = priceStorageDataService.getFilteredDataByShape($scope.lookupDrugs, newVal);
+			if (!$scope.searchQuery) {
+				return;
+			}
+
+			priceStorageDataService.getFilteredData($scope.searchQuery, newVal, true).promise
+				.then(function (result) {
+					$scope.lookupDrugs = result;
+				})
 		});
 
 		var showPrice = function (price) {
@@ -99,7 +106,7 @@
 					return;
 				}
 
-				if ($scope.searchQuery) {
+				if ($scope.searchQuery) {// TODO - если есть и форма то добавить сюда еще и форму
 					showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
 				} else {
 					showPrice();
@@ -125,8 +132,8 @@
 				}
 
 				if (event.keyCode === 40 || event.keyCode === 38) { // down || up
-					if ($scope.lookupDrugs.length === 0) {
-						$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, true);
+					if ($scope.lookupDrugs.length === 0) { // здесь тоже добавить форму если она есть
+						$scope.lookupDrugs = priceStorageDataService.getFilteredData($scope.searchQuery, null, true);
 						selectByArrows(event, selectedIdx);
 					} else {
 						selectByArrows(event, selectedIdx);

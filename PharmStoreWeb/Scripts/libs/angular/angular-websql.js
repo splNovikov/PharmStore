@@ -16,10 +16,10 @@ angular.module("angular-websql", []).factory("$webSql", ["$q",
 					return {
 						executeQuery: function(query, values) {
 							var deferred = $q.defer();
-							db.transaction(function(tx) {
+							db.transaction(function (tx) {
 								tx.executeSql(query, values, function(tx, results) {
 									deferred.resolve(results);
-								}, function(tx, e){
+								}, function (tx, e) {
 									console.log("There has been an error: " + e.message);
 									deferred.reject();
 								});
@@ -79,22 +79,8 @@ angular.module("angular-websql", []).factory("$webSql", ["$q",
 								"{where}": a.w,
 							}), a.p);
 						},
-						selectCustom: function (b, c, lim, offset, uniq) {
-							var d = "SELECT " + (uniq ? "DISTINCT " : "") +
-										"Id, "+
-										"Title, " +
-										"Form, " +
-										"Manufacturer " +
-									"FROM `{tableName}` WHERE {where} " +
-									"LIMIT {limit} " +
-									"OFFSET {offset};",
-								a = this.whereClause(c);
-							return this.executeQuery(this.replace(d, {
-								"{tableName}": b,
-								"{where}": a.w,
-								"{limit}": lim,
-								"{offset}": offset
-							}), a.p);
+						selectCustom: function (query, queryParamsArr) {
+							return this.executeQuery(query, queryParamsArr);
 						},
 						selectAll: function(a) {
 							return this.executeQuery("SELECT * FROM `" + a + "`; ", []);

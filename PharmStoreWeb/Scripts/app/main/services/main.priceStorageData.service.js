@@ -22,11 +22,15 @@
 			_setData,
 			_getFullData,
 			shapeQuery,
-			getFilterAndColorize,
+			getColorize,
 			getSubstringIndexes,
 			replaceStringWithColorized,
+			getQueryString,
+			getShapeQueryString,
+			getQueryParams,
+			queryBuilder,
 			_getFilteredData,
-			_getFilteredDataByShape,
+			//_getFilteredDataByShape,
 			_getFilteredDataByItem,
 			_getCustomerById;
 
@@ -100,7 +104,7 @@
 				mainPrice.push({
 					Id: id,
 					DrugIdCustomer: i * id,
-					Title: 'Аспирин_' + id,
+					Title: 'Аспирин ' + id,
 					Form: 'таб. №20' + id,
 					Manufacturer: 'Лек. фарма',
 					Price: 39.92,
@@ -154,28 +158,27 @@
 			return localStorageService.get('mainPrice');
 		};
 
-		getFilterAndColorize = function (queryArr, price, fieldForColorize, colorizedFieldName) {
-			var filtered = price;
+		getColorize = function (queryArr, price, fieldForColorize, colorizedFieldName) {
 			_.each(queryArr, function (q, ind) {
 
-				if (ind !== 0) {
-					filtered = _.filter(filtered, function (drug, key, arr) {
-						return drug[fieldForColorize].toLowerCase().indexOf(q.toLowerCase()) !== -1;
-					});
-				}
-
-				_.each(filtered, function (drug) {
+				_.each(price, function (drug) {
 					drug[colorizedFieldName] = drug[colorizedFieldName] || drug[fieldForColorize];
 					drug[colorizedFieldName] = replaceStringWithColorized(drug[colorizedFieldName], q);
 				});
 			});
 
-			return filtered;
+			return price;
 		};
 
 		getSubstringIndexes = function (originalString, substring) {
 			var a = [], i = -1;
-			while ((i = originalString.toLowerCase().indexOf(substring.toLowerCase(), i + 1)) >= 0) a.push(i);
+			while ((i = originalString.toLowerCase().indexOf(substring.toLowerCase(), i + 1)) >= 0) {
+				a.push(i);
+				// for cases like 20202 and substring === "202"
+				if (a.length > 1 && substring.length > a[a.length - 1] - a[a.length - 2]) {
+					a.pop();
+				}
+			}
 			return a;
 		};
 
@@ -201,94 +204,101 @@
 			return originalString;
 		};
 
-		_getFilteredData = function (query, isUniq) {
+		getQueryString = function (queryArr, undefined) {
+			var queryString = '';
+			_.each(queryArr, function (q, num) {
+				if (num === 0) {
+					queryString += "WHERE `Title` LIKE ? ";
+				} else {
+					queryString += "AND `Title` LIKE ? ";
+				};
+			});
+
+			return queryString || undefined;
+		};
+
+		getShapeQueryString = function (queryArr, undefined) {
+			var queryString = '';
+			_.each(queryArr, function (q, num) {
+				queryString += "AND `Form` LIKE ? ";
+			});
+
+			return queryString || undefined;
+		};
+
+		getQueryParams = function (queryArr) {
+			var newQueryArr = [];
+			_.each(queryArr, function (q) {
+				newQueryArr.push('%' + q + '%');
+			});
+			return newQueryArr;
+		};
+
+		_getFilteredData = function (query, shapeQuery, isUniq) {
 			//isUniq - only for lookup dropdown
 
-			// переходим на web sql!
-			// первое - временно отрубаем подкрашивание (разбить метод на 2а)
-			// фильтрация может происходить и по форме - помнить об этом
-			// зная сколько нужно результатов фильтруем данные. когда количество равно максимму в странице - тормозим фильтрацию. (важно сделать это оптимально чтоб не шерстить по всем данным)
-
-			// отфильтрованное сохраняем для следующих страниц
 			// если прилетает снова номер страницы - 1 то начинаем фильтрацию заново
 			// склейка данных происходит не здесь - а на том слое где идет вызов.
+			// остался limit и offset
 
-			// 1. split query by space and delete spaces
 			var queryArr = _.compact(query.split(' ')),
+				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
+				titleQueryString = getQueryString(queryArr),
+				shapeQueryString = getShapeQueryString(shapeQueryArr),
+				queryString = "SELECT " + (isUniq ? "DISTINCT " : "") +
+										"Id, " +
+										"Title, " +
+										"Form, " +
+										"Manufacturer " +
+									"FROM `Drugs` " +
+									(titleQueryString ? titleQueryString : "") +
+									(shapeQueryString ? shapeQueryString : "") +
+									"LIMIT ? " +
+									"OFFSET ?;",
+				queryParams = _.union(getQueryParams(queryArr), getQueryParams(shapeQueryArr), ["10", "0"]);
 
-				promise = db.selectCustom("Drugs", {
-					"Title": {
-						"operator": 'LIKE',
-						"value": '%' + queryArr[0] + '%'
+			var promise = db.selectCustom(queryString, queryParams)
+				.then(function (results) {
+
+					if (results.rows.length === 0) {
+						return null;
 					}
-				},
-				"10", // limit
-				"0", // offset
-				isUniq)
-					.then(function (results) {
 
-						if (results.rows.length === 0) {
-							return null;
-						}
+					var i = 0,
+						rowsLength = results.rows.length,
+						resultArray = [],
+						filtered;
 
-						var i = 0,
-							rowsLength = results.rows.length,
-							resultArray = [],
-							filtered;
+					for (i; i < rowsLength; i++) {
+						resultArray.push(results.rows.item(i));
+					}
 
-						for (i; i < rowsLength; i++) {
-							resultArray.push(results.rows.item(i));
-						}
+					filtered = getColorize(
+						queryArr,
+						resultArray,
+						'Title',
+						'colorizedTitle');
 
-						filtered = getFilterAndColorize(
-											queryArr,
-											resultArray,
-											'Title',
-											'colorizedTitle');
+					if (shapeQueryArr) {
+						filtered = getColorize(
+							shapeQueryArr,
+							filtered,
+							'Form',
+							'colorizedForm');
+					}
 
-						if (!isUniq){
-							filtered = sortDrugs(filtered);
-						}
+					if (!isUniq) {
+						filtered = sortDrugs(filtered);
+					}
 
-						if (shapeQuery) {
-							return _getFilteredDataByShape(filtered, shapeQuery);
-						} else {
-							return filtered;
-						}
+					return filtered;
 
-					});
+				});
 
 			return {
 				promise: promise
 			}
 
-		};
-
-		_getFilteredDataByShape = function (data, query) {
-			debugger;
-			shapeQuery = query;
-			if (!data) return null;
-
-			var colorizedFieldName = 'colorizedForm',
-				filtered;
-
-			_.each(data, function (drug) {
-				if (drug[colorizedFieldName]) {
-					drug[colorizedFieldName] = null;
-				}
-			});
-
-			if (!query) {
-				return data;
-			}
-
-			filtered = getFilterAndColorize(query, data, 'Form', colorizedFieldName);
-
-			if (filtered.length === 0) {
-				return null;
-			}
-
-			return filtered;
 		};
 
 		_getFilteredDataByItem = function (item) {
@@ -320,7 +330,6 @@
 			setData: _setData,
 			getFullData: _getFullData,
 			getFilteredData: _getFilteredData,
-			getFilteredDataByShape: _getFilteredDataByShape,
 			getFilteredDataByItem: _getFilteredDataByItem,
 			getCustomerById: _getCustomerById
 		};
