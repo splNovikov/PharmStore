@@ -277,6 +277,7 @@
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\app.layout.controller.js" />
     <Content Include="Scripts\app\app.start.js" />
+    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.autoScroll.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.digitsOnly.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.module.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.ngEnter.directive.js" />

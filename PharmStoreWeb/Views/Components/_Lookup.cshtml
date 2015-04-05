@@ -34,7 +34,9 @@
 		</div>
 		<div class="drugs-lookup"
 			 ng-show="searchQuery && lookupDrugs.length > 0"
-			 lookup-scrolled="lookup.continueLoading()">
+			 lookup-scrolled="lookup.continueLoading()"
+			 auto-scroll
+			 lines-to-scroll="lookup.linesToScroll">
 			<ul role="listbox">
 				<li ng-repeat="drug in lookupDrugs"
 					ng-click="lookup.showResultsByItem(drug)"

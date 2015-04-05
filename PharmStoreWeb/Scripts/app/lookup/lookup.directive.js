@@ -30,7 +30,8 @@
 		var ctrlVariables = {
 			queryLimit: 15,
 			lookupPageNum: 0,
-			stringsBeforeLoadingNext: 5
+			stringsBeforeLoadingNext: 2,
+			linesAfterScrolling: 7
 		}
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
@@ -88,6 +89,11 @@
 						if (selectedIdx === lookupLength - ctrlVariables.stringsBeforeLoadingNext) {
 							$scope.lookup.continueLoading();
 						}
+						// auto-scroll
+						if (selectedIdx > ctrlVariables.linesAfterScrolling) {
+							$scope.lookup.linesToScroll = selectedIdx;
+						}
+
 						if (selectedIdx + 1 !== lookupLength) {
 							$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
 						} else {
@@ -95,6 +101,12 @@
 						}
 					} else if (event.keyCode === 38) {
 						if (selectedIdx !== 0) {
+							//// auto-scroll
+							//if (selectedIdx === ctrlVariables.stringsForScrolling - ctrlVariables.stringsForScrolling) {
+							//	$scope.lookup.linesToScroll = ctrlVariables.stringsForScrolling - ctrlVariables.stringsForScrolling;
+							//	ctrlVariables.stringsForScrolling -= ctrlVariables.stringsForScrolling;
+							//}
+
 							$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
 						} else {
 							$scope.lookupDrugs[0].isSelected = true;
@@ -105,6 +117,8 @@
 		};
 
 		$scope.lookup = {
+			linesToScroll: false,
+
 			showResultsByItem: function (item) {
 				showPrice(priceStorageDataService.getFilteredDataByItem(item));
 			},
