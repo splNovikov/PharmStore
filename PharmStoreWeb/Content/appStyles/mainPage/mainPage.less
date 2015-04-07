@@ -16,6 +16,24 @@
 		box-shadow: 0 6px 24px -10px #000;
 		z-index: 10;
 
+		.refill-data {
+			position: fixed;
+			z-index: 1000;
+			left: 19px;
+			top: 19px;
+			width: 60px;
+			height: 60px;
+			border-radius: 60px;
+			cursor: pointer;
+			background-color: @primary;
+
+			.icon{
+				margin: 16px 0 0 18px;
+				color: #fff;
+				font-size: 28px;
+			}
+		}
+
 		@import "loggedUser";
 		@import url('lookup.less');
 

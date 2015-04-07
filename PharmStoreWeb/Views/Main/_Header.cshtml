@@ -1,4 +1,12 @@
 ﻿<div class="main-header">
+
+	<div class="refill-data"
+		 ng-show="vm.showRefillData"
+		 ng-click="refillTestData()">
+		<i class="fa fa-refresh icon"
+		   ng-class="{ 'fa-spin': vm.refillingInProgress }"></i>
+	</div>
+
 	<logged-user></logged-user>
 	<lookup></lookup>
 	<div class="search-preferences"></div>

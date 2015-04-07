@@ -4,12 +4,14 @@
 	angular
 		.module('login')
 		.factory('priceStorageDataService', [
+			'$q',
 			'localStorageService',
 			'$webSql',
 			'DebugSettings',
 			priceStorageDataService]);
 
 	function priceStorageDataService(
+		$q,
 		localStorageService,
 		$webSql,
 		DebugSettings) {
@@ -89,7 +91,8 @@
 			createDrugsTable();
 
 			var mainPrice,
-				customers;
+				customers,
+				promises = [];
 
 			mainPrice = [];
 
@@ -123,6 +126,7 @@
 			]
 
 			_.each(mainPrice, function (drug) {
+				var def = new $q.defer();
 
 				db.insert('Drugs', {
 					'Id': drug.Id,
@@ -136,12 +140,16 @@
 					'Balance': drug.Balance,
 					'DueDate': drug.DueDate
 				}).then(function (results) {
+					def.resolve();
 					if (DebugSettings.couldLog) {
 						console.log('added new test line to Drugs');
 					}
 				})
+
+				promises.push(def.promise)
 			})
 
+			return $q.all(promises);
 		};
 
 		_setData = function () {

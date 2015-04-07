@@ -53,10 +53,6 @@
 			}
 			putTemplatesToCache();
 			priceStorageDataService.initDatabase();
-
-			if (DebugSettings.isDeveloper && DebugSettings.refillTestData){
-				priceStorageDataService.refillTestData();
-			}
 		};
 
 		return {
