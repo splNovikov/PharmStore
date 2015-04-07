@@ -32,7 +32,7 @@
 		modalViews) {
 
 		$scope.showDrugFullInfo = function (item) {
-			item.DueDate = $filter('date')(item.DueDate, "dd.MM.yyyy");
+			//item.DueDate = $filter('date')(item.DueDate, "dd.MM.yyyy");
 			modalsService.openAlert(null, modalViews.alerts.drugView, item, 'инфо: ' + item.Title);
 		}
 

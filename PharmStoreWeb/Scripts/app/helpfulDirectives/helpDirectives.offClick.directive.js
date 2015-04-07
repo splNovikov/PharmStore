@@ -17,7 +17,7 @@
 
 
 			function targetCustomClassFilter(target, filter) {
-				if (!target || !filter || (target && !target.parentElement.hasAttribute('is-off-click-exception'))) return false;
+				if (!target || !filter || (target && target.parentElement && !target.parentElement.hasAttribute('is-off-click-exception'))) return false;
 				
 				var filterLen = filter.length;
 				for (var i = 0; i < filterLen; ++i)

@@ -12,8 +12,8 @@
 				},
 				link: function (scope, elem, attr) {
 					scope.$watch('linesToScroll', function (val) {
-						if (val) {
-							elem.scrollTop((val - 8) * 24);
+						if (val !== undefined) {
+							elem.scrollTop(val * 24);
 						}
 					})
 					

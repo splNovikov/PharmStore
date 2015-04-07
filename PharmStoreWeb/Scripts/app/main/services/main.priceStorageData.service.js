@@ -14,8 +14,7 @@
 		$webSql,
 		DebugSettings) {
 
-		var sortDrugs,
-			db,
+		var db,
 			createDrugsTable,
 			_initDatabase,
 			_refillTestData,
@@ -30,14 +29,9 @@
 			getQueryParams,
 			queryBuilder,
 			_getFilteredData,
-			//_getFilteredDataByShape,
 			_getFilteredDataByItem,
+			_getMaximumData,
 			_getCustomerById;
-
-		/*my own sorting - may be I have to improve it*/
-		sortDrugs = function (drugs) {
-			return _.sortBy(drugs, ['Id', 'Price']);
-		};
 
 		createDrugsTable = function () {
 			db.createTable('Drugs', {
@@ -111,7 +105,7 @@
 					CustomerId: 1,
 					Multiplicity: 5,
 					Balance: 1000,
-					DueDate: new Date('2015.11.24')
+					DueDate: '2015-11-24'
 				})
 			}
 
@@ -132,7 +126,7 @@
 
 				db.insert('Drugs', {
 					'Id': drug.Id,
-					"DrugIdCustomer": drug.DrugIdCustomer,
+					'DrugIdCustomer': drug.DrugIdCustomer,
 					'Title': drug.Title,
 					'Form': drug.Form,
 					'Manufacturer': drug.Manufacturer,
@@ -234,21 +228,20 @@
 			return newQueryArr;
 		};
 
-		_getFilteredData = function (query, shapeQuery, isUniq, limit, pageNum) {
-			//isUniq - only for lookup dropdown
+		_getFilteredData = function (query, shapeQuery, limit, pageNum) {
 
 			var queryArr = _.compact(query.split(' ')),
 				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
 				titleQueryString = getQueryString(queryArr),
 				shapeQueryString = getShapeQueryString(shapeQueryArr),
-				queryString = "SELECT " + (isUniq ? "DISTINCT " : "") +
-										"Id, " +
+				queryString = "SELECT Id, " +
 										"Title, " +
 										"Form, " +
 										"Manufacturer " +
-									"FROM `Drugs` " +
+									"FROM Drugs " +
 									(titleQueryString ? titleQueryString : "") +
 									(shapeQueryString ? shapeQueryString : "") +
+									"ORDER BY Id " +
 									"LIMIT ? " +
 									"OFFSET ?;",
 				queryParams = getQueryParams(queryArr)
@@ -285,10 +278,6 @@
 							'colorizedForm');
 					}
 
-					if (!isUniq) {
-						filtered = sortDrugs(filtered);
-					}
-
 					return filtered;
 
 				});
@@ -300,18 +289,90 @@
 		};
 
 		_getFilteredDataByItem = function (item) {
-			var filtered, sorted;
+			var queryString = "SELECT Id, " +
+							"DrugIdCustomer, " +
+							"Title, " +
+							"Form, " +
+							"Manufacturer, " +
+							"Price, " +
+							"CustomerId, " +
+							"Multiplicity, " +
+							"Balance, " +
+							"DueDate " +
+						"FROM Drugs " +
+						"WHERE Id = ? " +
+						"ORDER BY Id, Price;",
+				queryParams = [item.Id];
 
-			filtered = _.filter(localStorageService.get('mainPrice'), function (drug) {
-				return drug.Id === item.Id;
-			});
+			var promise = db.selectCustom(queryString, queryParams)
+				.then(function (results) {
+					if (results.rows.length === 0) {
+						return null;
+					}
 
-			if (filtered.length === 0) {
-				return null;
+					var i = 0,
+						rowsLength = results.rows.length,
+						resultArray = [];
+
+					for (i; i < rowsLength; i++) {
+						resultArray.push(results.rows.item(i));
+					}
+
+					return resultArray;
+				});
+
+			return {
+				promise: promise
+			}
+		};
+
+		_getMaximumData = function (query, shapeQuery, limit, pageNum) {
+			var queryArr = _.compact(query.split(' ')),
+				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
+				titleQueryString = getQueryString(queryArr),
+				shapeQueryString = getShapeQueryString(shapeQueryArr),
+				queryString = "SELECT Id, " +
+										"DrugIdCustomer, " +
+										"Title, " +
+										"Form, " +
+										"Manufacturer, " +
+										"Price, " +
+										"CustomerId, " +
+										"Multiplicity, " +
+										"Balance, " +
+										"DueDate " +
+									"FROM Drugs " +
+									(titleQueryString ? titleQueryString : "") +
+									(shapeQueryString ? shapeQueryString : "") +
+									"ORDER BY Id, Price " +
+									"LIMIT ? " +
+									"OFFSET ?;",
+				queryParams = getQueryParams(queryArr)
+					.concat(getQueryParams(shapeQueryArr))
+					.concat([limit, pageNum * limit]);
+
+			var promise = db.selectCustom(queryString, queryParams)
+				.then(function (results) {
+
+					if (results.rows.length === 0) {
+						return null;
+					}
+
+					var i = 0,
+						rowsLength = results.rows.length,
+						resultArray = [];
+
+					for (i; i < rowsLength; i++) {
+						resultArray.push(results.rows.item(i));
+					}
+
+					return resultArray;
+				});
+
+			return {
+				promise: promise
 			}
 
-			sorted = sortDrugs(filtered);
-			return sorted;
 		};
 
 		_getCustomerById = function (id) {
@@ -329,6 +390,7 @@
 			getFullData: _getFullData,
 			getFilteredData: _getFilteredData,
 			getFilteredDataByItem: _getFilteredDataByItem,
+			getMaximumData: _getMaximumData,
 			getCustomerById: _getCustomerById
 		};
 

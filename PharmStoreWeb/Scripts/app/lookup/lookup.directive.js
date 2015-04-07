@@ -31,7 +31,8 @@
 			queryLimit: 15,
 			lookupPageNum: 0,
 			stringsBeforeLoadingNext: 2,
-			linesAfterScrolling: 7
+			linesAfterScrolling: 7,
+			defaultLinesAfterScrolling: 7
 		}
 
 		$scope.$watch('searchQuery', function (newVal, prevVal, scope) {
@@ -40,8 +41,10 @@
 				return;
 			}
 			ctrlVariables.lookupPageNum = 0;
+			resetScrolling();
 
-			priceStorageDataService.getFilteredData(newVal, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+			priceStorageDataService.getFilteredData(newVal, $scope.searchQueryShape,
+				ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 				})
@@ -52,8 +55,10 @@
 				return;
 			}
 			ctrlVariables.lookupPageNum = 0;
+			resetScrolling();
 
-			priceStorageDataService.getFilteredData($scope.searchQuery, newVal, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+			priceStorageDataService.getFilteredData($scope.searchQuery, newVal,
+				ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 				})
@@ -68,7 +73,8 @@
 			var lookupLength = $scope.lookupDrugs.length;
 
 			if (!$scope.lookupDrugs || lookupLength === 0) {
-				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape,
+					ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 				.then(function (result) {
 					$scope.lookupDrugs = result;
 					$scope.lookupDrugs[0].isSelected = true;
@@ -82,31 +88,37 @@
 				} else {
 					if (lookupLength === 1) return;
 
-					$scope.lookupDrugs[selectedIdx].isSelected = false;
-
 					// 3. if selected is exists
 					if (event.keyCode === 40) {
+
+						if (selectedIdx === lookupLength - 1) {
+							return;
+						}
+
+						$scope.lookupDrugs[selectedIdx].isSelected = false;
+
 						if (selectedIdx === lookupLength - ctrlVariables.stringsBeforeLoadingNext) {
 							$scope.lookup.continueLoading();
 						}
 						// auto-scroll
 						if (selectedIdx > ctrlVariables.linesAfterScrolling) {
-							$scope.lookup.linesToScroll = selectedIdx;
+							ctrlVariables.linesAfterScrolling = selectedIdx;
+							$scope.lookup.linesToScroll = selectedIdx - 8;
 						}
 
-						if (selectedIdx + 1 !== lookupLength) {
-							$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
-						} else {
-							$scope.lookupDrugs[0].isSelected = true;
-						}
+						$scope.lookupDrugs[selectedIdx + 1].isSelected = true;
+
 					} else if (event.keyCode === 38) {
-						if (selectedIdx !== 0) {
-							//// auto-scroll
-							//if (selectedIdx === ctrlVariables.stringsForScrolling - ctrlVariables.stringsForScrolling) {
-							//	$scope.lookup.linesToScroll = ctrlVariables.stringsForScrolling - ctrlVariables.stringsForScrolling;
-							//	ctrlVariables.stringsForScrolling -= ctrlVariables.stringsForScrolling;
-							//}
 
+						$scope.lookupDrugs[selectedIdx].isSelected = false;
+
+						// auto-scroll
+						if (selectedIdx <= ctrlVariables.linesAfterScrolling - 8) {
+							ctrlVariables.linesAfterScrolling = selectedIdx + 8;
+							$scope.lookup.linesToScroll = selectedIdx - 1;
+						}
+
+						if (selectedIdx !== 0) {
 							$scope.lookupDrugs[selectedIdx - 1].isSelected = true;
 						} else {
 							$scope.lookupDrugs[0].isSelected = true;
@@ -116,11 +128,19 @@
 			}
 		};
 
+		var resetScrolling = function () {
+			$scope.lookup.linesToScroll = 0;
+			ctrlVariables.linesAfterScrolling = ctrlVariables.defaultLinesAfterScrolling;
+		}
+
 		$scope.lookup = {
 			linesToScroll: false,
 
 			showResultsByItem: function (item) {
-				showPrice(priceStorageDataService.getFilteredDataByItem(item));
+				priceStorageDataService.getFilteredDataByItem(item).promise
+					.then(function (results) {
+						showPrice(results);
+					})
 			},
 
 			showResults: function () {
@@ -130,12 +150,17 @@
 				});
 
 				if (selectedDrug) {
-					showPrice(priceStorageDataService.getFilteredDataByItem(selectedDrug));
+					$scope.lookup.showResultsByItem(selectedDrug);
 					return;
 				}
 
-				if ($scope.searchQuery) {// TODO - если есть и форма то добавить сюда еще и форму
-					showPrice(priceStorageDataService.getFilteredData($scope.searchQuery));
+				if ($scope.searchQuery) {
+					priceStorageDataService.getMaximumData($scope.searchQuery,
+															$scope.searchQueryShape,
+															100, 0).promise
+						.then(function (results) {
+							showPrice(results);
+						})
 				} else {
 					showPrice();
 				}
@@ -149,7 +174,8 @@
 			continueLoading: function () {
 				ctrlVariables.lookupPageNum += 1;
 
-				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape, true, ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
+				priceStorageDataService.getFilteredData($scope.searchQuery, $scope.searchQueryShape,
+					ctrlVariables.queryLimit, ctrlVariables.lookupPageNum).promise
 					.then(function (result) {
 						$scope.lookupDrugs = _.union($scope.lookupDrugs, result);
 					})
