@@ -13,7 +13,7 @@
 		.constant('DebugSettings', {
 			couldLog: true,
 			isDeveloper: true,
-			refillTestData: true
+			refillTestData: false
 		})
 
 
