@@ -1,0 +1,48 @@
+﻿<div>
+	<ul>
+		<li>
+			Идентификатор с системе PharmStore:
+			<span class="entity-field">{{ content.Id }}</span>
+		</li>
+		<li>
+			Идентификатор в системе поставщика:
+			<span class="entity-field">{{ content.DrugIdCustomer }}</span>
+		</li>
+		<li>
+			Наименование:
+			<span class="entity-field">{{ content.Title }}</span>
+		</li>
+		<li>
+			Форма упаковки:
+			<span class="entity-field">{{ content.Form }}</span>
+		</li>
+		<li>
+			Производитель:
+			<span class="entity-field">{{ content.Manufacturer }}</span>
+		</li>
+		<li>
+			Цена:
+			<span class="entity-field">{{ content.Price }}</span>
+		</li>
+		<li>
+			Поставщик:
+			<span class="entity-field">{{ content.Manufacturer }}</span>
+		</li>
+		<li>
+			Кратность:
+			<span class="entity-field">{{ content.Multiplicity }}</span>
+		</li>
+		<li>
+			Остаток:
+			<span class="entity-field">{{ content.Balance }}</span>
+		</li>
+		<li>
+			Срок годности:
+			<span class="entity-field">{{ content.DueDate | date:'MM/dd/yyyy' }}</span>
+		</li>
+	</ul>
+
+	<div class="buttons-section">
+		<div ng-click="closeModal()" data-dismiss="modal"  class="btn btn-primary">OK</div>
+	</div>
+</div>

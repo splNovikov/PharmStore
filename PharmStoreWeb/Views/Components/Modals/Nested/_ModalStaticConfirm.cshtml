@@ -1,0 +1,9 @@
+﻿<div>
+	<div class="confirm-body" ng-bind-html="content.Body">
+	</div>
+
+	<div class="buttons-section">
+		<button type="button" ng-click="agreePostBack()" class="btn btn-primary">{{ content.AgreeBtnName }}</button>
+		<div ng-click="closeModal()" data-dismiss="modal" class="btn btn-default">Отмена</div>
+	</div>
+</div>

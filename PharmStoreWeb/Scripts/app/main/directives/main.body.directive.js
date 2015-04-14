@@ -32,13 +32,15 @@
 		modalViews) {
 
 		$scope.showDrugFullInfo = function (item) {
-			//item.DueDate = $filter('date')(item.DueDate, "dd.MM.yyyy");
-			modalsService.openAlert(null, modalViews.alerts.drugView, item, 'инфо: ' + item.Title);
+			modalsService.openModal(null, modalViews.drugInfo, item, item.Title);
 		}
 
-		$scope.showCustomerInfo = function (customer) {
-			var customerFull = priceStorageDataService.getCustomerById(customer.Id);
-			modalsService.openAlert(null, modalViews.alerts.customerView, customerFull, customer.Name);
+		$scope.showCustomerInfo = function (customerId) {
+
+			priceStorageDataService.getCustomerById(customerId).promise
+					.then(function (customer) {
+						modalsService.openModal(null, modalViews.customerInfo, customer, customer.Name);
+					})
 		}
 	}
 

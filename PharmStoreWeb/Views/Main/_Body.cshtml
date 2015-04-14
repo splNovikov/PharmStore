@@ -56,7 +56,8 @@
 					<td class="t-col col5">{{ item.Form }}</td>
 					<td class="t-col col6">{{ item.Manufacturer }}</td>
 					<td class="t-col col7">{{ item.Price }}</td>
-					<td class="t-col col8" ng-click="showCustomerInfo(item.Customer)"><span class="cur-pointer">{{ item.Customer.Name }}</span></td>
+					<td class="t-col col8" 
+						ng-click="showCustomerInfo(item.CustomerId)"><span class="cur-pointer">{{ item.CustomerName }}</span></td>
 					<td class="t-col col9">TODO!</td>
 					<td class="t-col col10">{{ item.Multiplicity }}</td>
 					<td class="t-col col11">{{ item.Balance }}</td>

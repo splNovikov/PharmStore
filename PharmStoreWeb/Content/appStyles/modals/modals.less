@@ -1,15 +1,25 @@
-﻿.modal-body {
-	ul {
-		margin: 0;
-		padding: 0;
-		list-style-type: none;
+﻿@import "../../libs/materialDesign/_variables";
 
-		li {
+.modal-content {
+	.modal-body {
+		padding-bottom: 14px;
 
-			.entity-field{
-				color: @primary;
-				font-weight: bold;
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style-type: none;
+
+			li {
+
+				.entity-field {
+					color: @primary;
+					font-weight: bold;
+				}
 			}
+		}
+
+		.buttons-section {
+			text-align: right;
 		}
 	}
 }

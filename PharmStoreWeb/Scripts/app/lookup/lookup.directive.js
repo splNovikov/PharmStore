@@ -140,7 +140,7 @@
 				priceStorageDataService.getFilteredDataByItem(item).promise
 					.then(function (results) {
 						showPrice(results);
-					})
+					});
 			},
 
 			showResults: function () {

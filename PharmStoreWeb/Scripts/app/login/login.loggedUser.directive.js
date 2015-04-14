@@ -43,10 +43,18 @@
 		};
 
 		$scope.logOut = function () {
-			modalsService.openConfirm('sm', 'Вы уверены что хотите выйти?', modalViews.confirms.exitView, null, function () {
+			var staticContent = {
+				Title: 'Вы уверены что хотите выйти?',
+				Body: 'В этом случае вы потеряете все данные. ' +
+					'<br /> TODO: Сделать очистку localStorage и webSQL',
+				AgreeBtnName: 'Да'
+			},
+			agreeBtnPostBack = function () {
 				loginService.logOut();
 				$state.go('login');
-			});
+			};
+
+			modalsService.openConfirm(null, staticContent, staticContent.Title, agreeBtnPostBack);
 		};
 
 		$scope.setBranchActive = function (branch) {

@@ -37,13 +37,9 @@
 		};
 
 		putTemplatesToCache = function () {
-			// push modal templates to cache
-			_.each(modalViews.alerts, function (n, key) {
-				modalsService.getTemplate(modalViews.alerts[key]);
-			});
-
-			_.each(modalViews.confirms, function (n, key) {
-				modalsService.getTemplate(modalViews.confirms[key]);
+			 //push modal templates to cache
+			_.each(modalViews, function (n, key) {
+				modalsService.getTemplate(modalViews[key]);
 			});
 		};
 

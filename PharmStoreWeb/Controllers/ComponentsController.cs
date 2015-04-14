@@ -13,29 +13,24 @@ namespace PharmStoreWeb.Controllers
 			return PartialView("~/Views/Components/_Lookup.cshtml");
 		}
 
-		public ActionResult ModalConfirm()
+		public ActionResult ModalBasicView()
 		{
-			return PartialView("~/Views/Components/Confirms/_ModalConfirm.cshtml");
+			return PartialView("~/Views/Components/Modals/_ModalBasic.cshtml");
+		}
+		
+		public ActionResult ModalStaticConfirmView()
+		{
+			return PartialView("~/Views/Components/Modals/Nested/_ModalStaticConfirm.cshtml");
 		}
 
-		public ActionResult ModalAlert()
+		public ActionResult ModalDrugInfoView()
 		{
-			return PartialView("~/Views/Components/Alerts/_ModalAlert.cshtml");
+			return PartialView("~/Views/Components/Modals/Nested/_ModalDrugInfo.cshtml");
 		}
 
-		public ActionResult AlertDrugView()
+		public ActionResult ModalCustomerInfoView()
 		{
-			return PartialView("~/Views/Components/Alerts/Templates/_DrugViewTmpl.cshtml");
-		}
-
-		public ActionResult AlertCustomerView()
-		{
-			return PartialView("~/Views/Components/Alerts/Templates/_CustomerViewTmpl.cshtml");
-		}
-
-		public ActionResult ConfirmExitView()
-		{
-			return PartialView("~/Views/Components/Confirms/Templates/_ExitViewTmpl.cshtml");
+			return PartialView("~/Views/Components/Modals/Nested/_ModalCustomerInfo.cshtml");
 		}
 
 	}

@@ -20,6 +20,10 @@
 		}
 
 		$scope.refillTestData = function () {
+			if ($scope.vm.refillingInProgress) {
+				return;
+			}
+
 			$scope.vm.refillingInProgress = true;
 			priceStorageDataService.refillTestData()
 				.then(function () {

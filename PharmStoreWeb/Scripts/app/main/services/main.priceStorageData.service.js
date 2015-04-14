@@ -5,19 +5,18 @@
 		.module('login')
 		.factory('priceStorageDataService', [
 			'$q',
-			'localStorageService',
 			'$webSql',
 			'DebugSettings',
 			priceStorageDataService]);
 
 	function priceStorageDataService(
 		$q,
-		localStorageService,
 		$webSql,
 		DebugSettings) {
 
 		var db,
 			createDrugsTable,
+			createCustomerTable,
 			_initDatabase,
 			_refillTestData,
 			_setData,
@@ -77,6 +76,23 @@
 			})
 		};
 
+		createCustomerTable = function () {
+			db.createTable('Customers', {
+				'Id': {
+					'type': 'INTEGER',
+					'null': 'NOT NULL'
+				},
+				'Name': {
+					'type': 'TEXT',
+					'null': 'NOT NULL'
+				},
+				'Address': {
+					'type': 'TEXT',
+					'null': 'NOT NULL'
+				}
+			});
+		};
+
 		_initDatabase = function () {
 			//Database name //Version number //Text description //Size of database //Creation callback
 			db = $webSql.openDatabase('pharmStoreDB', '1.0', 'Test DB', 5 * 1024 * 1024); // 5Mb
@@ -87,8 +103,10 @@
 		_refillTestData = function () {
 
 			db.dropTable('Drugs');
+			db.dropTable('Customers');
 
 			createDrugsTable();
+			createCustomerTable();
 
 			var mainPrice,
 				customers,
@@ -125,6 +143,23 @@
 				}
 			]
 
+			_.each(customers, function (customer) {
+				var def = new $q.defer();
+
+				db.insert('Customers', {
+					'Id': customer.Id,
+					'Name': customer.Name,
+					'Address': customer.Address,
+				}).then(function (results) {
+					def.resolve();
+					if (DebugSettings.couldLog) {
+						console.log('added new test line to Customers');
+					}
+				})
+
+				promises.push(def.promise);
+			});
+
 			_.each(mainPrice, function (drug) {
 				var def = new $q.defer();
 
@@ -146,7 +181,7 @@
 					}
 				})
 
-				promises.push(def.promise)
+				promises.push(def.promise);
 			})
 
 			return $q.all(promises);
@@ -297,19 +332,22 @@
 		};
 
 		_getFilteredDataByItem = function (item) {
-			var queryString = "SELECT Id, " +
-							"DrugIdCustomer, " +
-							"Title, " +
-							"Form, " +
-							"Manufacturer, " +
-							"Price, " +
-							"CustomerId, " +
-							"Multiplicity, " +
-							"Balance, " +
-							"DueDate " +
-						"FROM Drugs " +
-						"WHERE Id = ? " +
-						"ORDER BY Id, Price;",
+			var queryString = "SELECT d.Id, " +
+							"d.DrugIdCustomer, " +
+							"d.Title, " +
+							"d.Form, " +
+							"d.Manufacturer, " +
+							"d.Price, " +
+							"d.CustomerId, " +
+							"c.Name AS CustomerName, " +
+							"d.Multiplicity, " +
+							"d.Balance, " +
+							"d.DueDate " +
+						"FROM Drugs d " +
+						"LEFT JOIN Customers c " +
+						"ON d.CustomerId = c.Id " +
+						"WHERE d.Id = ? " +
+						"ORDER BY d.Id, d.Price;",
 				queryParams = [item.Id];
 
 			var promise = db.selectCustom(queryString, queryParams)
@@ -339,20 +377,23 @@
 				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
 				titleQueryString = getQueryString(queryArr),
 				shapeQueryString = getShapeQueryString(shapeQueryArr),
-				queryString = "SELECT Id, " +
-										"DrugIdCustomer, " +
-										"Title, " +
-										"Form, " +
-										"Manufacturer, " +
-										"Price, " +
-										"CustomerId, " +
-										"Multiplicity, " +
-										"Balance, " +
-										"DueDate " +
-									"FROM Drugs " +
+				queryString = "SELECT d.Id, " +
+										"d.DrugIdCustomer, " +
+										"d.Title, " +
+										"d.Form, " +
+										"d.Manufacturer, " +
+										"d.Price, " +
+										"d.CustomerId, " +
+										"c.Name AS CustomerName, " +
+										"d.Multiplicity, " +
+										"d.Balance, " +
+										"d.DueDate " +
+									"FROM Drugs d " +
+									"LEFT JOIN Customers c " +
+									"ON d.CustomerId = c.Id " +
 									(titleQueryString ? titleQueryString : "") +
 									(shapeQueryString ? shapeQueryString : "") +
-									"ORDER BY Id, Price " +
+									"ORDER BY d.Id, d.Price " +
 									"LIMIT ? " +
 									"OFFSET ?;",
 				queryParams = getQueryParams(queryArr)
@@ -384,11 +425,26 @@
 		};
 
 		_getCustomerById = function (id) {
-			var found = _.find(localStorageService.get('customers'), function (customer) {
-				return customer.Id === id;
-			});
+			var queryString = "SELECT c.Id, " +
+									"c.Name, " +
+									"c.Address " +
+									"FROM Customers c " +
+									"WHERE c.Id = ?;";
+			
+			var promise = db.selectCustom(queryString, [id])
+				.then(function (results) {
 
-			return found;
+					if (results.rows.length === 0) {
+						return null;
+					}
+
+					return results.rows.item(0);
+				});
+
+			return {
+				promise: promise
+			}
+
 		};
 
 		return {

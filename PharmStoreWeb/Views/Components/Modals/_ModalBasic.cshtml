@@ -1,0 +1,8 @@
+﻿<div>
+	<div class="modal-header" ng-if="modalTitle">
+		<button type="button" ng-click="closeModal()" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h4 class="modal-title">{{ modalTitle }}</h4>
+	</div>
+	<div compile-templates nested-view="nestedView"
+		 class="modal-body"></div>
+</div>

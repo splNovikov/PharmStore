@@ -10,7 +10,7 @@ namespace PharmStoreWeb
 
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			BundleTable.EnableOptimizations = true;
+			BundleTable.EnableOptimizations = false;
 
 			RegisterThirdPartyLibs(bundles);
 
@@ -56,10 +56,10 @@ namespace PharmStoreWeb
 
 				// Modals
 				"~/Scripts/app/modals/modals.module.js",
+				"~/Scripts/app/modals/modals.compileTemplate.directive.js",
+				"~/Scripts/app/modals/modals.basic.controller.js",
 				"~/Scripts/app/modals/modals.constants.js",
 				"~/Scripts/app/modals/modals.service.js",
-				"~/Scripts/app/modals/modals.confirm.controller.js",
-				"~/Scripts/app/modals/modals.alert.controller.js",
 
 				// Login
 				"~/Scripts/app/login/login.module.js",

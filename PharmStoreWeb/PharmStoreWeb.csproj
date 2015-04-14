@@ -216,6 +216,12 @@
     <Content Include="Content\appStyles\mainPage\variables.min.css">
       <DependentUpon>variables.css</DependentUpon>
     </Content>
+    <Content Include="Content\appStyles\modals\modals.css">
+      <DependentUpon>modals.less</DependentUpon>
+    </Content>
+    <Content Include="Content\appStyles\modals\modals.min.css">
+      <DependentUpon>modals.css</DependentUpon>
+    </Content>
     <Content Include="Content\appStyles\site.css">
       <DependentUpon>site.less</DependentUpon>
     </Content>
@@ -297,8 +303,8 @@
     <Content Include="Scripts\app\main\directives\main.header.directive.js" />
     <Content Include="Scripts\app\main\main.module.js" />
     <Content Include="Scripts\app\main\services\main.priceStorageData.service.js" />
-    <Content Include="Scripts\app\modals\modals.alert.controller.js" />
-    <Content Include="Scripts\app\modals\modals.confirm.controller.js" />
+    <Content Include="Scripts\app\modals\modals.basic.controller.js" />
+    <Content Include="Scripts\app\modals\modals.compileTemplate.directive.js" />
     <Content Include="Scripts\app\modals\modals.constants.js" />
     <Content Include="Scripts\app\modals\modals.module.js" />
     <Content Include="Scripts\app\modals\modals.service.js" />
@@ -1121,11 +1127,6 @@
     <Content Include="Scripts\libs\materialDesign\ripples.min.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Components\Alerts\Templates\_CustomerViewTmpl.cshtml" />
-    <Content Include="Views\Components\Alerts\Templates\_DrugViewTmpl.cshtml" />
-    <Content Include="Views\Components\Alerts\_ModalAlert.cshtml" />
-    <Content Include="Views\Components\Confirms\Templates\_ExitViewTmpl.cshtml" />
-    <Content Include="Views\Components\Confirms\_ModalConfirm.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\_Index.cshtml" />
     <Content Include="Views\Main\_Body.cshtml" />
@@ -1213,6 +1214,23 @@
     <Content Include="Scripts\libs\angular\angular-websql.min.js.map">
       <DependentUpon>angular-websql.min.js</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Components\Modals\_ModalBasic.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Components\Modals\Nested\_ModalDrugInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\modals\modals.css.map">
+      <DependentUpon>modals.css</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Components\Modals\Nested\_ModalCustomerInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Components\Modals\Nested\_ModalStaticConfirm.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

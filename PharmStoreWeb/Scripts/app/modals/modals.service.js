@@ -9,6 +9,7 @@
 			'$templateCache',
 			'$modal',
 			'modalViews',
+			'DebugSettings',
 			modalsService]);
 
 	function modalsService(
@@ -16,68 +17,40 @@
 		$http,
 		$templateCache,
 		$modal,
-		modalViews) {
+		modalViews,
+		DebugSettings) {
 
-		var _openConfirm,
-			_openAlert,
+		var _openModal,
+			_openConfirm,
 			_getTemplate;
 
-
-		_openConfirm = function (size, title, confirmViewType, entity, yesCallback, cancelCallback) {
-
-			_getTemplate(modalViews.confirms.mainView)
+		_openModal = function (size, nestedView, content, title, agreePostBack) {
+			_getTemplate(modalViews.basicView)
 				.then(function (tmpl) {
-
 					$modal.open({
 						template: tmpl,
-						controller: 'ModalsConfirmController',
+						controller: 'modalsBasicController',
 						size: size,
 						resolve: {
+							nestedView: function () {
+								return nestedView;
+							},
+							content: function () {
+								return content;
+							},
 							title: function () {
 								return title;
 							},
-							confirmViewType: function () {
-								return confirmViewType;
-							},
-							entity: function () {
-								return entity;
-							},
-							yesCallback: function () {
-								return yesCallback;
-							},
-							cancelCallback: function () {
-								return cancelCallback;
+							agreePostBack: function () {
+								return agreePostBack;
 							}
 						}
 					});
-				});
+				})
 		};
 
-		_openAlert = function (size, alertViewType, entity, title, yesCallback) {
-
-			_getTemplate(modalViews.alerts.mainView)
-				.then(function (tmpl) {
-
-					$modal.open({
-						template: tmpl,
-						controller: 'ModalsAlertController',
-						size: size,
-						resolve: {
-							alertViewType: function () {
-								return alertViewType;
-							},
-							entity: function () {
-								return entity;
-							},
-							title: function () {
-								return title;
-							},
-							yesCallback: function () {
-								return yesCallback;
-							}
-						}
-					});
-				});
+		_openConfirm = function (size, staticContent, title, agreePostBack) {
+			_openModal(size, modalViews.modalStaticConfirm, staticContent, title, agreePostBack);
 		};
 
 		_getTemplate = function (contentType) {
@@ -89,6 +62,10 @@
 					.success(function (data) {
 						$templateCache.put(contentType.path, data);
 						def.resolve(data);
+
+						if (DebugSettings.couldLog) {
+							console.info('Loaded template from server: ' + contentType.path);
+						}
 					});
 			} else {
 				def.resolve(template);
@@ -98,8 +75,8 @@
 		};
 
 		return {
+			openModal: _openModal,
 			openConfirm: _openConfirm,
-			openAlert: _openAlert,
 			getTemplate: _getTemplate
 		};
 

@@ -4,14 +4,25 @@
 	angular
 		.module('modals')
 		.constant('modalViews', {
-			alerts: {
-				mainView: { path: 'components/modalAlert', num: 1 },
-				drugView: { path: 'components/alertDrugView', num: 2 },
-				customerView: { path: 'components/alertCustomerView', num: 3 }
+			basicView:{
+				id: 1,
+				path: 'components/modalBasicView'
 			},
-			confirms: {
-				mainView: { path: 'components/modalConfirm', num: 4 },
-				exitView: { path: 'components/confirmExitView', num: 5 }
+			//modalStaticAlert: {
+			//	id: 2,
+			//	path: 'TODO!'
+			//},
+			modalStaticConfirm: {
+				id: 3,
+				path: 'components/modalStaticConfirmView'
+			},
+			drugInfo: {
+				id: 4,
+				path: 'components/modalDrugInfoView'
+			},
+			customerInfo: {
+				id: 5,
+				path: 'components/modalCustomerInfoView'
 			}
 		})
 
