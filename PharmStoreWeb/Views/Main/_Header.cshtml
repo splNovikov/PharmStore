@@ -1,8 +1,9 @@
 ﻿<div class="main-header">
 
 	<div class="refill-data"
-		 ng-show="vm.showRefillData"
-		 ng-click="refillTestData()">
+		 ng-if="vm.showRefillData"
+		 ng-click="refillTestData()"
+		 ng-class="{ 'in-progress' : vm.refillingInProgress }">
 		<i class="fa fa-refresh icon"
 		   ng-class="{ 'fa-spin': vm.refillingInProgress }"></i>
 	</div>

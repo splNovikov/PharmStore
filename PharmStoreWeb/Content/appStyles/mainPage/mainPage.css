@@ -60,6 +60,10 @@
   color: #fff;
   font-size: 28px;
 }
+.main-page .main-header .refill-data.in-progress {
+  cursor: default;
+  background-color: #7fc9c2;
+}
 .main-page .main-header .user-info {
   /*border: 1px solid red;*/
   height: 25px;
