@@ -295,7 +295,7 @@
     <Content Include="Scripts\app\login\login.module.js" />
     <Content Include="Scripts\app\login\login.service.js" />
     <Content Include="Scripts\app\login\login.loggedUser.directive.js" />
-    <Content Include="Scripts\app\lookup\lookup.scrolled.js" />
+    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.listScrolled.js" />
     <Content Include="Scripts\app\lookup\lookup.module.js" />
     <Content Include="Scripts\app\lookup\lookup.directive.js" />
     <Content Include="Scripts\app\main\directives\main.body.directive.js" />

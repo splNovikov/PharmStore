@@ -10,7 +10,7 @@ namespace PharmStoreWeb
 
 		public static void RegisterBundles(BundleCollection bundles)
 		{
-			BundleTable.EnableOptimizations = true;
+			BundleTable.EnableOptimizations = false;
 
 			RegisterThirdPartyLibs(bundles);
 
@@ -53,6 +53,7 @@ namespace PharmStoreWeb
 				"~/Scripts/app/helpfulDirectives/helpDirectives.ngEnter.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.offClick.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.autoScroll.directive.js",
+				"~/Scripts/app/helpfulDirectives/helpDirectives.listScrolled.js",
 
 				// Modals
 				"~/Scripts/app/modals/modals.module.js",
@@ -71,7 +72,6 @@ namespace PharmStoreWeb
 				// Lookup
 				"~/Scripts/app/lookup/lookup.module.js",
 				"~/Scripts/app/lookup/lookup.directive.js",
-				"~/Scripts/app/lookup/lookup.scrolled.js",
 
 				// Main
 				"~/Scripts/app/main/main.module.js",

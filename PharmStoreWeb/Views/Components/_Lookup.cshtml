@@ -34,7 +34,7 @@
 		</div>
 		<div class="drugs-lookup"
 			 ng-show="searchQuery && lookupDrugs.length > 0"
-			 lookup-scrolled="lookup.continueLoading()"
+			 list-scrolled="lookup.continueLoading()"
 			 auto-scroll
 			 lines-to-scroll="lookup.linesToScroll">
 			<ul role="listbox">
@@ -48,7 +48,7 @@
 			</ul>
 		</div>
 		<div class="drugs-lookup" ng-show="searchQuery && !lookupDrugs">
-			В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}</b><b ng-show="searchQueryShape"> {{ searchQueryShape }}</b>"
+			В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}<span ng-show="searchQueryShape"> {{ searchQueryShape }}</span></b>"
 		</div>
 	</div>
 </div>

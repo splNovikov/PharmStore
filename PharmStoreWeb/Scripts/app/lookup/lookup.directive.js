@@ -64,11 +64,6 @@
 				})
 		});
 
-		var showPrice = function (price) {
-			$scope.$parent.shownPriceList = price;
-			$scope.lookup.clearLookup();
-		};
-
 		var selectByArrows = function (event, selectedIdx) {
 			var lookupLength = $scope.lookupDrugs.length;
 
@@ -137,10 +132,9 @@
 			linesToScroll: false,
 
 			showResultsByItem: function (item) {
-				priceStorageDataService.getFilteredDataByItem(item).promise
-					.then(function (results) {
-						showPrice(results);
-					});
+				// main.body.directive.js
+				$scope.showPriceByItem(item);
+				$scope.lookup.clearLookup();
 			},
 
 			showResults: function () {
@@ -155,15 +149,13 @@
 				}
 
 				if ($scope.searchQuery) {
-					priceStorageDataService.getMaximumData($scope.searchQuery,
-															$scope.searchQueryShape,
-															100, 0).promise
-						.then(function (results) {
-							showPrice(results);
-						})
+					// main.body.directive.js
+					$scope.showMaximumPrice($scope.searchQuery, true);
 				} else {
-					showPrice();
+					// main.body.directive.js
+					$scope.clearDrugsTable();
 				}
+				$scope.lookup.clearLookup();
 			},
 
 			clearLookup: function () {

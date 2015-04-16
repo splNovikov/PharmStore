@@ -2,8 +2,8 @@
 	'use strict';
 
 	angular
-		.module('lookup')
-		.directive('lookupScrolled', lookupScrolledDirective);
+		.module('helpDirectives')
+		.directive('listScrolled', lookupScrolledDirective);
 
 	function lookupScrolledDirective() {
 		return {
@@ -13,7 +13,7 @@
 
 				elem.bind('scroll', function () {
 					if (raw.scrollHeight && raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-						scope.$apply(attrs.lookupScrolled);
+						scope.$apply(attrs.listScrolled);
 					}
 				});
 			}

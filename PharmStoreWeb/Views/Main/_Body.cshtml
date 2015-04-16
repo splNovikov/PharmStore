@@ -1,11 +1,13 @@
 ﻿<div class="main-body">
-	<div class="for-table">
+	<div class="for-table"
+		 list-scrolled="continueLoading()">
 		<div class="empty-table" ng-if="!shownPriceList || shownPriceList.length === 0">
 			<span>
 				Для того чтобы отобразился прайс необходимо что-нибудь написать в строке поиска, либо не загружено ни одного прайса <br /> ToDo: сделать точное определние отсутствия прайса <br />ИЛИ ничего не найдено
 			</span>
 		</div>
-		<table class="table table-striped table-hover" ng-if="shownPriceList.length > 0">
+		<table class="table table-striped table-hover"
+			   ng-if="shownPriceList.length > 0">
 			<thead>
 				<tr>
 					<td class="t-col col1"></td>
@@ -17,7 +19,7 @@
 					</td>
 					<td class="t-col col4">
 						<span tooltip="Наименование товара" tooltip-placement="top" tooltip-animation="false">Наименование</span>
-</td>
+					</td>
 					<td class="t-col col5">
 						<span tooltip="Форма упаковки" tooltip-placement="top" tooltip-animation="false">Форма</span>
 					</td>
@@ -56,8 +58,10 @@
 					<td class="t-col col5">{{ item.Form }}</td>
 					<td class="t-col col6">{{ item.Manufacturer }}</td>
 					<td class="t-col col7">{{ item.Price }}</td>
-					<td class="t-col col8" 
-						ng-click="showCustomerInfo(item.CustomerId)"><span class="cur-pointer">{{ item.CustomerName }}</span></td>
+					<td class="t-col col8"
+						ng-click="showCustomerInfo(item.CustomerId)">
+						<span class="cur-pointer">{{ item.CustomerName }}</span>
+					</td>
 					<td class="t-col col9">TODO!</td>
 					<td class="t-col col10">{{ item.Multiplicity }}</td>
 					<td class="t-col col11">{{ item.Balance }}</td>
