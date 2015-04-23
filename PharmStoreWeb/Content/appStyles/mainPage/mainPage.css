@@ -228,12 +228,14 @@
   font-size: 24px;
   color: #a8a8a8;
 }
-.main-page .main-body .for-table table {
-  width: 100%;
-  min-width: 1285px;
+.main-page .main-body .for-table .table-container {
   display: none;
 }
-.main-page .main-body .for-table table .t-col {
+.main-page .main-body .for-table .table-container table {
+  width: 100%;
+  min-width: 1285px;
+}
+.main-page .main-body .for-table .table-container table .t-col {
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -242,65 +244,65 @@
   vertical-align: middle;
   cursor: default;
 }
-.main-page .main-body .for-table table .t-col.col1 {
+.main-page .main-body .for-table .table-container table .t-col.col1 {
   min-width: 30px;
   max-width: 30px;
 }
-.main-page .main-body .for-table table .t-col.col1.drug-info {
+.main-page .main-body .for-table .table-container table .t-col.col1.drug-info {
   cursor: pointer;
   color: #009587;
 }
-.main-page .main-body .for-table table .t-col.col1.drug-info:hover i {
+.main-page .main-body .for-table .table-container table .t-col.col1.drug-info:hover i {
   font-weight: bold;
 }
-.main-page .main-body .for-table table .t-col.col2 {
+.main-page .main-body .for-table .table-container table .t-col.col2 {
   min-width: 65px;
   max-width: 65px;
 }
-.main-page .main-body .for-table table .t-col.col3 {
+.main-page .main-body .for-table .table-container table .t-col.col3 {
   width: 50px;
 }
-.main-page .main-body .for-table table .t-col.col4 {
+.main-page .main-body .for-table .table-container table .t-col.col4 {
   min-width: 150px;
   max-width: 150px;
 }
-.main-page .main-body .for-table table .t-col.col5 {
+.main-page .main-body .for-table .table-container table .t-col.col5 {
   min-width: 200px;
   max-width: 200px;
 }
-.main-page .main-body .for-table table .t-col.col6 {
+.main-page .main-body .for-table .table-container table .t-col.col6 {
   min-width: 200px;
   max-width: 200px;
 }
-.main-page .main-body .for-table table .t-col.col7 {
+.main-page .main-body .for-table .table-container table .t-col.col7 {
   min-width: 70px;
   max-width: 70px;
 }
-.main-page .main-body .for-table table .t-col.col8 {
+.main-page .main-body .for-table .table-container table .t-col.col8 {
   min-width: 100px;
   max-width: 100px;
 }
-.main-page .main-body .for-table table .t-col.col9 {
+.main-page .main-body .for-table .table-container table .t-col.col9 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table table .t-col.col10 {
+.main-page .main-body .for-table .table-container table .t-col.col10 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table table .t-col.col11 {
+.main-page .main-body .for-table .table-container table .t-col.col11 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table table .t-col.col12 {
+.main-page .main-body .for-table .table-container table .t-col.col12 {
   min-width: 100px;
   max-width: 100px;
 }
-.main-page .main-body .for-table table .t-col.col13 {
+.main-page .main-body .for-table .table-container table .t-col.col13 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table table thead {
+.main-page .main-body .for-table .table-container table thead {
   background-color: #7fc9c2;
   font-weight: bold;
 }

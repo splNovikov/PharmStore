@@ -27,13 +27,13 @@
 			cursor: pointer;
 			background-color: @primary;
 
-			.icon{
+			.icon {
 				margin: 16px 0 0 18px;
 				color: #fff;
 				font-size: 28px;
 			}
 
-			&.in-progress{
+			&.in-progress {
 				cursor: default;
 				background-color: @lighten-primary;
 			}
@@ -81,100 +81,103 @@
 				}
 			}
 
-			table {
-				width: 100%;
-				min-width: @main-table-width;
+			.table-container {
 				display: none;
 
-				.t-col {
-					overflow: hidden;
-					-ms-text-overflow: ellipsis;
-					-o-text-overflow: ellipsis;
-					text-overflow: ellipsis;
-					white-space: nowrap;
-					vertical-align: middle;
-					cursor: default;
+				table {
+					width: 100%;
+					min-width: @main-table-width;
 
-					&.col1 {
-						min-width: @col1-width;
-						max-width: @col1-width;
+					.t-col {
+						overflow: hidden;
+						-ms-text-overflow: ellipsis;
+						-o-text-overflow: ellipsis;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						vertical-align: middle;
+						cursor: default;
 
-						&.drug-info {
-							cursor: pointer;
-							color: @primary;
+						&.col1 {
+							min-width: @col1-width;
+							max-width: @col1-width;
 
-							&:hover i {
-								font-weight: bold;
+							&.drug-info {
+								cursor: pointer;
+								color: @primary;
+
+								&:hover i {
+									font-weight: bold;
+								}
 							}
+						}
+
+						&.col2 {
+							min-width: @col2-width;
+							max-width: @col2-width;
+						}
+
+						&.col3 {
+							width: @col3-width;
+						}
+
+						&.col4 {
+							min-width: @col4-width;
+							max-width: @col4-width;
+						}
+
+						&.col5 {
+							min-width: @col5-width;
+							max-width: @col5-width;
+						}
+
+						&.col6 {
+							min-width: @col6-width;
+							max-width: @col6-width;
+						}
+
+						&.col7 {
+							min-width: @col7-width;
+							max-width: @col7-width;
+						}
+
+						&.col8 {
+							min-width: @col8-width;
+							max-width: @col8-width;
+						}
+
+						&.col9 {
+							min-width: @col9-width;
+							max-width: @col9-width;
+						}
+
+						&.col10 {
+							min-width: @col10-width;
+							max-width: @col10-width;
+						}
+
+						&.col11 {
+							min-width: @col11-width;
+							max-width: @col11-width;
+						}
+
+						&.col12 {
+							min-width: @col12-width;
+							max-width: @col12-width;
+						}
+
+						&.col13 {
+							min-width: @col13-width;
+							max-width: @col13-width;
 						}
 					}
 
-					&.col2 {
-						min-width: @col2-width;
-						max-width: @col2-width;
+					thead {
+						background-color: @lighten-primary;
+						font-weight: bold;
 					}
 
-					&.col3 {
-						width: @col3-width;
+					tbody {
 					}
-
-					&.col4 {
-						min-width: @col4-width;
-						max-width: @col4-width;
-					}
-
-					&.col5 {
-						min-width: @col5-width;
-						max-width: @col5-width;
-					}
-
-					&.col6 {
-						min-width: @col6-width;
-						max-width: @col6-width;
-					}
-
-					&.col7 {
-						min-width: @col7-width;
-						max-width: @col7-width;
-					}
-
-					&.col8 {
-						min-width: @col8-width;
-						max-width: @col8-width;
-					}
-
-					&.col9 {
-						min-width: @col9-width;
-						max-width: @col9-width;
-					}
-
-					&.col10 {
-						min-width: @col10-width;
-						max-width: @col10-width;
-					}
-
-					&.col11 {
-						min-width: @col11-width;
-						max-width: @col11-width;
-					}
-
-					&.col12 {
-						min-width: @col12-width;
-						max-width: @col12-width;
-					}
-
-					&.col13 {
-						min-width: @col13-width;
-						max-width: @col13-width;
-					}
-				}
-
-				thead {
-					background-color: @lighten-primary;
-					font-weight: bold;
-				}
-
-				tbody {
 				}
 			}
 		}
