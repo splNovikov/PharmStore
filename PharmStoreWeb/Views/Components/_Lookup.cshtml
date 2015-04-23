@@ -33,7 +33,7 @@
 			</span>
 		</div>
 		<div class="drugs-lookup"
-			 ng-show="searchQuery && lookupDrugs.length > 0"
+			 lasy-show="!!searchQuery && lookupDrugs.length > 0"
 			 list-scrolled="lookup.continueLoading()"
 			 auto-scroll
 			 lines-to-scroll="lookup.linesToScroll">
@@ -47,7 +47,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="drugs-lookup" ng-show="searchQuery && !lookupDrugs">
+		<div class="drugs-lookup" lasy-show="!!searchQuery && !lookupDrugs">
 			В прайсе не найдено совпадений по запросу: "<b>{{ searchQuery }}<span ng-show="searchQueryShape"> {{ searchQueryShape }}</span></b>"
 		</div>
 	</div>

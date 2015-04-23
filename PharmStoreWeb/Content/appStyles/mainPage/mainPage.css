@@ -125,6 +125,7 @@
   width: 60%;
   margin: 0 auto;
   margin-top: 8px;
+  position: relative;
 }
 .main-page .main-header .search-block .for-input .input-group {
   width: 100%;
@@ -160,6 +161,10 @@
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
+  position: absolute;
+  width: 100%;
+  z-index: 200;
+  display: none;
 }
 .main-page .main-header .search-block .for-input .drugs-lookup ul {
   margin-bottom: 0;
@@ -226,6 +231,7 @@
 .main-page .main-body .for-table table {
   width: 100%;
   min-width: 1285px;
+  display: none;
 }
 .main-page .main-body .for-table table .t-col {
   overflow: hidden;

@@ -1,1 +1,1 @@
-﻿.cur-pointer{cursor:pointer}
+﻿.cur-pointer{cursor:pointer}.show-transparently{display:block !important;opacity:0;-moz-transition:opacity .35s linear;-o-transition:opacity .35s linear;-webkit-transition:opacity .35s linear;transition:opacity .35s linear}.show-transparently.is-shown{opacity:1}

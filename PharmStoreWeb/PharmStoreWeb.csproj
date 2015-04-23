@@ -285,6 +285,7 @@
     <Content Include="Scripts\app\app.start.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.autoScroll.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.digitsOnly.directive.js" />
+    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.lasyShow.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.module.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.ngEnter.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.offClick.directive.js" />
@@ -295,7 +296,7 @@
     <Content Include="Scripts\app\login\login.module.js" />
     <Content Include="Scripts\app\login\login.service.js" />
     <Content Include="Scripts\app\login\login.loggedUser.directive.js" />
-    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.listScrolled.js" />
+    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.listScrolled.directive.js" />
     <Content Include="Scripts\app\lookup\lookup.module.js" />
     <Content Include="Scripts\app\lookup\lookup.directive.js" />
     <Content Include="Scripts\app\main\directives\main.body.directive.js" />

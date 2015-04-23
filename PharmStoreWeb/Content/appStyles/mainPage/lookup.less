@@ -12,6 +12,7 @@
 		width: 60%;
 		margin: 0 auto;
 		margin-top: @for-input-margin-top;
+		position: relative;
 
 		.input-group {
 			width: 100%;
@@ -53,6 +54,10 @@
 			-ms-user-select: none;
 			-webkit-user-select: none;
 			user-select: none;
+			position: absolute;
+			width: 100%;
+			z-index: 200;
+			display: none;
 
 			ul {
 				margin-bottom: 0;

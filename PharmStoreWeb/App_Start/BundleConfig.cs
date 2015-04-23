@@ -53,7 +53,8 @@ namespace PharmStoreWeb
 				"~/Scripts/app/helpfulDirectives/helpDirectives.ngEnter.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.offClick.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.autoScroll.directive.js",
-				"~/Scripts/app/helpfulDirectives/helpDirectives.listScrolled.js",
+				"~/Scripts/app/helpfulDirectives/helpDirectives.lasyShow.directive.js",
+				"~/Scripts/app/helpfulDirectives/helpDirectives.listScrolled.directive.js",
 
 				// Modals
 				"~/Scripts/app/modals/modals.module.js",

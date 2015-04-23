@@ -1,3 +1,16 @@
 ﻿.cur-pointer {
 	cursor: pointer;
 }
+
+.show-transparently {
+	display: block !important;
+	opacity: 0;
+	-moz-transition: opacity .35s linear;
+	-o-transition: opacity .35s linear;
+	-webkit-transition: opacity .35s linear;
+	transition: opacity .35s linear;
+
+	&.is-shown {
+		opacity: 1;
+	}
+}
