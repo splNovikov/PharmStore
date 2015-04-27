@@ -62,8 +62,9 @@
 		background-color: #fff;
 
 		.for-table {
-			overflow: auto;
+			overflow: hidden;
 			height: 100%;
+			position: relative;
 
 			.tooltip-inner {
 				border-radius: 5px;
@@ -83,100 +84,121 @@
 
 			.table-container {
 				display: none;
+				position: absolute;
+				height: 100%;
+				width: 100%;
 
-				table {
-					width: 100%;
-					min-width: @main-table-width;
+				.t-col {
+					overflow: hidden;
+					-ms-text-overflow: ellipsis;
+					-o-text-overflow: ellipsis;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					vertical-align: middle;
+					cursor: default;
+					display: inline-block;
+					margin-top: 10px;
+					text-align: center;
 
-					.t-col {
-						overflow: hidden;
-						-ms-text-overflow: ellipsis;
-						-o-text-overflow: ellipsis;
-						text-overflow: ellipsis;
-						white-space: nowrap;
-						vertical-align: middle;
-						cursor: default;
+					&.col1 {
+						min-width: @col1-width;
+						max-width: @col1-width;
 
-						&.col1 {
-							min-width: @col1-width;
-							max-width: @col1-width;
+						&.drug-info {
+							cursor: pointer;
+							color: @primary;
 
-							&.drug-info {
-								cursor: pointer;
-								color: @primary;
-
-								&:hover i {
-									font-weight: bold;
-								}
+							&:hover i {
+								font-weight: bold;
 							}
 						}
-
-						&.col2 {
-							min-width: @col2-width;
-							max-width: @col2-width;
-						}
-
-						&.col3 {
-							width: @col3-width;
-						}
-
-						&.col4 {
-							min-width: @col4-width;
-							max-width: @col4-width;
-						}
-
-						&.col5 {
-							min-width: @col5-width;
-							max-width: @col5-width;
-						}
-
-						&.col6 {
-							min-width: @col6-width;
-							max-width: @col6-width;
-						}
-
-						&.col7 {
-							min-width: @col7-width;
-							max-width: @col7-width;
-						}
-
-						&.col8 {
-							min-width: @col8-width;
-							max-width: @col8-width;
-						}
-
-						&.col9 {
-							min-width: @col9-width;
-							max-width: @col9-width;
-						}
-
-						&.col10 {
-							min-width: @col10-width;
-							max-width: @col10-width;
-						}
-
-						&.col11 {
-							min-width: @col11-width;
-							max-width: @col11-width;
-						}
-
-						&.col12 {
-							min-width: @col12-width;
-							max-width: @col12-width;
-						}
-
-						&.col13 {
-							min-width: @col13-width;
-							max-width: @col13-width;
-						}
 					}
 
-					thead {
-						background-color: @lighten-primary;
-						font-weight: bold;
+					&.col2 {
+						min-width: @col2-width;
+						max-width: @col2-width;
 					}
 
-					tbody {
+					&.col3 {
+						width: @col3-width;
+					}
+
+					&.col4 {
+						min-width: @col4-width;
+						max-width: @col4-width;
+					}
+
+					&.col5 {
+						min-width: @col5-width;
+						max-width: @col5-width;
+					}
+
+					&.col6 {
+						min-width: @col6-width;
+						max-width: @col6-width;
+					}
+
+					&.col7 {
+						min-width: @col7-width;
+						max-width: @col7-width;
+					}
+
+					&.col8 {
+						min-width: @col8-width;
+						max-width: @col8-width;
+					}
+
+					&.col9 {
+						min-width: @col9-width;
+						max-width: @col9-width;
+					}
+
+					&.col10 {
+						min-width: @col10-width;
+						max-width: @col10-width;
+					}
+
+					&.col11 {
+						min-width: @col11-width;
+						max-width: @col11-width;
+					}
+
+					&.col12 {
+						min-width: @col12-width;
+						max-width: @col12-width;
+					}
+
+					&.col13 {
+						min-width: @col13-width;
+						max-width: @col13-width;
+					}
+
+					&.col-last{
+						width: 14px;
+					}
+				}
+
+				@table-header-height: 40px;
+
+				.table-header {
+					background-color: @lighten-primary;
+					font-weight: bold;
+					height: @table-header-height;
+					white-space: nowrap;
+					position: absolute;
+					top: 0;
+				}
+
+				.table-body {
+					position: absolute;
+					top: @table-header-height;
+					overflow-y: auto;
+					height: calc(~'100%' - @table-header-height);
+					width: 100%;
+
+					.drug-raw {
+						white-space: nowrap;
+						background-color: #fff;
 					}
 				}
 			}

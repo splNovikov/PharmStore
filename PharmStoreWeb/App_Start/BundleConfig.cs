@@ -55,6 +55,7 @@ namespace PharmStoreWeb
 				"~/Scripts/app/helpfulDirectives/helpDirectives.autoScroll.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.lasyShow.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.listScrolled.directive.js",
+				"~/Scripts/app/helpfulDirectives/helpDirectives.scrollHeader.directive.js",
 
 				// Modals
 				"~/Scripts/app/modals/modals.module.js",

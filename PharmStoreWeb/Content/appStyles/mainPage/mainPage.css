@@ -14,22 +14,6 @@
 /*Сумма*/
 /* header-heights*/
 /* search query */
-/* table column sizes*/
-/*#*/
-/*Код*/
-/*Заказ*/
-/*Наименование*/
-/*Форма*/
-/*Производитель*/
-/*Цена*/
-/*Поставщик*/
-/*Больше %*/
-/*Кратность*/
-/*Остаток*/
-/*Годность*/
-/*Сумма*/
-/* header-heights*/
-/* search query */
 .main-page .main-header,
 .main-page .main-footer,
 .main-page .main-body {
@@ -212,8 +196,9 @@
   background-color: #fff;
 }
 .main-page .main-body .for-table {
-  overflow: auto;
+  overflow: hidden;
   height: 100%;
+  position: relative;
 }
 .main-page .main-body .for-table .tooltip-inner {
   border-radius: 5px;
@@ -230,12 +215,11 @@
 }
 .main-page .main-body .for-table .table-container {
   display: none;
-}
-.main-page .main-body .for-table .table-container table {
+  position: absolute;
+  height: 100%;
   width: 100%;
-  min-width: 1285px;
 }
-.main-page .main-body .for-table .table-container table .t-col {
+.main-page .main-body .for-table .table-container .t-col {
   overflow: hidden;
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
@@ -243,67 +227,88 @@
   white-space: nowrap;
   vertical-align: middle;
   cursor: default;
+  display: inline-block;
+  margin-top: 10px;
+  text-align: center;
 }
-.main-page .main-body .for-table .table-container table .t-col.col1 {
+.main-page .main-body .for-table .table-container .t-col.col1 {
   min-width: 30px;
   max-width: 30px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col1.drug-info {
+.main-page .main-body .for-table .table-container .t-col.col1.drug-info {
   cursor: pointer;
   color: #009587;
 }
-.main-page .main-body .for-table .table-container table .t-col.col1.drug-info:hover i {
+.main-page .main-body .for-table .table-container .t-col.col1.drug-info:hover i {
   font-weight: bold;
 }
-.main-page .main-body .for-table .table-container table .t-col.col2 {
+.main-page .main-body .for-table .table-container .t-col.col2 {
   min-width: 65px;
   max-width: 65px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col3 {
-  width: 50px;
+.main-page .main-body .for-table .table-container .t-col.col3 {
+  width: 70px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col4 {
+.main-page .main-body .for-table .table-container .t-col.col4 {
   min-width: 150px;
   max-width: 150px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col5 {
+.main-page .main-body .for-table .table-container .t-col.col5 {
   min-width: 200px;
   max-width: 200px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col6 {
+.main-page .main-body .for-table .table-container .t-col.col6 {
   min-width: 200px;
   max-width: 200px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col7 {
+.main-page .main-body .for-table .table-container .t-col.col7 {
   min-width: 70px;
   max-width: 70px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col8 {
+.main-page .main-body .for-table .table-container .t-col.col8 {
   min-width: 100px;
   max-width: 100px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col9 {
+.main-page .main-body .for-table .table-container .t-col.col9 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col10 {
+.main-page .main-body .for-table .table-container .t-col.col10 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col11 {
+.main-page .main-body .for-table .table-container .t-col.col11 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col12 {
+.main-page .main-body .for-table .table-container .t-col.col12 {
   min-width: 100px;
   max-width: 100px;
 }
-.main-page .main-body .for-table .table-container table .t-col.col13 {
+.main-page .main-body .for-table .table-container .t-col.col13 {
   min-width: 80px;
   max-width: 80px;
 }
-.main-page .main-body .for-table .table-container table thead {
+.main-page .main-body .for-table .table-container .t-col.col-last {
+  width: 14px;
+}
+.main-page .main-body .for-table .table-container .table-header {
   background-color: #7fc9c2;
   font-weight: bold;
+  height: 40px;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+.main-page .main-body .for-table .table-container .table-body {
+  position: absolute;
+  top: 40px;
+  overflow-y: auto;
+  height: calc(100% - 40px);
+  width: 100%;
+}
+.main-page .main-body .for-table .table-container .table-body .drug-raw {
+  white-space: nowrap;
+  background-color: #fff;
 }
 /*# sourceMappingURL=mainPage.css.map */
