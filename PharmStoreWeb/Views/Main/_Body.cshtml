@@ -10,7 +10,7 @@
 				<div class="t-col col1"></div>
 				<div class="t-col col2">
 					<span tooltip="Код поставщика"
-						  tooltip-placement="top"
+						  tooltip-placement="bottom"
 						  tooltip-animation="false">Код</span>
 				</div>
 				<div class="t-col col3">
@@ -61,7 +61,7 @@
 						   tooltip-animation="false"></i>
 					</div>
 					<div class="t-col col2"
-						 tooltip="{{ item.DrugIdCustomer }}"
+						 tooltip="Код поставщика: {{ item.DrugIdCustomer }}"
 						 tooltip-placement="right"
 						 tooltip-animation="false">{{ item.DrugIdCustomer }}</div>
 					<div class="t-col col3"><input type="number" min="1" max="5000" digits-only ng-model="item.count"></div>

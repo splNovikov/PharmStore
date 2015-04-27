@@ -272,6 +272,9 @@
 		};
 
 		_getFilteredData = function (query, shapeQuery, limit, pageNum) {
+			if (!query || query.length === 0) {
+				return null;
+			};
 
 			var queryArr = _.compact(query.split(' ')),
 				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
@@ -332,6 +335,11 @@
 		};
 
 		_getFilteredDataByItem = function (item) {
+
+			if (!item || item.length === 0) {
+				return null;
+			}
+
 			var queryString = "SELECT d.Id, " +
 							"d.DrugIdCustomer, " +
 							"d.Title, " +
@@ -373,6 +381,10 @@
 		};
 
 		_getMaximumData = function (query, shapeQuery, limit, pageNum) {
+			if (!query || query.length === 0) {
+				return null;
+			};
+
 			var queryArr = _.compact(query.split(' ')),
 				shapeQueryArr = shapeQuery ? _.compact(shapeQuery.split(' ')) : null,
 				titleQueryString = getQueryString(queryArr),
@@ -425,12 +437,16 @@
 		};
 
 		_getCustomerById = function (id) {
+			if (!id) {
+				return null;
+			};
+
 			var queryString = "SELECT c.Id, " +
 									"c.Name, " +
 									"c.Address " +
 									"FROM Customers c " +
 									"WHERE c.Id = ?;";
-			
+
 			var promise = db.selectCustom(queryString, [id])
 				.then(function (results) {
 
