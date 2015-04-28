@@ -67,7 +67,6 @@
 		};
 
 		$scope.showMaximumPrice = function (query, isNewSearch) {
-
 			if (isNewSearch) {
 				$scope.clearDrugsTable();
 				forTableData.query = query;
