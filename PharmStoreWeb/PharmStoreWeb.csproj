@@ -343,6 +343,12 @@
     <Content Include="Scripts\libs\angular\angular-websql.min.js" />
     <Content Include="Scripts\libs\angular\angular.js" />
     <Content Include="Scripts\libs\angular\angular.min.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload-all.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload-all.min.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload-shim.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload-shim.min.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload.js" />
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload.min.js" />
     <Content Include="Scripts\libs\angular\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\libs\angular\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\libs\angular\i18n\angular-locale_aa-et.js" />
