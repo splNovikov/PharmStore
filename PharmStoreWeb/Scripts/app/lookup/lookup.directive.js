@@ -185,6 +185,7 @@
 
 				if (event.keyCode === 27) { // Esc
 					if (selectedDrug) { selectedDrug.isSelected = false; }
+					$scope.lookup.clearLookup();
 				}
 
 				if (event.keyCode === 40 || event.keyCode === 38) { // down || up
