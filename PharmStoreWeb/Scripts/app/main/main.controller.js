@@ -8,17 +8,30 @@
 			'DebugSettings',
 			'priceStorageDataService',
 			'modalsService',
+			'Upload',
 			MainController]);
 
 	function MainController(
 		$scope,
 		DebugSettings,
 		priceStorageDataService,
-		modalsService) {
+		modalsService,
+		Upload) {
+
+		$scope.$watch('files', function (newVal) {
+			if (!newVal) { return; }
+
+			// hide dropzone
+			$scope.vm.hideDropZone = true;
+
+
+			debugger
+		});
 
 		$scope.vm = {
 			showRefillData: DebugSettings.isDeveloper,
-			refillingInProgress: false
+			refillingInProgress: false,
+			hideDropZone: true
 		}
 
 		$scope.refillTestData = function () {

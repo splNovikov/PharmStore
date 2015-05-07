@@ -1,4 +1,19 @@
-﻿<div class="main-page">
+﻿<div class="main-page" 
+	 drop-zone-enter 
+	 hide-immediately="vm.hideDropZone">
+
+	<div class="drop-zone drop-box"
+		 drop-zone-leave
+		 hide-immediately="vm.hideDropZone"
+		 ngf-drop
+		 ngf-select
+		 ng-model="files"
+		 ngf-drag-over-class="dragover"
+		 ngf-multiple="true"
+		 ngf-allow-dir="true"
+		 accept="image/*,application/pdf">
+	</div>
+
 	<main-header></main-header>
 
 	<main-body></main-body>

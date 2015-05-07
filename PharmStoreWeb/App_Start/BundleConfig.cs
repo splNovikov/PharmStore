@@ -28,6 +28,7 @@ namespace PharmStoreWeb
 				"~/Scripts/libs/angular/angular-sanitize.js",
 				"~/Scripts/libs/angular/angular-ui/ui-bootstrap-tpls.js",
 				"~/Scripts/libs/angular/file-upload/ng-file-upload.js",
+				"~/Scripts/libs/angular/file-upload/ng-file-upload.shim.js",
 
 				"~/Scripts/libs/jquery/jquery-{version}.js",
 				"~/Scripts/libs/bootstrap/bootstrap.min.js",
@@ -57,6 +58,8 @@ namespace PharmStoreWeb
 				"~/Scripts/app/helpfulDirectives/helpDirectives.lasyShow.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.listScrolled.directive.js",
 				"~/Scripts/app/helpfulDirectives/helpDirectives.scrollHeader.directive.js",
+				"~/Scripts/app/helpfulDirectives/forDropZone/helpDirectives.dropZoneEnter.directive.js",
+				"~/Scripts/app/helpfulDirectives/forDropZone/helpDirectives.dropZoneLeave.directive.js",
 
 				// Modals
 				"~/Scripts/app/modals/modals.module.js",

@@ -9,6 +9,7 @@
 			'ui.bootstrap',
 			'LocalStorageModule',
 			'angular-websql',
+			'ngFileUpload',
 
 			// app own modules:
 			'helpDirectives',

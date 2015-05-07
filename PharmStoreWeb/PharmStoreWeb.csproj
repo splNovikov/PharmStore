@@ -180,6 +180,12 @@
     <Content Include="Content\appStyles\defaults.min.css">
       <DependentUpon>defaults.css</DependentUpon>
     </Content>
+    <Content Include="Content\appStyles\layout.css">
+      <DependentUpon>layout.less</DependentUpon>
+    </Content>
+    <Content Include="Content\appStyles\layout.min.css">
+      <DependentUpon>layout.css</DependentUpon>
+    </Content>
     <Content Include="Content\appStyles\loginPage\loginPage.css">
       <DependentUpon>loginPage.less</DependentUpon>
     </Content>
@@ -283,9 +289,11 @@
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\app.layout.controller.js" />
     <Content Include="Scripts\app\app.start.js" />
+    <Content Include="Scripts\app\helpfulDirectives\forDropZone\helpDirectives.dropZoneLeave.directive.js" />
+    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.digitsOnly.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.scrollHeader.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.autoScroll.directive.js" />
-    <Content Include="Scripts\app\helpfulDirectives\helpDirectives.digitsOnly.directive.js" />
+    <Content Include="Scripts\app\helpfulDirectives\forDropZone\helpDirectives.dropZoneEnter.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.lasyShow.directive.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.module.js" />
     <Content Include="Scripts\app\helpfulDirectives\helpDirectives.ngEnter.directive.js" />
@@ -1239,6 +1247,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Components\Modals\Nested\_ModalStaticConfirm.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\layout.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\appStyles\layout.css.map">
+      <DependentUpon>layout.css</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\libs\angular\file-upload\ng-file-upload.min.js.map">
+      <DependentUpon>ng-file-upload.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

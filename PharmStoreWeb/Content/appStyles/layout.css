@@ -1,0 +1,18 @@
+﻿.drop-zone {
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  /*display: block;*/
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.drop-zone-is-shown .drop-zone {
+  display: block;
+}
+.dragover {
+  border: 5px dashed blue;
+}
+/*# sourceMappingURL=layout.css.map */
